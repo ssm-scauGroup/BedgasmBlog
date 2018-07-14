@@ -6,7 +6,7 @@
 
 myeclipse 2017
 
-mysql 2.7.14
+mysql 5.7.14
 
 先把`card.sql`导入到`mysql`数据库。
 
