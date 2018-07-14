@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    <typeAliases>
+        <typeAlias alias="Cardinfo" type="com.model.Cardinfo"/>
+        <typeAlias alias="Usertable" type="com.model.Usertable"/>
+     </typeAliases>
+	 <mappers>
+        <mapper resource="mybatis/CardinfoMapper.xml"/>
+        <mapper resource="mybatis/UsertableMapper.xml"/>
+ 	</mappers>
+</configuration>
