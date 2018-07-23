@@ -1,7 +1,5 @@
 package blog.entity;
 
-import java.util.Date;
-
 /**
  * @author Administrator
  * 评论实体类
@@ -18,7 +16,7 @@ public class Comment {
 	/**
 	 * 评论日期
 	 */
-	private Date commentDate;
+	private String commentDate;
 	/**
 	 * 评论用户id
 	 */
@@ -40,10 +38,10 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCommentDate() {
+	public String getCommentDate() {
 		return commentDate;
 	}
-	public void setCommentDate(Date commentDate) {
+	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
 	}
 	public Integer getUserid() {

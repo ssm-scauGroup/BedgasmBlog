@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import blog.dao.ArticleDao;
 import blog.entity.Article;
+import blog.util.FormatDate;
 
 /**
  * @author Administrator
@@ -30,7 +31,7 @@ public class ArticleDaoTest {
 	
 //	@Test
 //	public void getById() throws Exception{
-//		Article article = articleDao.getById(1);
+//		Article article = articleDao.findById(4);
 //		System.out.println(article);
 //	}
 	
@@ -46,11 +47,11 @@ public class ArticleDaoTest {
 //		System.out.println("result is "+res);
 //	}
 	
-	@Test
-	public void updateArticle() throws Exception{
-		Article article = new Article(4,"helladfasdfo1","今天是个好adsfadf日子",null, null, null, "hhhhhhhhhhhhh","demo",1);
-		Integer res = articleDao.updateArticle(article);
-		System.out.println("result is "+res);
-	}
+//	@Test
+//	public void updateArticle() throws Exception{
+//		Article article = new Article(4,"helladfasdfo1","今天是个好adsfadf日子",FormatDate.formatDate(), null, null, "hhhhhhhhhhhhh","demo",1);
+//		Integer res = articleDao.updateArticle(article);
+//		System.out.println("result is "+res);
+//	}
 	
 }

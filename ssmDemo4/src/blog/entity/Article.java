@@ -1,7 +1,5 @@
 package blog.entity;
 
-import java.util.Date;
-
 /**
  * @author Administrator
  * 文章实体类
@@ -22,7 +20,7 @@ public class Article {
 	/**
 	 * 文章发布日期
 	 */
-	private Date releaseDate;
+	private String releaseDate;
 	/**
 	 * 文章点击数
 	 */
@@ -76,7 +74,7 @@ public class Article {
 	 * @param tags
 	 * @param blogtypeid
 	 */
-	public Article(Integer id, String title, String summary, Date releaseDate, Integer clickCount, Integer replyCount,
+	public Article(Integer id, String title, String summary, String releaseDate, Integer clickCount, Integer replyCount,
 			String content, String tags, Integer blogtypeid) {
 		super();
 		this.id = id;
@@ -108,10 +106,10 @@ public class Article {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	public Date getReleaseDate() {
+	public String getReleaseDate() {
 		return releaseDate;
 	}
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 	public Integer getClickCount() {

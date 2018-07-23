@@ -19,6 +19,11 @@ public class Media {
 	 */
 	private String userid;
 	
+	/**
+	 * 上传日期
+	 */
+	private String releaseDate;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,6 +41,12 @@ public class Media {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 	
 	@Override

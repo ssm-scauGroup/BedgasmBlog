@@ -25,9 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogtypeid!=null and blogtypeid!=''">
                 and blogtypeid=#{blogtypeid}
             </if>
-            <if test="releaseDateStr!=null and releaseDateStr!=''">
-                and DATE_FORMAT(releaseDate,'%Y年%m月')=#{releaseDateStr}
-            </if>
         </where>
         ORDER BY releaseDate DESC
         <if test="start!=null and end!=null">
@@ -43,9 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="blogtypeid!=null and blogtypeid!=''">
                 and blogtypeid=#{blogtypeid}
-            </if>
-            <if test="releaseDateStr!=null and releaseDateStr!=''">
-                and DATE_FORMAT(releaseDate,'%Y年%m月')=#{releaseDateStr}
             </if>
         </where>
     </select>
@@ -68,11 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="summary!=null and summary!=''">
                 summary=#{summary},
             </if>
-            <if test="content!=null and content!=''">
-                content=#{content},
-            </if>
-            <if test="blogtypeid!=null">
-                blogtypeid=#{blogtypeid},
+            <if test="releaseDate!=null and releaseDate!=''">
+            	releaseDate=#{releaseDate},
             </if>
             <if test="clickCount!=null">
                 clickCount=#{clickCount},
@@ -80,8 +71,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="replyCount!=null">
                 replyCount=#{replyCount},
             </if>
+            <if test="content!=null and content!=''">
+                content=#{content},
+            </if>
             <if test="tags!=null and tags!=''">
                 tags=#{tags},
+            </if>
+            <if test="blogtypeid!=null">
+                blogtypeid=#{blogtypeid},
             </if>
         </set>
         where id=#{id}
@@ -92,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id=#{id}
     </delete>
 
-    <select id="getById" parameterType="java.lang.Integer" resultMap="ArticleResult">
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ArticleResult">
         SELECT * from t_article where id=#{id}
     </select>
 </mapper> 

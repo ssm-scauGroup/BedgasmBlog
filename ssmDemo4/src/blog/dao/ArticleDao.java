@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import blog.entity.Article;
 
+/**
+ * @author Administrator
+ * 文章Dao类
+ */
 @Repository("articleDao")
 public interface ArticleDao {
 	/**
@@ -46,10 +50,10 @@ public interface ArticleDao {
 	 */
 	public Integer deleteArticle(Integer id);
 	/**
-	 * 获取文章
+	 * 通过id获取文章
 	 * @param id
 	 * @return
 	 */
-	public Article getById(Integer id);
+	public Article findById(Integer id);
 	
 }

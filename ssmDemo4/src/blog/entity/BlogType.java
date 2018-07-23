@@ -16,7 +16,25 @@ public class BlogType {
 	/**
 	 * 该类别下的文章数
 	 */
-	private String typecount;
+	private Integer typecount;
+	
+	public BlogType(){
+		
+	}
+	
+	public BlogType(String typename, Integer typecount) {
+		super();
+		this.typename = typename;
+		this.typecount = typecount;
+	}
+	
+	public BlogType(Integer id,Integer typecount,String typename) {
+		super();
+		this.id = id;
+		this.typecount = typecount;
+		this.typename = typename;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -29,10 +47,10 @@ public class BlogType {
 	public void setTypename(String typename) {
 		this.typename = typename;
 	}
-	public String getTypecount() {
+	public Integer getTypecount() {
 		return typecount;
 	}
-	public void setTypecount(String typecount) {
+	public void setTypecount(Integer typecount) {
 		this.typecount = typecount;
 	}
 	
