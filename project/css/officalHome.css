@@ -1,0 +1,59 @@
+/*.carousel-inner{
+	height: 386px;
+}*/
+#navbar{
+	position: relative;
+}
+
+.search2 {
+	position: absolute;
+	right: 200px;
+	top:4px;
+	/*background: url(../images/sbac.png)no-repeat 28px 6px;*/
+	padding: 11px;
+	width: 16%;
+	border-color: white;
+	color: white;
+}
+.search2 input[type="text"] {
+	outline: none;
+	color: black;
+	background: white;
+	font-size: 15px;
+	border-color:  black;
+	opacity: 0.8;
+	border-radius: 8px;
+	width: 80%;
+}
+.search2 input[type="submit"] {
+	background: url('../images/sprit-1.png') no-repeat -3px 1px;
+	padding: 8px 20px;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	outline: none;
+	top: 4px;
+	right: 2px;
+}
+
+
+.item{
+	max-width: 100%;
+	max-height: 386px;
+}
+.banner{
+
+         background-size:contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+}
+.carousel-caption{
+	position: absolute;
+	bottom: 30px;
+	text-align: center;
+	padding-top:20px;
+	background-color: grey;
+	opacity: 0.5;
+
+}
