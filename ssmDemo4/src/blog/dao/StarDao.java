@@ -25,6 +25,9 @@ public interface StarDao {
 	 */
 	public Integer deleteStar(@Param("subscriber") Integer subscriber,@Param("subscribee") Integer subscribee);
 	
+	
+	//public Integer deleteStar(Star star);
+	
 	/**
 	 * 列出关注的人
 	 * @param subscriber
@@ -44,7 +47,7 @@ public interface StarDao {
 	 * @param star
 	 * @return
 	 */
-	public Integer updateStar(Star star);
+	//public Integer updateStar(Star star);
 	
 	/**
 	 * subscriber 关注总数

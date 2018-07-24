@@ -15,6 +15,16 @@ public class Star {
 	 */
 	private Integer subscribee;
 	
+	public Star(){
+		
+	}
+	
+	public Star(Integer subscriber, Integer subscribee) {
+		super();
+		this.subscriber = subscriber;
+		this.subscribee = subscribee;
+	}
+
 	public Integer getSubscriber() {
 		return subscriber;
 	}
