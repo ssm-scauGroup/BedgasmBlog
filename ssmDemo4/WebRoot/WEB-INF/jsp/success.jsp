@@ -9,4 +9,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	success
 </title>
 <p>${user.username }</p>
+<p>${user.password }</p>
 </HTML>

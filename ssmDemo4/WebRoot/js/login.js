@@ -179,11 +179,6 @@ $(function(){
 })();
 });
 
-function loginClick(){
-    $("#loginModal").modal('hide');
-    $(location).attr('href', 'user/login');
-
-}
 function showPromptBox(){
 var oDiv1=document.getElementById('accountname');
         var oDiv2=document.getElementById('prompt-box');

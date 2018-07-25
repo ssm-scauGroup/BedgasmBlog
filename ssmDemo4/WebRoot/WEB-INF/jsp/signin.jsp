@@ -10,12 +10,13 @@
 	<meta name="description" content="">
 		<meta name="author" content="">
 	<title>BEDGASM BLOG</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link href="css/jquery.bxslider.css" rel="stylesheet">
-	<link href="css/homeReset.css" type="text/css" rel="stylesheet">
-	<link href="css/officalHome.css" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
+	<link href="${pageContext.request.contextPath}/css/jquery.bxslider.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/homeReset.css" type="text/css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/officalHome.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/personhome.css">
 
 </head>
 <body>
@@ -32,95 +33,31 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="index.html">Home</a></li>
-						<li><a href="aboutme.html" onclick="">About Me</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li class="active" ><a href="#">Home</a></li>
+						<li><a href="myaboutme.html">About Me</a></li>
+						<li><a href="mycontact.html">Contact</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li> <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">登录</a></li>
-						<li><a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">注册</a></li>
-						
+						<li id="account"><a id="accountname" href="#" onmouseover="showPromptBox()">欢迎您,${user.username }</a></li>
 					</ul>
 
 				</div>
 				<!--/.nav-collapse -->
  			
-
+		<div id="prompt-box">
+			<p><a href="#">个人中心</p>
+			<p><a href="index.html">退出登录</a></p>
+		</div>
 			
 		</nav>
+		
 
-<div class="modal fade login" id="loginModal">
-		      <div class="modal-dialog login animated">
-    		      <div class="modal-content">
-    		         <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Login with</h4>
-                    </div>
-                    <div class="modal-body">  
-                        <div class="box">
-                             <div class="content">
-
-                                <div class="error"></div>
-                                <div class="form loginBox">
-                                    <form method="post" action="user/login" accept-charset="UTF-8">
-	                                    <input id="nameoremail" class="form-control" type="text" placeholder="用户名或邮箱" name="nameoremail">
-	                                     <span class="error error5"></span>
-	                                    <input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
-	                                     <span class="error error6"></span>
-	                                    <input id="loginBtn" class="btn btn-default btn-login" type="submit" value="登 录" >
-                                    </form>
-                                </div>
-                             </div>
-                        </div>
-                        <div class="box">
-                            <div class="content registerBox" style="display:none;">
-                             <div class="form">
-                                <form method="post" html="{:multipart=>true}" data-remote="true" 
-                                	action="/register" accept-charset="UTF-8">
-	                                <input id="username" class="form-control" type="text" 
-	                                placeholder="用户名(4-16位)" name="username">
-	                                <span class="error error1"></span>
-
-	                                <input id="email" class="form-control" type="text" 
-	                                placeholder="邮箱" name="email">
-	                                 <span class="error error2"></span>
-
-	                                <input id="pwd" class="form-control" type="password" 
-	                                placeholder="密码(8-30位)" name="pwd">
-	                                 <span class="error error3"></span>
-
-	                                <input id="password_confirmation" class="form-control" 
-	                                type="password" placeholder="确认密码" name="password_confirmation">
-	                                 <span class="error error4"></span>
-
-	                                <input class="btn btn-default btn-register" type="submit" 
-	                                value="注 册" name="commit">
-                                </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>还没账号？
-                                 <a href="javascript: showRegisterForm();">去注册</a>
-                            </span>
-                        </div>
-                        <div class="forgot register-footer" style="display:none">
-                             <span>已有账号?</span>
-                             <a href="javascript: showLoginForm();">去登录</a>
-                        </div>
-                    </div>        
-    		      </div>
-		      </div>
-		  </div>
 
 
 
 			<div class="wrap-col">
-						<div class="logo">
-							<a href="index.html"><img class="becenter" src="images/bigLogo.png"/></a> </div>	
+						<div class="logo"><a href="#"><img class="becenter" src="${pageContext.request.contextPath}/images/bigLogo.png"/></a></div>	
 						<h4 class="tagline becenter">记录过去，憧憬未来 &nbsp; 向下扎根，向上生长</h4>
 						<!-- <h4 class="right-tag becenter">向下扎根，向上生长</h4> -->
 		</div>
@@ -139,23 +76,23 @@
 		    <div class="carousel-inner">
 
 		        <div class="item active">
-		            <img src="images/1.jpg" alt="First slide" style="width: 100%;height: 100%;">
+		            <img src="${pageContext.request.contextPath}/images/1.jpg" alt="First slide" style="width: 100%;height: 100%;">
 		            <div class="carousel-caption">标题 1</div>
 		        </div>
 		        <div class="item">
-		            <img src="images/2.jpg" alt="Second slide" style="width: 100%;height: 100%;">
+		            <img src="${pageContext.request.contextPath}/images/2.jpg" alt="Second slide" style="width: 100%;height: 100%;">
 		            <div class="carousel-caption">标题 2</div>
 		        </div>
 		        <div class="item">
-		            <img src="images/3.jpg" alt="Third slide" style="width: 100%;height: 100%;">
+		            <img src="${pageContext.request.contextPath}/images/3.jpg" alt="Third slide" style="width: 100%;height: 100%;">
 		            <div class="carousel-caption">标题 3</div>
 		        </div>
 		        <div class="item">
-		            <img src="images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;">
+		            <img src="${pageContext.request.contextPath}/images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;">
 		            <div class="carousel-caption">标题 4</div>
 		        </div>
 		        <div class="item">
-		            <img src="images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;">
+		            <img src="${pageContext.request.contextPath}/images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;">
 		            <div class="carousel-caption">标题 5</div>
 		        </div>
 		    </div>
@@ -369,9 +306,7 @@
 				<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
 				
 			</div>
-
 		</footer>
-
 
 		<button class="back-to-top">
 			<p class="backtop">回到顶部</p>
@@ -379,13 +314,12 @@
 		</button>
 
 
-
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.bxslider.js"></script>
-		<script src="js/mooz.scripts.min.js"></script>
-<script src="js/nav.js"></script>
-		<script type="text/javascript" src="js/login.js"></script>
-		<script type="text/javascript" src="js/common.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.bxslider.js"></script>
+		<script src="${pageContext.request.contextPath}/js/mooz.scripts.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>
