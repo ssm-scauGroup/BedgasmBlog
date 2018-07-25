@@ -6,14 +6,6 @@
  * Web script: #
  * 
  */
-$(document).ready(function () {
-    $('.navbar').find('a').each(function () {
-            if (this.href == document.location.href || document.location.href.search(this.href) >= 0) {
-                $(this).parent().addClass('active'); // this.className = 'active';
-            }
-        });
-
-});
 
 function showRegisterForm(){
     $('.loginBox').fadeOut('fast',function(){
@@ -182,5 +174,28 @@ $(function(){
         }
     });
 
+    
+
 })();
 });
+
+function loginClick(){
+    $("#loginModal").modal('hide');
+    $(location).attr('href', 'signin.html');
+
+}
+function showPromptBox(){
+var oDiv1=document.getElementById('accountname');
+        var oDiv2=document.getElementById('prompt-box');
+        var timer=null;
+
+        oDiv1.onmouseover=oDiv2.onmouseover=function(){
+            clearTimeout(timer);
+            oDiv2.style.display='block';
+        }
+        oDiv1.onmouseout=oDiv2.onmouseout=function(){
+            timer=setTimeout(function(){
+            oDiv2.style.display='none';
+            },500)
+        }
+    }
