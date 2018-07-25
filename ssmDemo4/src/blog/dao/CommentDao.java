@@ -45,9 +45,23 @@ public interface CommentDao {
 	public List<Comment> listByArticleId(Integer articleid);
 	
 	/**
+	 * 某个人的所有评论
+	 * @param userid
+	 * @return
+	 */
+	public List<Comment> listByUserId(Integer userid);
+	
+	/**
 	 * 获取某篇文章的评论总数
 	 * @param articleid
 	 * @return
 	 */
-	public Long getTotal(Integer articleid);
+	public Long getTotalByArticleId(Integer articleid);
+	
+	/**
+	 * 获取某用户评论的总数
+	 * @param userid
+	 * @return
+	 */
+	public Long getTotalByUserId(Integer userid);
 }

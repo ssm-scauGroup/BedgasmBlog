@@ -17,13 +17,30 @@ public class Media {
 	/**
 	 * 上传媒体的用户id
 	 */
-	private String userid;
+	private Integer userid;
 	
 	/**
 	 * 上传日期
 	 */
 	private String releaseDate;
 	
+	public Media(){
+		
+	}
+		
+	public Media(String imagepath, Integer userid) {
+		super();
+		this.imagepath = imagepath;
+		this.userid = userid;
+	}
+
+	public Media(Integer id, String imagepath, Integer userid, String releaseDate) {
+		super();
+		this.id = id;
+		this.imagepath = imagepath;
+		this.userid = userid;
+		this.releaseDate = releaseDate;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -36,10 +53,10 @@ public class Media {
 	public void setImagepath(String imagepath) {
 		this.imagepath = imagepath;
 	}
-	public String getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
-	public void setUserid(String userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
 	public String getReleaseDate() {

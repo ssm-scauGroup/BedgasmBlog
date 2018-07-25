@@ -38,6 +38,22 @@ public class User {
 	 */
 	private Integer role;
 	
+	public User() {
+		
+	}
+	
+	public User(String username, String password, String nickname, String email, String signature, String profile,
+			Integer role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.nickname = nickname;
+		this.email = email;
+		this.signature = signature;
+		this.profile = profile;
+		this.role = role;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

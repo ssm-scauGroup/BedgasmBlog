@@ -1,5 +1,7 @@
 package blog.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import blog.entity.User;
@@ -32,5 +34,10 @@ public interface UserDao {
 	 */
 	public Integer updateUser(User user);
 	
+	/**
+	 * 列出所有用户
+	 * @return
+	 */
+	public List<User> listUser();
 
 }
