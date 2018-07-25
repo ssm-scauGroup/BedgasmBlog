@@ -2,43 +2,43 @@ package blog.entity;
 
 /**
  * @author Administrator
- * ÎÄÕÂÊµÌåÀà
+ * æ–‡ç« å®ä½“ç±»
  */
 public class Article {
 	/**
-	 * ÎÄÕÂid
+	 * æ–‡ç« id
 	 */
 	private Integer id;
 	/**
-	 * ÎÄÕÂÌâÄ¿
+	 * æ–‡ç« é¢˜ç›®
 	 */
 	private String title;
 	/**
-	 * ÎÄÕÂÕªÒª
+	 * æ–‡ç« æ‘˜è¦
 	 */
 	private String summary;
 	/**
-	 * ÎÄÕÂ·¢²¼ÈÕÆÚ
+	 * æ–‡ç« å‘å¸ƒæ—¥æœŸ
 	 */
 	private String releaseDate;
 	/**
-	 * ÎÄÕÂµã»÷Êı
+	 * æ–‡ç« ç‚¹å‡»æ•°
 	 */
 	private Integer clickCount;
 	/**
-	 * ÎÄÕÂ±»ÆÀÂÛÊı
+	 * æ–‡ç« è¢«è¯„è®ºæ•°
 	 */
 	private Integer replyCount;
 	/**
-	 * ÎÄÕÂÕıÎÄ
+	 * æ–‡ç« æ­£æ–‡
 	 */
 	private String content;
 	/**
-	 * ÎÄÕÂ±êÇ©(ÒªÇó','¶ººÅ¸ô¿ª ÒÔ±ãÓÚ¸ñÊ½»¯)
+	 * æ–‡ç« æ ‡ç­¾(è¦æ±‚','é€—å·éš”å¼€ ä»¥ä¾¿äºæ ¼å¼åŒ–)
 	 */
 	private String tags;
 	/**
-	 * ÎÄÕÂÀà±ğid
+	 * æ–‡ç« ç±»åˆ«id
 	 */
 	private Integer blogtypeid;
 	
@@ -47,7 +47,7 @@ public class Article {
 	}
 	
 	/**
-	 * ¹¹Ôì·½·¨
+	 * æ„é€ æ–¹æ³•
 	 * @param title
 	 * @param summary
 	 * @param content

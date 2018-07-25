@@ -8,41 +8,41 @@ import blog.entity.Link;
 
 /**
  * @author Administrator
- * ÓÑÇéÁ´½ÓDaoÀà
+ * å‹æƒ…é“¾æ¥Daoç±»
  */
 @Repository("linkDao")
 public interface LinkDao {
 	/**
-	 * Ìí¼ÓÓÑÇéÁ´½Ó
+	 * æ·»åŠ å‹æƒ…é“¾æ¥
 	 * @param link
 	 * @return
 	 */
 	public Integer addLink(Link link);
 	/**
-	 * É¾³ıÓÑÇéÁ´½Ó
+	 * åˆ é™¤å‹æƒ…é“¾æ¥
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteLink(Integer id);
 	/**
-	 * ¸ù¾İid²éÑ¯Á´½Ó
+	 * æ ¹æ®idæŸ¥è¯¢é“¾æ¥
 	 * @param id
 	 * @return
 	 */
 	public Link findById(Integer id);
 	/**
-	 * ¸üĞÂÓÑÇéÁ´½Ó
+	 * æ›´æ–°å‹æƒ…é“¾æ¥
 	 * @param link
 	 * @return
 	 */
 	public Integer updateLink(Link link);
 	/**
-	 * »ñÈ¡ËùÓĞÓÑÇéÁ´½Ó
+	 * è·å–æ‰€æœ‰å‹æƒ…é“¾æ¥
 	 * @return
 	 */
 	public List<Link> listLink();
 	/**
-	 * »ñÈ¡ÓÑÇéÁ´½ÓµÄ×ÜÊı
+	 * è·å–å‹æƒ…é“¾æ¥çš„æ€»æ•°
 	 * @return
 	 */
 	public Long getTotal();

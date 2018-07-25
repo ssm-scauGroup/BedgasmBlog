@@ -8,46 +8,60 @@ import blog.entity.Comment;
 
 /**
  * @author Administrator
- * ÆÀÂÛDaoÀà
+ * è¯„è®ºDaoç±»
  */
 @Repository("commentDao")
 public interface CommentDao {
 	/**
-	 * Ôö¼ÓÆÀÂÛ
+	 * å¢åŠ è¯„è®º
 	 * @param comment
 	 * @return
 	 */
 	public Integer addComment(Comment comment);
 	/**
-	 * É¾³ıÆÀÂÛ
+	 * åˆ é™¤è¯„è®º
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteComment(Integer id);
 	/**
-	 * Í¨¹ıid»ñÈ¡ÆÀÂÛ
+	 * é€šè¿‡idè·å–è¯„è®º
 	 * @param id
 	 * @return
 	 */
 	public Comment findById(Integer id);
 	/**
-	 * ¸üĞÂÆÀÂÛ
+	 * æ›´æ–°è¯„è®º
 	 * @param comment
 	 * @return
 	 */
 	public Integer updateComment(Comment comment);
 	
 	/**
-	 * »ñÈ¡Ä³ÆªÎÄÕÂµÄËùÓĞÆÀÂÛ
+	 * è·å–æŸç¯‡æ–‡ç« çš„æ‰€æœ‰è¯„è®º
 	 * @param articleid
 	 * @return
 	 */
 	public List<Comment> listByArticleId(Integer articleid);
 	
 	/**
-	 * »ñÈ¡Ä³ÆªÎÄÕÂµÄÆÀÂÛ×ÜÊı
+	 * æŸä¸ªäººçš„æ‰€æœ‰è¯„è®º
+	 * @param userid
+	 * @return
+	 */
+	public List<Comment> listByUserId(Integer userid);
+	
+	/**
+	 * è·å–æŸç¯‡æ–‡ç« çš„è¯„è®ºæ€»æ•°
 	 * @param articleid
 	 * @return
 	 */
-	public Long getTotal(Integer articleid);
+	public Long getTotalByArticleId(Integer articleid);
+	
+	/**
+	 * è·å–æŸç”¨æˆ·è¯„è®ºçš„æ€»æ•°
+	 * @param userid
+	 * @return
+	 */
+	public Long getTotalByUserId(Integer userid);
 }

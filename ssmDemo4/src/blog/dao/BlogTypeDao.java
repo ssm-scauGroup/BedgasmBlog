@@ -9,37 +9,37 @@ import blog.entity.BlogType;
 
 /**
  * @author Administrator
- * ÎÄÕÂÀà±ğDaoÀà
+ * æ–‡ç« ç±»åˆ«Daoç±»
  */
 @Repository("blogTypeDao")
 public interface BlogTypeDao {
 
 	/**
-	 * Ìí¼ÓÀà±ğ
+	 * æ·»åŠ ç±»åˆ«
 	 * @param blogType
 	 * @return
 	 */
 	public Integer addBlogType(BlogType blogType);
 	/**
-	 * É¾³ıÀà±ğ
+	 * åˆ é™¤ç±»åˆ«
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteBlogType(Integer id);
 	/**
-	 * Í¨¹ıid²éÑ¯Àà±ğ
+	 * é€šè¿‡idæŸ¥è¯¢ç±»åˆ«
 	 * @param id
 	 * @return
 	 */
 	public BlogType findById(Integer id);
 	/**
-	 * ¸üĞÂÀà±ğ
+	 * æ›´æ–°ç±»åˆ«
 	 * @param blogType
 	 * @return
 	 */
 	public Integer updateBlogType(BlogType blogType);
 	/**
-	 * ²éÑ¯µÚ¼¸Ò³
+	 * æŸ¥è¯¢ç¬¬å‡ é¡µ
 	 * @param start
 	 * @param end
 	 * @return
@@ -47,7 +47,7 @@ public interface BlogTypeDao {
 	public List<BlogType> listBlogType(@Param("start") Integer start,
 			@Param("end") Integer end);
 	/**
-	 * Àà±ğ×ÜÊı
+	 * ç±»åˆ«æ€»æ•°
 	 * @return
 	 */
 	public Long getTotal();

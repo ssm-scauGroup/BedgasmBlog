@@ -2,8 +2,6 @@ package blog.dao;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.W3CDomHandler;
-
 import org.springframework.stereotype.Repository;
 
 import blog.entity.Media;
@@ -12,42 +10,42 @@ import blog.entity.Media;
 public interface MediaDao {
 	
 	/**
-	 * Ìí¼ÓÃ½Ìå
+	 * æ·»åŠ åª’ä½“
 	 * @param media
 	 * @return
 	 */
 	public Integer addMedia(Media media);
 	
 	/**
-	 * É¾³ıÃ½Ìå
+	 * åˆ é™¤åª’ä½“
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteMedia(Integer id);
 	
 	/**
-	 * ¸ù¾İid²éÑ¯media
+	 * æ ¹æ®idæŸ¥è¯¢media
 	 * @param id
 	 * @return
 	 */
 	public Media findById(Integer id);
 	
 	/**
-	 * ¸üĞÂÃ½Ìå
+	 * æ›´æ–°åª’ä½“
 	 * @param media
 	 * @return
 	 */
 	public Integer updateMedia(Media media);
 	
 	/**
-	 * ¸ù¾İÓÃ»§idÁĞ³ö¸ÃÓÃ»§µÄËùÓĞÃ½Ìå
+	 * æ ¹æ®ç”¨æˆ·idåˆ—å‡ºè¯¥ç”¨æˆ·çš„æ‰€æœ‰åª’ä½“
 	 * @param userid
 	 * @return
 	 */
 	public List<Media> listByUserId(Integer userid);
 	
 	/**
-	 * ¸ù¾İÓÃ»§id»ñÈ¡¸ÃÓÃ»§ÉÏ´«µÄÃ½ÌåÊı
+	 * æ ¹æ®ç”¨æˆ·idè·å–è¯¥ç”¨æˆ·ä¸Šä¼ çš„åª’ä½“æ•°
 	 * @param userid
 	 * @return
 	 */

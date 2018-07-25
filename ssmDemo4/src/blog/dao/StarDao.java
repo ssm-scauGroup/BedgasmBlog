@@ -11,50 +11,53 @@ import blog.entity.Star;
 public interface StarDao {
 	
 	/**
-	 * Ìí¼Ó¶©ÔÄ¹ØÏµ
+	 * æ·»åŠ è®¢é˜…å…³ç³»
 	 * @param star
 	 * @return
 	 */
 	public Integer addStar(Star star);
 	
 	/**
-	 * É¾³ı¶©ÔÄ¹ØÏµ
+	 * åˆ é™¤è®¢é˜…å…³ç³»
 	 * @param subscriber
 	 * @param subscribee
 	 * @return
 	 */
 	public Integer deleteStar(@Param("subscriber") Integer subscriber,@Param("subscribee") Integer subscribee);
 	
+	
+	//public Integer deleteStar(Star star);
+	
 	/**
-	 * ÁĞ³ö¹Ø×¢µÄÈË
+	 * åˆ—å‡ºå…³æ³¨çš„äºº
 	 * @param subscriber
 	 * @return
 	 */
 	public List<Star> findBySubscriber(Integer subscriber);
 	
 	/**
-	 * ÁĞ³ö×Ô¼ºµÄ·ÛË¿
+	 * åˆ—å‡ºè‡ªå·±çš„ç²‰ä¸
 	 * @param subscribee
 	 * @return
 	 */
 	public List<Star> findBySubscribee(Integer subscribee);
 	
 	/**
-	 * ¸üĞÂ¶©ÔÄ¹ØÏµ
+	 * æ›´æ–°è®¢é˜…å…³ç³»
 	 * @param star
 	 * @return
 	 */
-	public Integer updateStar(Star star);
+	//public Integer updateStar(Star star);
 	
 	/**
-	 * subscriber ¹Ø×¢×ÜÊı
+	 * subscriber å…³æ³¨æ€»æ•°
 	 * @param subscriber
 	 * @return
 	 */
 	public Long getTotalSubscriber(Integer subscriber);
 	
 	/**
-	 * subscribee ·ÛË¿×ÜÊı
+	 * subscribee ç²‰ä¸æ€»æ•°
 	 * @param subscribee
 	 * @return
 	 */

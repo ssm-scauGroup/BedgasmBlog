@@ -2,30 +2,50 @@ package blog.entity;
 
 /**
  * @author Administrator
- * ÆÀÂÛÊµÌåÀà
+ * è¯„è®ºå®ä½“ç±»
  */
 public class Comment {
 	/**
-	 * ÆÀÂÛÌõid
+	 * è¯„è®ºæ¡id
 	 */
 	private Integer id;
 	/**
-	 * ÆÀÂÛÕıÎÄ
+	 * è¯„è®ºæ­£æ–‡
 	 */
 	private String content;
 	/**
-	 * ÆÀÂÛÈÕÆÚ
+	 * è¯„è®ºæ—¥æœŸ
 	 */
 	private String commentDate;
 	/**
-	 * ÆÀÂÛÓÃ»§id
+	 * è¯„è®ºç”¨æˆ·id
 	 */
 	private Integer userid;
 	/**
-	 * ±»ÆÀÂÛµÄÎÄÕÂid
+	 * è¢«è¯„è®ºçš„æ–‡ç« id
 	 */
 	private Integer articleid;
 	
+	public Comment(){
+		
+	}
+	
+	public Comment(String content, Integer userid, Integer articleid) {
+		super();
+		this.content = content;
+		this.userid = userid;
+		this.articleid = articleid;
+	}
+	
+	public Comment(Integer id, String content, String commentDate, Integer userid, Integer articleid) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.commentDate = commentDate;
+		this.userid = userid;
+		this.articleid = articleid;
+	}
+
 	public Integer getId() {
 		return id;
 	}

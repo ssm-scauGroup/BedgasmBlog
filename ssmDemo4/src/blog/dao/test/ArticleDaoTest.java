@@ -13,7 +13,7 @@ import blog.util.FormatDate;
 
 /**
  * @author Administrator
- * ÎÄÕÂ²âÊÔÀà
+ * æ–‡ç« æµ‹è¯•ç±»
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:beans.xml")
@@ -24,7 +24,7 @@ public class ArticleDaoTest {
 	
 //	@Test
 //    public void addArticle() throws Exception {
-//        Article article = new Article("hello1","½ñÌìÊÇ¸öºÃÈÕ×Ó","hhhhhhhhhhhhh","demo",1);
+//        Article article = new Article("hello1","ä»Šå¤©æ˜¯ä¸ªå¥½æ—¥å­","hhhhhhhhhhhhh","demo",1);
 //        int result = articleDao.addArticle(article);
 //        System.out.println("result is "+result);
 //    }
@@ -49,7 +49,7 @@ public class ArticleDaoTest {
 	
 //	@Test
 //	public void updateArticle() throws Exception{
-//		Article article = new Article(4,"helladfasdfo1","½ñÌìÊÇ¸öºÃadsfadfÈÕ×Ó",FormatDate.formatDate(), null, null, "hhhhhhhhhhhhh","demo",1);
+//		Article article = new Article(4,"helladfasdfo1","ä»Šå¤©æ˜¯ä¸ªå¥½adsfadfæ—¥å­",FormatDate.formatDate(), null, null, "hhhhhhhhhhhhh","demo",1);
 //		Integer res = articleDao.updateArticle(article);
 //		System.out.println("result is "+res);
 //	}

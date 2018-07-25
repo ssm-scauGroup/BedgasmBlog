@@ -2,19 +2,19 @@ package blog.entity;
 
 /**
  * @author Administrator
- * ÎÄÕÂ·ÖÀàÊµÌåÀà
+ * æ–‡ç« åˆ†ç±»å®ä½“ç±»
  */
 public class BlogType {
 	/**
-	 * ÎÄÕÂ·ÖÀàid
+	 * æ–‡ç« åˆ†ç±»id
 	 */
 	private Integer id;
 	/**
-	 * ÎÄÕÂ·ÖÀàÃû³Æ
+	 * æ–‡ç« åˆ†ç±»åç§°
 	 */
 	private String typename;
 	/**
-	 * ¸ÃÀà±ğÏÂµÄÎÄÕÂÊı
+	 * è¯¥ç±»åˆ«ä¸‹çš„æ–‡ç« æ•°
 	 */
 	private Integer typecount;
 	

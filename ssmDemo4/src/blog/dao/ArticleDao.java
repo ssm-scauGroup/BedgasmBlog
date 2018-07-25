@@ -9,48 +9,48 @@ import blog.entity.Article;
 
 /**
  * @author Administrator
- * ÎÄÕÂDaoÀà
+ * æ–‡ç« Daoç±»
  */
 @Repository("articleDao")
 public interface ArticleDao {
 	/**
-	 * ²éÑ¯ËùÓĞÎÄÕÂ
+	 * æŸ¥è¯¢æ‰€æœ‰æ–‡ç« 
 	 * @param map
 	 * @return
 	 */
 	public List<Article> listArticle(Map<String,Object> map);
 	/**
-	 * »ñÈ¡ÎÄÕÂÊıÄ¿¡£
+	 * è·å–æ–‡ç« æ•°ç›®ã€‚
 	 * @param map
 	 * @return
 	 */
 	public Long getTotal(Map<String,Object> map);
 	/**
-	 * ²éÑ¯Ä³¸öÀà±ğÏÂµÄÎÄÕÂÊı
+	 * æŸ¥è¯¢æŸä¸ªç±»åˆ«ä¸‹çš„æ–‡ç« æ•°
 	 * @param blogtypeid
 	 * @return
 	 */
 	public Integer getBlogByTypeId(Integer blogtypeid);
 	/**
-	 * Ìí¼ÓÎÄÕÂ
+	 * æ·»åŠ æ–‡ç« 
 	 * @param article
 	 * @return
 	 */
 	public Integer addArticle(Article article);
 	/**
-	 * ¸üĞÂÎÄÕÂ
+	 * æ›´æ–°æ–‡ç« 
 	 * @param article
 	 * @return
 	 */
 	public Integer updateArticle(Article article);
 	/**
-	 * É¾³ıÎÄÕÂ
+	 * åˆ é™¤æ–‡ç« 
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteArticle(Integer id);
 	/**
-	 * Í¨¹ıid»ñÈ¡ÎÄÕÂ
+	 * é€šè¿‡idè·å–æ–‡ç« 
 	 * @param id
 	 * @return
 	 */

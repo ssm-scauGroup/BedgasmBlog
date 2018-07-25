@@ -23,7 +23,7 @@ public class BlogTypeDaoTest {
 	
 	@Test
 	public void addBlogType() throws Exception{
-		BlogType blogType = new BlogType("ÕâÊÇÒ»¸ö²âÊÔ",0);
+		BlogType blogType = new BlogType("è¿™æ˜¯ä¸€ä¸ªæµ‹è¯•",0);
 		int res = blogTypeDao.addBlogType(blogType);
 		System.out.println(res);
 	}
@@ -36,7 +36,7 @@ public class BlogTypeDaoTest {
 	
 //	@Test
 //	public void updateBlogType() throws Exception{
-//		BlogType blogType = new BlogType(1,0,"ÐÞ¸ÄÀà±ð");
+//		BlogType blogType = new BlogType(1,0,"ä¿®æ”¹ç±»åˆ«");
 //		int res = blogTypeDao.updateBlogType(blogType);
 //		System.out.println("res is "+res);
 //	}
