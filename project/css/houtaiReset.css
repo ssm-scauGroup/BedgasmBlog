@@ -1,0 +1,376 @@
+/*禁止文字选择*/
+.user-select{
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+@charset "utf-8";
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, button, input, fieldset, legend, input, textarea, p, blockquote, th, td, article, aside, details, figcaption, figure, #footer, #header, hgroup, menu, nav, section {
+	margin: 0;
+	padding: 0;
+}
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, button, input, textarea, p, span, th, td, article, aside, nav, section, img, a, table, tbody, tr, label {
+	outline: none;
+	transition: all 0.30s ease-in-out;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+}
+dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, span, th, tr, td {
+	cursor: default;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+	display: block;
+}
+body {
+	color: #000;
+	background-color: #EEE;
+	overflow-x: hidden;
+	padding-top: 50px;
+}
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: none; 
+    /*display: block;*/
+}
+
+.clearfix{
+    zoom:1;
+}
+.clearfix:after{
+    display: table;
+    clear: both;
+    content: "";
+    
+}
+
+.becenter{
+    margin:0 auto;
+}
+
+nav{
+    display: block;
+
+}
+
+#navbar{
+    margin:0 20px;
+
+}
+
+.navbar-nav li{
+    margin:0 12px;
+
+}
+
+.navbar-inverse{
+	border: none;
+}
+
+#navlogo{
+    width:70px;
+    height: 50px;
+    background: url("../images/whiteLogo.png") no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    padding: 0;
+}
+
+@media (min-width: 750px){
+#prompt-box {
+    width: 150px;
+    height: 50px;
+    background-color: #222;
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    display: none;
+}
+}
+
+@media (max-width: 750px){
+#prompt-box {
+    width: 150px;
+    height: 50px;
+    background-color: #222;
+    position: fixed;
+    margin-left: 50px;
+    display: none;
+}
+}
+
+
+#prompt-box p{
+	padding: 10px 20px;
+    background-color: #222;
+    font-size: 14px;
+    font-family: "Microsoft Yahei",Georgia,Serif;
+
+}
+
+#prompt-box a{
+	color: #9d9d9d;
+}
+
+#prompt-box a:hover{
+	color: white; 
+}
+
+
+
+/*布局容器*/
+.container-fluid {
+	padding-right: 0;
+	padding-left: 0;
+	margin-right: 0;
+	margin-left: 0;
+}
+/*栅格系统*/
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+
+
+
+/*页面滚动条*/
+html::-webkit-scrollbar {
+ width:6px;
+ height:6px;
+ background:#CCC;
+}
+html::-webkit-scrollbar-button {
+ display:none;
+}
+html::-webkit-scrollbar-track-piece {
+ display:none;
+}
+html::-webkit-scrollbar-thumb {
+ background:#999;
+}
+html::-webkit-scrollbar-thumb:hover {
+ background:#3399CC;
+}
+
+/*文本域滚动条*/
+textarea::-webkit-scrollbar {
+ width:3px;
+ height:3px;
+ border-radius:20px;
+}
+textarea::-webkit-scrollbar-button {
+ display:none;
+}
+textarea::-webkit-scrollbar-track-piece {
+ display:none;
+}
+textarea::-webkit-scrollbar-thumb {
+ background:#999;
+}
+
+
+.row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+/*侧边导航样式*/
+.sidebar {
+	display: none;
+	overflow: hidden;
+}
+.sidebar::-webkit-scrollbar {
+ width:1px;
+ height:1px;
+ border-radius:20px;
+}
+.sidebar::-webkit-scrollbar-button {
+ display:none;
+}
+.sidebar::-webkit-scrollbar-track-piece {
+ display:none;
+}
+.sidebar::-webkit-scrollbar-thumb {
+ background:#CCC;
+ border-radius:20px;
+}
+
+@media (min-width: 768px) {
+.sidebar {
+	position: fixed;
+	top: 50px;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	display: block;
+	padding: 16px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	/*background-color: #f8f8f8;*/
+	background-color: #AEAEAE;
+	border-right: 1px solid #eee;
+}
+}
+.nav-sidebar {
+	margin-right: -16px;
+	margin-bottom: 30px;
+	margin-left: -15px;
+}
+.nav-sidebar li a:hover {
+	/*padding-left: 30px;*/
+	transition: 0.6s;
+	color: #fff;
+	background-color: #737373;
+}
+.nav-sidebar > li > a {
+	color: #000;
+	letter-spacing: 3px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+	color: #fff;
+	background-color: #737373;
+}
+
+.myhead{
+	display: block;
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	background:  url("../images/pakho.jpg") no-repeat;
+	background-position: center center;
+    background-size: 100%;
+    margin:15px auto;
+    transition: transform 0.3s ease-in-out;
+}
+.nav-sidebar .myhead:hover{
+	background:  url("../images/pakho.jpg") no-repeat;
+	background-position: center center;
+    background-size: 100%;
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+            -moz-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+} 
+/*内容主体样式*/
+.main {
+	padding:3px 0px;
+}
+
+@media (max-width: 768px) {
+.main {
+	padding:5px 0px;
+}
+}
+.placeholders{
+
+}
+
+.page-header{
+	    font-family: "黑体";
+		font-size: 26px;
+		border-bottom: 1px solid #DDD;
+		margin-top:30px;
+}
+
+.placeholders {
+	text-align: center;
+
+}
+.placeholders h4 {
+	margin-bottom: 5px;
+}
+.placeholder {
+	margin-bottom: 20px;
+}
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+}
+/*表格超出滚动条样式*/
+.table-responsive::-webkit-scrollbar {
+ width:1px;
+ height:1px;
+ border-radius:20px;
+}
+.table-responsive::-webkit-scrollbar-button {
+ display:none;
+}
+.table-responsive::-webkit-scrollbar-track-piece {
+ display:none;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+ background:#CCC;
+ border-radius:20px;
+}
+
+#overview,#shortcut{
+	margin: 30px 30px;
+	/*width:50%;*/
+	height: 160px;
+	background: #fff;
+}
+
+.next1{
+	display: block;
+	position: relative;
+	width: 130px;
+	position: relative;
+	left: 16%;
+	top:20%;
+
+}
+.next1 li , .next2 li{
+	list-style: none;
+}
+
+@media(min-width: 480px){
+	.next2{
+	display: block;
+	width: 130px;
+	position: relative;
+	left: 50%;
+	top:-3%;
+
+}
+}
+@media(max-width: 480px){
+	.next2{
+	display: block;
+	width: 130px;
+	position: relative;
+	left: 16%;
+	top:20%;
+
+}
+}
+/*.next2{
+	display: block;
+	width: 130px;
+	position: relative;
+	left: 50%;
+	top:-3%;
+
+}*/
+h5{
+	font-size: 16px;
+	font-weight: bold;
+	position: relative;
+	top: 12%;
+	left:8%;
+}

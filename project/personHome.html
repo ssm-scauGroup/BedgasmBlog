@@ -14,6 +14,9 @@
 	<link href="css/officalHome.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<link rel="stylesheet" type="text/css" href="css/personhome.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/personhome.css"> -->
+
+	<script src="js/jquery.min.js"></script>
 
 </head>
 <body>
@@ -29,27 +32,32 @@
 					</button>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">	
-						<li><a id="navlogo" href="signin.html"></a></li>
+					<ul class="nav navbar-nav">
+						<li><a href="signin.html">Home</a></li>
+						<li><a href="myaboutme.html" >About Me</a></li>
+						<li class="active"><a href="#">Contact</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
-					</ul>
+							<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
+							
+						</ul>
 
 				</div>
 				<!--/.nav-collapse -->
- 			
-		<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
-			<!-- <p><a href="personHome.html">个人中心</p> -->
-			<p><a href="index.html">退出登录</a></p>
-		</div>			
+				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+						<!-- <p><a href="personHome.html">个人中心</p> -->
+						<p><a href="#">个人资料</a></p>	
+						<p><a href="#">帮助</a></p>	
+						<p><a href="index.html">退出登录</a></p>
+					</div>			
 		</nav>
 		
 			
 
 		
-		<div class="container">
+<div class="container">
+			
 			<div class="basicinfo clearfix">
 				<div class="headimage"></div>
 				<div class="headmessg">
@@ -65,10 +73,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -77,10 +85,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -89,10 +97,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -101,10 +109,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -158,9 +166,9 @@
 						<h3 class="sidebar-title">近期评论</h3>
 						<div class="widget-container">
 							<ul class="cate">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
+								<li><a href="article.html#comment">1</a></li>
+								<li><a href="article.html#comment">2</a></li>
+								<li><a href="article.html#comment">3</a></li>
 							</ul>
 						</div>
 					</div>
@@ -203,5 +211,6 @@
 <script src="js/nav.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
+			<script type="text/javascript" src="js/prompt.js"></script>
 </body>
 </html>

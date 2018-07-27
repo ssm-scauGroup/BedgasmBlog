@@ -1,32 +1,3 @@
-// ;$(function()
-// {
-// 	'use strict';
-
-//     var backbt = $('.back-to-top');
- 
-//      backbt.css("display","none");
-    
-//     backbt.on('click',function(){
-//     	$('body').animate({
-//     		scrollTop:0
-//     	},800)
-//     })
-
-    
-//     $(window).on('scroll',function(){
-//     	if($(window).scrollTop()>$(window).height()){
-//     		backbt.fadeIn();
-
-//     	}
-//         else 
-//         	backbt.fadeOut();
-    	
-//     })
-//     $(window).trigger('scroll');
-
-
-//     }
-// )	
 
 window.onload = function(){
   var btn = document.getElementById('backtopbtn');
@@ -72,3 +43,29 @@ window.onload = function(){
     },30);
   };
 };
+
+
+//  var timer=null;
+// function showPromptBox(){
+// // var oDiv1=document.getElementById('accountname');
+//         var oDiv2=document.getElementById('prompt-box');
+       
+
+//         // oDiv1.onmouseover=oDiv2.onmouseover=function(){
+//             clearTimeout(timer);
+//             oDiv2.style.display='block';
+        
+//         // oDiv1.onmouseout=oDiv2.onmouseout=function(){
+//         //     timer=setTimeout(function(){
+//         //     oDiv2.style.display='none';
+//         //     },500)
+//         // }
+//     }
+
+// function closePromptBox(){
+//     // var timer=null;
+//     var oDiv2=document.getElementById('prompt-box');
+//     timer=setTimeout(function(){
+//             oDiv2.style.display='none';
+//             },500)
+// }

@@ -15,6 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<link rel="stylesheet" type="text/css" href="css/personhome.css">
 
+	<script src="js/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -30,22 +32,24 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active" ><a href="#">Home</a></li>
-						<li><a href="myaboutme.html">About Me</a></li>
-						<li><a href="mycontact.html">Contact</a></li>
+						<li><a href="signin.html">Home</a></li>
+						<li><a href="myaboutme.html" >About Me</a></li>
+						<li><a href="#">Contact</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
-					</ul>
+							<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
+							
+						</ul>
 
 				</div>
 				<!--/.nav-collapse -->
- 			
-		<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
-			<p><a href="personHome.html">个人中心</p>
-			<p><a href="index.html">退出登录</a></p>
-		</div>
+				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+						<!-- <p><a href="personHome.html">个人中心</p> -->
+						<p><a href="#">个人资料</a></p>	
+						<p><a href="#">帮助</a></p>	
+						<p><a href="index.html">退出登录</a></p>
+					</div>	
 			
 		</nav>
 		
@@ -112,10 +116,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -124,10 +128,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -136,10 +140,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -148,10 +152,10 @@
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
 						<div class="blog-post-body">
-							<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="personHome.html">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
 							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-							<div class="read-more"><a href="#">Continue Reading</a></div>
+							<div class="read-more"><a href="article.html">Continue Reading</a></div>
 						</div>
 					</article>
 
@@ -188,41 +192,41 @@
 						<div class="widget-container">
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
+									<h2><a href="article.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
+									<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
@@ -234,41 +238,41 @@
 						<div class="widget-container">
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
+									<h2><a href="article.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
+									<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
 							<article class="widget-post">
 								<div class="post-body">
-									<h2><a href="post.html">The State of the Word 2014</a></h2>
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
 									<div class="post-meta">
-										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
 									</div>
 								</div>
 							</article>
@@ -296,6 +300,7 @@
 			</div>
 		</div>
 		
+		
 		<footer class="footer"> 
 
 			<div class="footer-bottom">
@@ -318,5 +323,6 @@
 <script src="js/nav.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
+			<script type="text/javascript" src="js/prompt.js"></script>
 </body>
 </html>
