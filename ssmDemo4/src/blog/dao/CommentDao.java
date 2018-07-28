@@ -1,6 +1,7 @@
 package blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -38,18 +39,11 @@ public interface CommentDao {
 	public Integer updateComment(Comment comment);
 	
 	/**
-	 * 获取某篇文章的所有评论
+	 * 根据条件查询评论
 	 * @param articleid
 	 * @return
 	 */
-	public List<Comment> listByArticleId(Integer articleid);
-	
-	/**
-	 * 某个人的所有评论
-	 * @param userid
-	 * @return
-	 */
-	public List<Comment> listByUserId(Integer userid);
+	public List<Comment> listComment(Map<String, Object> map);
 	
 	/**
 	 * 获取某篇文章的评论总数

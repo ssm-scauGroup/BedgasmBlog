@@ -1,6 +1,7 @@
 package blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -35,11 +36,17 @@ public interface UserDao {
 	public Integer updateUser(User user);
 	
 	/**
-	 * 列出所有用户
+	 * 根据条件查询
+	 * @param map
 	 * @return
 	 */
-	public List<User> listUser();
+	public List<User> listUser(Map<String, Object> map);
 	
+	/**
+	 * 根据用户名查出改用户
+	 * @param username
+	 * @return
+	 */
 	public User fingByUserLogin(String username);
 
 }

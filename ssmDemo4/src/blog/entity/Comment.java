@@ -25,26 +25,6 @@ public class Comment {
 	 * 被评论的文章id
 	 */
 	private Integer articleid;
-	
-	public Comment(){
-		
-	}
-	
-	public Comment(String content, Integer userid, Integer articleid) {
-		super();
-		this.content = content;
-		this.userid = userid;
-		this.articleid = articleid;
-	}
-	
-	public Comment(Integer id, String content, String commentDate, Integer userid, Integer articleid) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.commentDate = commentDate;
-		this.userid = userid;
-		this.articleid = articleid;
-	}
 
 	public Integer getId() {
 		return id;

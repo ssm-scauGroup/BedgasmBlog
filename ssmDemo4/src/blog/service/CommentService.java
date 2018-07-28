@@ -13,9 +13,7 @@ public interface CommentService {
 
 	public Integer updateComment(Comment comment);
 
-	public List<Comment> listByArticleId(Integer articleid);
-
-	public List<Comment> listByUserId(Integer userid);
+	public List<Comment> listComment(Map<String, Object> map);
 
 	public Long getTotalByArticleId(Integer articleid);
 

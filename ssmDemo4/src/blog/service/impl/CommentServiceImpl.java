@@ -38,18 +38,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comment> listByArticleId(Integer articleid) {
-		// TODO Auto-generated method stub
-		return cdo.listByArticleId(articleid);
-	}
-
-	@Override
-	public List<Comment> listByUserId(Integer userid) {
-		// TODO Auto-generated method stub
-		return cdo.listByUserId(userid);
-	}
-
-	@Override
 	public Long getTotalByArticleId(Integer articleid) {
 		// TODO Auto-generated method stub
 		return cdo.getTotalByArticleId(articleid);
@@ -59,6 +47,12 @@ public class CommentServiceImpl implements CommentService {
 	public Long getTotalByUserId(Integer userid) {
 		// TODO Auto-generated method stub
 		return cdo.getTotalByUserId(userid);
+	}
+
+	@Override
+	public List<Comment> listComment(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return cdo.listComment(map);
 	}
 
 }

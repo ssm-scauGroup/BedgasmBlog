@@ -1,6 +1,7 @@
 package blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -39,13 +40,21 @@ public interface BlogTypeDao {
 	 */
 	public Integer updateBlogType(BlogType blogType);
 	/**
-	 * 查询第几页
+	 * 分页查询
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	public List<BlogType> listBlogType(@Param("start") Integer start,
+	public List<BlogType> listByPage(@Param("start") Integer start,
 			@Param("end") Integer end);
+	
+	/**
+	 * 根据相关条件查询类别
+	 * @param map
+	 * @return
+	 */
+	public List<BlogType> listBlogType(Map<String, Object> map);
+	
 	/**
 	 * 类别总数
 	 * @return

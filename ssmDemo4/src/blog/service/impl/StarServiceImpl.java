@@ -20,12 +20,6 @@ public class StarServiceImpl implements StarService {
 	}
 
 	@Override
-	public Integer deleteStar(Integer subscriber, Integer subscribee) {
-		// TODO Auto-generated method stub
-		return sdo.deleteStar(subscriber, subscribee);
-	}
-
-	@Override
 	public List<Star> findBySubscriber(Integer subscriber) {
 		// TODO Auto-generated method stub
 		return sdo.findBySubscriber(subscriber);
@@ -53,6 +47,12 @@ public class StarServiceImpl implements StarService {
 	public Long getTotalSubscribee(Integer subscribee) {
 		// TODO Auto-generated method stub
 		return sdo.getTotalSubscribee(subscribee);
+	}
+
+	@Override
+	public Integer deleteStar(Star star) {
+		// TODO Auto-generated method stub
+		return sdo.deleteStar(star);
 	}
 
 }

@@ -5,15 +5,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import blog.entity.Article;
 import blog.entity.BlogType;
 import blog.service.*;
+import blog.util.PageBean;
 import blog.dao.*;
 
 @Service("blogTypeService")
 public class BlogTypeServiceImpl implements BlogTypeService{
+	
 	@Autowired
     private BlogTypeDao bdo;
+	
 	@Override
 	public Integer addBlogType(BlogType blogType) {
 		// TODO Auto-generated method stub
@@ -39,15 +41,23 @@ public class BlogTypeServiceImpl implements BlogTypeService{
 	}
 
 	@Override
-	public List<BlogType> listBlogType(Integer start, Integer end) {
-		// TODO Auto-generated method stub
-		return bdo.listBlogType(start, end);
-	}
-
-	@Override
 	public Long getTotal() {
 		// TODO Auto-generated method stub
 		return bdo.getTotal();
 	}
+
+	@Override
+	public PageBean<BlogType> listByPage(PageBean<BlogType> pageBean) {
+		// TODO Auto-generated method stub
+		pageBean.setResult(bdo.listByPage(pageBean.getStart(), pageBean.getEnd()));
+		return pageBean;
+	}
+
+	@Override
+	public List<BlogType> listBlogType(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bdo.listBlogType(map);
+	}
+	
 
 }

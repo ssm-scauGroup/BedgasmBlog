@@ -42,51 +42,10 @@ public class Article {
 	 */
 	private Integer blogtypeid;
 	
-	public Article(){
-		
-	}
-	
 	/**
-	 * 构造方法
-	 * @param title
-	 * @param summary
-	 * @param content
-	 * @param tags
-	 * @param blogtypeid
+	 * 作者id
 	 */
-	public Article(String title, String summary, String content, String tags, Integer blogtypeid) {
-		super();
-		this.title = title;
-		this.summary = summary;
-		this.content = content;
-		this.tags = tags;
-		this.blogtypeid = blogtypeid;
-	}
-	
-	/**
-	 * @param id
-	 * @param title
-	 * @param summary
-	 * @param releaseDate
-	 * @param clickCount
-	 * @param replyCount
-	 * @param content
-	 * @param tags
-	 * @param blogtypeid
-	 */
-	public Article(Integer id, String title, String summary, String releaseDate, Integer clickCount, Integer replyCount,
-			String content, String tags, Integer blogtypeid) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.summary = summary;
-		this.releaseDate = releaseDate;
-		this.clickCount = clickCount;
-		this.replyCount = replyCount;
-		this.content = content;
-		this.tags = tags;
-		this.blogtypeid = blogtypeid;
-	}
+	private Integer author;
 
 	public Integer getId() {
 		return id;
@@ -143,11 +102,19 @@ public class Article {
 		this.blogtypeid = blogtypeid;
 	}
 
+	public Integer getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Integer author) {
+		this.author = author;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", summary=" + summary + ", releaseDate=" + releaseDate
 				+ ", clickCount=" + clickCount + ", replyCount=" + replyCount + ", content=" + content + ", tags="
-				+ tags + ", blogtypeid=" + blogtypeid + "]";
+				+ tags + ", blogtypeid=" + blogtypeid + ", author=" + author + "]";
 	}
 	
 }

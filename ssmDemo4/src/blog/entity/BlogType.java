@@ -18,23 +18,6 @@ public class BlogType {
 	 */
 	private Integer typecount;
 	
-	public BlogType(){
-		
-	}
-	
-	public BlogType(String typename, Integer typecount) {
-		super();
-		this.typename = typename;
-		this.typecount = typecount;
-	}
-	
-	public BlogType(Integer id,Integer typecount,String typename) {
-		super();
-		this.id = id;
-		this.typecount = typecount;
-		this.typename = typename;
-	}
-	
 	public Integer getId() {
 		return id;
 	}

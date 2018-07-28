@@ -23,7 +23,7 @@ public interface StarDao {
 	 * @param subscribee
 	 * @return
 	 */
-	public Integer deleteStar(@Param("subscriber") Integer subscriber,@Param("subscribee") Integer subscribee);
+	public Integer deleteStar(Star star);
 	
 	
 	//public Integer deleteStar(Star star);

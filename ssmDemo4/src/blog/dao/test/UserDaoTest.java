@@ -21,8 +21,13 @@ public class UserDaoTest {
 	
 //	@Test
 //	public void addUser() throws Exception{
-//		User u = new User("ronething","123456","axing","178965100@qq.com","这是一个个性签名","images/touxiang",1);
-//		Integer res = userDao.addUser(u);
+//		User user = new User();
+//		user.setUsername("nihao");
+//		user.setEmail("123@qq.com");
+//		user.setPassword("123456");
+//		user.setNickname("nihao");
+//		//User u = new User("ronething","123456","axing","178965100@qq.com","这是一个个性签名","images/touxiang",1);
+//		Integer res = userDao.addUser(user);
 //		System.out.println(res);
 //	}
 	

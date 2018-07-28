@@ -9,7 +9,7 @@ import blog.entity.Star;
 public interface StarService {
 	public Integer addStar(Star star);
 
-	public Integer deleteStar(@Param("subscriber") Integer subscriber, @Param("subscribee") Integer subscribee);
+	public Integer deleteStar(Star star);
 
 	public List<Star> findBySubscriber(Integer subscriber);
 
