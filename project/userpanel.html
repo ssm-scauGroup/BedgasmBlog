@@ -45,43 +45,51 @@
 						<p><a href="#">帮助</a></p>	
 						<p><a href="index.html">退出登录</a></p>
 					</div>			
-			</nav>
+			  </nav>
 		  </header>
-  <div class="row">
+    <div class="row">
     <aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
       <ul class="nav nav-sidebar">
       	 <li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
       </ul>
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">仪表盘</a></li>
+        <li class="active"><a href="#"><span class="  glyphicon glyphicon-dashboard">&nbsp</span>仪表盘</a></li>
       </ul>
       <ul class="nav nav-sidebar">
-	        <li><a href="#">文章</a></li>
-	        <li><a href="#">媒体</a></li>
-	        <li><a href="#">评论</a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-pushpin">&nbsp</span>文章</a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-picture">&nbsp</span>媒体</a></li>
+          <li><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li>
 	        <!-- <li><a href="#">栏目</a></li> -->
       </ul>
       <ul class="nav nav-sidebar">
-        <li><a href="category.html">栏目</a></li>
-        <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其它</a>
+        <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-star  ">&nbsp</span>订阅</a>
           <ul class="dropdown-menu" aria-labelledby="otherMenu">
-            <li><a href="flink.html">友情链接</a></li>
-            <li><a data-toggle="modal" data-target="#areDeveloping">访问记录</a></li>
+            <li><a href="flink.html"><span class="glyphicon glyphicon-star-empty">&nbsp</span>我的订阅</a></li>
+            <li><a data-toggle="modal" data-target="#areDeveloping"><span class="glyphicon glyphicon-heart">&nbsp</span>我的粉丝</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li>
+          <!-- <li><a href="#">栏目</a></li> -->
+        <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
+          <ul class="dropdown-menu" aria-labelledby="otherMenu">
+            <li><a href="flink.html"><span class="glyphicon glyphicon-star">&nbsp</span>友情链接</a></li>
+            <li><a data-toggle="modal" data-target="#areDeveloping"><span class="glyphicon glyphicon-eye-open">&nbsp</span>访问记录</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav nav-sidebar">
-        <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
+        <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog">&nbsp</span>设置</a>
           <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a data-toggle="modal" data-target="#areDeveloping">个人资料</a></li>
-            <li><a href="manage-user.html">安全设置</a></li>
+            <li><a data-toggle="modal" data-target="#areDeveloping"><span class="glyphicon glyphicon-user">&nbsp</span>个人资料</a></li>
+            <li><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>安全设置</a></li>
           </ul>
         </li>
        
       </ul>
     </aside>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-    <div class="container">
+    <div class="container wrap">
       <div class="row">
       	<h1 class="page-header">欢迎使用BEDGASM BLOG !</h1>
          <div class="container">
@@ -91,12 +99,12 @@
 
                 <h5>信息概览</h5>
                 <ul class="next1">
-                  <li><span class="glyphicon glyphicon-edit">&nbsp<a href="">文章个数26</a></span></li>
-                  <li><span class="glyphicon glyphicon-home">&nbsp<a href="">评论数33</a></span></li>
+                  <li><span class="glyphicon glyphicon-pushpin">&nbsp<a href="">文章个数26</a></span></li>
+                  <li><span class="glyphicon glyphicon-comment">&nbsp<a href="">评论数33</a></span></li>
                 </ul>
                 <ul class="next2">
-                  <li><span class="glyphicon glyphicon-check">&nbsp<a href="">友情链接6</a></span></li>
-                  <li><span class="glyphicon glyphicon-pushpin">&nbsp<a href="">访问量136</a></span></li>
+                  <li><span class="glyphicon glyphicon-star">&nbsp<a href="">友情链接6</a></span></li>
+                  <li><span class="glyphicon glyphicon-eye-open">&nbsp<a href="">访问量136</a></span></li>
                 </ul>
             </div>  
             <div class=" col-md-5 col-md-offset-1" id="shortcut">
@@ -107,7 +115,7 @@
                 </ul>
                 <ul class="next2">
                  <li><span class="glyphicon glyphicon-check">&nbsp<a href="">打开/关闭评论</a></span></li>
-                  <li><span class="glyphicon glyphicon-pushpin">&nbsp<a href="">查看更多帮助</a></span></li>
+                  <li><span class="glyphicon glyphicon-question-sign">&nbsp<a href="">查看更多帮助</a></span></li>
                 </ul>
 
             </div>  
@@ -116,9 +124,7 @@
           
           </div>
         </div>
-    </div>
-    
-      <h1 class="page-header">状态</h1>
+          <h1 class="page-header">状态</h1>
       <div class="table-responsive">
         <table class="table table-striped table-hover">
           <tbody>
@@ -131,8 +137,8 @@
           </tbody>
         </table>
       </div>
-      <h1 class="page-header">系统信息</h1>
-      <div class="table-responsive">
+        <h1 class="page-header">系统信息</h1>
+      <div class="table-responsive xitong">
         <table class="table table-striped table-hover">
           <thead>
             <tr> </tr>
@@ -180,21 +186,18 @@
           </tfoot>
         </table>
       </div>
-      <footer>
-        <h1 class="page-header">程序信息</h1>
-        <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <tbody>
-            <tr>
-              <td><span style="display:inline-block; width:8em">版权所有</span> POWERED BY WY ALL RIGHTS RESERVED</td>
-            </tr>
-            <tr>
-              <td><span style="display:inline-block;width:8em">页面加载时间</span> PROCESSED IN 1.0835s  SECONDS 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-      </footer>
+       
+      
+
+          
+
+    
+    </div>
+    <div class="footer-bottom">
+            <h5>感谢使用Bedgasm Blog</h5>
+            <i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
+            
+          </div>
     </div>
   </div>
   </div>
