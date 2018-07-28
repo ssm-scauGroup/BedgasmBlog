@@ -13,7 +13,9 @@
 	<link href="css/homeReset.css" type="text/css" rel="stylesheet">
 	<link href="css/officalHome.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/personhome.css">
 
+	<script src="js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -35,11 +37,18 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li id="account"><a id="accountname" href="#">用户名</a></li>
-					</ul>
+							<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
+							
+						</ul>
 
 				</div>
 				<!--/.nav-collapse -->
+				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+						<!-- <p><a href="personHome.html">个人中心</p> -->
+						<p><a href="#">个人资料</a></p>	
+						<p><a href="#">帮助</a></p>	
+						<p><a href="index.html">退出登录</a></p>
+					</div>		
  			
 	</nav>
 
@@ -141,11 +150,10 @@
 			</div>
 	</footer>
 
-	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.bxslider.js"></script>
-	<script src="js/mooz.scripts.min.js"></script>
-<script src="js/nav.js"></script>
+	<script type="text/javascript" src="js/prompt.js"></script>
+	<!-- 	<script src="js/mooz.scripts.min.js"></script> -->
+	<script src="js/nav.js"></script>
 </body>
 
 </body>
