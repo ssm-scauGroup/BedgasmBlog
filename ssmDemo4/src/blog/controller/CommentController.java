@@ -16,7 +16,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import blog.entity.Article;
 import blog.entity.Comment;
+import blog.service.ArticleService;
 import blog.service.CommentService;
 
 @Controller
@@ -25,6 +27,9 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private ArticleService articleService;
 	
 	/**
 	 * 根据条件查询评论(某篇文章|某个用户)
@@ -72,14 +77,24 @@ public class CommentController {
 		JSONObject jsonObject = new JSONObject();
 		
 		int resultTotal = 0;
-		
+		int res=0;
+		int i=0;
         String[] commentsId = id.split(",");
-        for(int i = 0; i < commentsId.length; i++) {
+        for(i = 0; i < commentsId.length; i++) {
             int commentId = Integer.parseInt(commentsId[i]);
             //TODO 需要更新对应文章的replayCount 减去相应的数字
+            Comment comment = commentService.findById(commentId);
+            if(comment==null){
+            	jsonObject.put("success",false);
+            	jsonObject.put("reason","no this comment");
+            	return jsonObject.toString();
+            }
+            Article article = articleService.findById(comment.getArticleid());
+            article.setReplyCount(article.getReplyCount()-1);
+            res = articleService.updateArticle(article);
             resultTotal = commentService.deleteComment(commentId);
         }
-        if(resultTotal > 0){
+        if(resultTotal==i&&res==i){
         	jsonObject.put("success", true);
         }else {
         	jsonObject.put("success", false);
@@ -120,10 +135,17 @@ public class CommentController {
         resultTotal = commentService.addComment(comment);
         
         //TODO 增加对应文章的replayCount
+        Article article = articleService.findById(comment.getArticleid());
+        
+        article.setReplyCount(article.getReplyCount()+1);
+        
+        int res = articleService.updateArticle(article);
+        
+        
         
         JSONObject result = new JSONObject();
         
-        if(resultTotal > 0) {
+        if(resultTotal > 0&&res>0) {
             result.put("success", true);
         } else {
             result.put("success", false);
