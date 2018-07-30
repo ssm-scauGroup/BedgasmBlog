@@ -23,6 +23,7 @@ import blog.util.PageBean;
 @Controller
 @RequestMapping("/category")
 public class BlogTypeController {
+	
 	@Autowired
 	private ArticleService articleService;
 	@Autowired
@@ -79,6 +80,7 @@ public class BlogTypeController {
             resultTotal = blogTypeService.updateBlogType(blogType);
         }else{
             //新增文章
+        	blogType.setTypecount(0);
             resultTotal = blogTypeService.addBlogType(blogType);
         }
         
@@ -86,8 +88,10 @@ public class BlogTypeController {
         
         if(resultTotal > 0) {
             result.put("success", true);
+            result.put("msg","保存成功");
         } else {
             result.put("success", false);
+            result.put("msg","保存失败");
         }
         
         //ResponseUtil.write(response, result);
@@ -156,33 +160,30 @@ public class BlogTypeController {
 	public String deleteCategory(@RequestParam("id") String id){
 		JSONObject jsonObject = new JSONObject();
 		int resultTotal = 0;
-		int res=0;
-		int re=0;
+		int articleRes=0;
+		int blogTypeRes=0;
 		Map<String, Object> map = new HashMap<String, Object>();
         String[] blogTypesId = id.split(",");
         for(int i = 0; i < blogTypesId.length; i++) {
             int blogTypeId = Integer.parseInt(blogTypesId[i]);
             //TODO 将为类别的文章的类别设置为'未分类',未分类的类别count加上文章数
-            //暂时还没写
             map.put("blogtypeid", blogTypeId);
             List<Article> articles=articleService.listArticle(map);
-            System.out.println("articles size is "+articles.size());
             for (int j = 0; j < articles.size(); j++) {
-            	System.out.println("hjj");
             	articles.get(j).setBlogtypeid(1);
             	BlogType blogType=blogTypeService.findById(1);
             	blogType.setTypecount(blogType.getTypecount()+1);
-            	re=blogTypeService.updateBlogType(blogType);
-				res = articleService.updateArticle(articles.get(j));
-				System.out.println(res+" "+re); 
-
+            	blogTypeRes=blogTypeService.updateBlogType(blogType);
+            	articleRes = articleService.updateArticle(articles.get(j));
 			}
             resultTotal = blogTypeService.deleteBlogType(blogTypeId);
         }
-        if(resultTotal > 0&&res>0&&re>0){
+        if(resultTotal > 0 && articleRes>0 && blogTypeRes>0){
         	jsonObject.put("success", true);
+        	jsonObject.put("msg", "删除类别成功");
         }else {
         	jsonObject.put("success", false);
+        	jsonObject.put("msg", "删除类别失败");
 		}
         
         return jsonObject.toString();

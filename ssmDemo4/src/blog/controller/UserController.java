@@ -47,12 +47,14 @@ public class UserController {
 		}else{
 			if(Md5Encrypt.getMD5(password).equals(user.getPassword())){
 				jsonObject.put("success", true);
+				jsonObject.put("msg", "登录成功");
 				jsonObject.put("user", user);
 				session.setAttribute("user", user);
 				System.out.println(session.getId());
 			}
 			else{
 				jsonObject.put("success", false);
+				jsonObject.put("msg", "登录失败：密码错误");
 			}			
 		}
 		
@@ -82,10 +84,12 @@ public class UserController {
 		
 		if(res > 0){
 			jsonObject.put("success",true);
+			jsonObject.put("msg","注册成功");
 			jsonObject.put("user",user);
 		}
 		else {
 			jsonObject.put("success",false);
+			jsonObject.put("msg", "注册失败");
 		}
 		
 		return jsonObject.toString();
@@ -106,12 +110,13 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(email!=null){
+		if(email!=null && !email.equals("")){
 			map.put("email",email);
-		}else if(username!=null){
+		}else if(username!=null && !username.equals("")){
 			map.put("username", username);
 		}else{
 			jsonObject.put("success", false);
+			jsonObject.put("msg", "传入参数的值为空");
 			return jsonObject.toString();
 		}
 		
@@ -120,16 +125,23 @@ public class UserController {
 		if(users.size() > 0){
 			jsonObject.put("success",true);
 			jsonObject.put("isValid",false);
-			System.out.println("列表不为空,用户名或邮箱已被占用");
+			jsonObject.put("msg","用户名或邮箱已被占用");
 		}else {
 			jsonObject.put("success",true);
 			jsonObject.put("isValid",true);
-			System.out.println("列表为空,用户名或邮箱可用");
+			jsonObject.put("msg","用户名或邮箱可用");
 		}
 		
 		return jsonObject.toString();
 	}
 	
+	/**
+	 * 修改用户信息
+	 * @param oldpassword
+	 * @param user
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/modify",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String userModify(@RequestParam(value="oldpassword",required=false) String oldpassword,
@@ -141,7 +153,7 @@ public class UserController {
 		//0为管理员 1为普通用户
 		if(getUser(session)==null){
 			jsonObject.put("success", false);
-			jsonObject.put("reason", "no login");
+			jsonObject.put("msg", "no login");
 			return jsonObject.toString();
 		}
 		
@@ -156,26 +168,26 @@ public class UserController {
 		if(!user.getUsername().equals(getUser(session).getUsername()) && 
 				getUser(session).getRole()==1){
 			jsonObject.put("success", false);
-			jsonObject.put("reason", "no privileges");
+			jsonObject.put("msg", "no privileges");
 			return jsonObject.toString();
 		}
 		if(user.getPassword()!=null){ //TODO 如果修改了密码,前端页面应该在修改成功后提示重新登录 调用logout
 			if(!Md5Encrypt.getMD5(oldpassword).equals(getUser(session).getPassword())){
 				jsonObject.put("success", false);
-				jsonObject.put("reason", "oldpassword error");
+				jsonObject.put("msg", "oldpassword error");
 				return jsonObject.toString();
 			}
 
-			user.setPassword(Md5Encrypt.getMD5(user.getPassword()));//md5 密码之后再寸金
+			user.setPassword(Md5Encrypt.getMD5(user.getPassword()));//md5 密码之后再存进实体类
 		}
 		//修复的数据可以是用户昵称(用户名不能修改),头像,个性签名,密码,邮箱.
 		int res = userService.updateUser(user);
 		if(res > 0 ){
 			jsonObject.put("success", true);
-			System.out.println("修改成功");
+			jsonObject.put("msg","修改成功");
 		}else {
 			jsonObject.put("success", false);
-			System.out.println("修改失败");
+			jsonObject.put("msg","修改失败");
 		}
 		return jsonObject.toString();
 	}
@@ -193,9 +205,10 @@ public class UserController {
 			session.invalidate();
 			System.out.println(session.getId());
 			jsonObject.put("success", true);
+			jsonObject.put("msg", "用户已安全退出。");
 		} catch (Exception e) {
-			// TODO: handle exception
 			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户安全退出失败");
 		}
 		return jsonObject.toString();
 	}
@@ -211,31 +224,61 @@ public class UserController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
-		//判断是否是管理员
+		//判断是否有登录
 		if(getUser(session)==null){
 			jsonObject.put("success", false);
-			jsonObject.put("reason", "no login");
+			jsonObject.put("msg", "no login");
 			return jsonObject.toString();
 		}
 		
+		//判断是否是管理员
 		if(getUser(session).getRole()==1){
 			jsonObject.put("success", false);
-			jsonObject.put("reason", "no privileges");
+			jsonObject.put("msg", "no privileges");
 			return jsonObject.toString();
 		}
-		// 管理员默认设置用户名,用户昵称,用户邮箱,初始密码均为123456(前端可以设置);
+		
+		System.out.println("user is "+user);
+		
+//		if(user==null){
+//			jsonObject.put("success", false);
+//			jsonObject.put("msg", "没有传入user对象");
+//			return jsonObject.toString();
+//		}
+		
+		// TODO 管理员默认设置用户名,用户昵称,用户邮箱,初始密码均为123456(前端可以设置);
 		if(user.getPassword()!=null){
 			user.setPassword(Md5Encrypt.getMD5(user.getPassword()));
 		}
-		int res = userService.addUser(user);
+		
+		int res = 0 ;
+		
+		try {
+			user.setNickname(user.getUsername()); //昵称和用户名默认一样.
+			res = userService.addUser(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "没有传入user对象或者插入数据库失败");
+			return jsonObject.toString();
+		}
+		
 		if(res > 0){
 			jsonObject.put("success", true);
+			jsonObject.put("msg", "添加用户成功");
 		}else {
 			jsonObject.put("success",false);
+			jsonObject.put("msg", "添加用户失败");
 		}
 		return jsonObject.toString();
 	}
 	
+	/**
+	 * 查看登录用户个人信息。可用于查看是否登录，与其他接口相联合，例如游客没有登录的话
+	 * 不能发布文章，登录的人没有管理员权限(可以通过role属性判断)的话，不能进行用户删除添加一些相关操作等。
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/userinfo",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String userInfo(HttpSession session){
@@ -245,16 +288,10 @@ public class UserController {
 		//判断是否有登录
 		if(getUser(session)==null){
 			jsonObject.put("success", false);
-			jsonObject.put("reason", "no login");
+			jsonObject.put("msg", "no login");
 			return jsonObject.toString();
 		}
 		
-//		if(getUser(session).getRole()==1){
-//			jsonObject.put("success", false);
-//			jsonObject.put("reason", "no privileges");
-//			return jsonObject.toString();
-//		}
-		// 管理员默认设置用户名,用户昵称,用户邮箱,初始密码均为123456(前端可以设置);
 		User user = userService.findById(getUser(session).getId());
 		jsonObject.put("success", true);
 		jsonObject.put("user",user);

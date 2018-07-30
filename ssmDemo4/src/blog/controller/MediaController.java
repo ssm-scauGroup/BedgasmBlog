@@ -20,6 +20,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import blog.entity.Media;
 import blog.service.MediaService;
+import blog.util.RemoveFile;
 import blog.util.SingleFile;
 
 @Controller
@@ -40,7 +41,9 @@ public class MediaController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
-		if(userid==null){
+		System.out.println(userid);
+		
+		if(userid==null || userid.equals("")){
 			jsonObject.put("success", false);
 			jsonObject.put("reason","no userid");
 			return jsonObject.toString();
@@ -124,7 +127,15 @@ public class MediaController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete",produces="application/json;charset=UTF-8")
-	public String deleteMedia(@RequestParam("id") String id){
+	public String deleteMedia(@RequestParam("id") String id,HttpServletRequest request){
+		
+		//父文件夹 这里存放文件
+		String parentPath = "bedgasmBlogContents";
+		
+		String realpath = request.getServletContext().getRealPath(parentPath);
+		
+		String filename;
+		
 		JSONObject jsonObject = new JSONObject();
 		
 		int resultTotal = 0;
@@ -133,6 +144,26 @@ public class MediaController {
         for(int i = 0; i < mediasId.length; i++) {
             int mediaId = Integer.parseInt(mediasId[i]);
             //TODO 前端页面应该提示如果删除了媒体 资源失效 引用到此媒体的文章里面的资源也失效
+            try {
+            	filename = mediaService.findById(mediaId).getImagepath();
+            	File targetFile = new File(realpath, filename);
+            	if(!targetFile.exists()){
+        			jsonObject.put("success", false);
+        			jsonObject.put("msg", "文件不存在");
+        			return jsonObject.toString();
+            	}
+        		boolean flag = RemoveFile.removeSingle(targetFile);
+        		if (!flag) {
+        			jsonObject.put("success", false);
+        			jsonObject.put("msg", "文件删除失败");
+        			return jsonObject.toString();
+				}
+        		
+			} catch (Exception e) {
+				jsonObject.put("success", false);
+				jsonObject.put("msg", "获取文件名失败或者删除失败");
+				return jsonObject.toString();
+			}
             resultTotal = mediaService.deleteMedia(mediaId);
         }
         if(resultTotal > 0){

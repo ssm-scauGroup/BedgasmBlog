@@ -146,7 +146,7 @@ public class ArticleController {
 					// TODO: handle exception
 					result.put("success", false);
 					result.put("msg", "传入了不存在的文档id");
-					
+					return result.toString();
 				}
 
 			}
@@ -272,15 +272,24 @@ public class ArticleController {
 			map.put("articleid", articleId);
 			List<Comment> comments = commentService.listComment(map);
 			for (int j = 0; j < comments.size(); j++) {
-				int res = commentService.deleteComment(comments.get(j).getId());
-
+				try {
+					commentService.deleteComment(comments.get(j).getId());
+				} catch (Exception e) {
+					// TODO: handle exception
+					jsonObject.put("success", true);
+					jsonObject.put("msg", "删除评论失败");
+					return jsonObject.toString();
+				}
+				
 			}
 			resultTotal = articleService.deleteArticle(articleId);
 		}
-		if (resultTotal > 0) {
+		if (resultTotal > 0 ) {
 			jsonObject.put("success", true);
+			jsonObject.put("msg", "删除成功");
 		} else {
 			jsonObject.put("success", false);
+			jsonObject.put("msg", "删除失败");
 		}
 
 		return jsonObject.toString();

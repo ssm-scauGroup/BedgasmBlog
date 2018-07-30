@@ -41,11 +41,16 @@ public class StarController {
 		
 		if(subscribee==null&&subscriber==null){
 			jsonObject.put("success", false);
+			jsonObject.put("msg", "没有传入参数");
 			return jsonObject.toString();
-		}else if(subscribee!=null){
+		}else if(subscribee!=null && !subscribee.equals("")){
 			stars = starService.findBySubscribee(Integer.parseInt(subscribee));
-		}else if(subscriber!=null){
+		}else if(subscriber!=null && !subscriber.equals("")){
 			stars = starService.findBySubscriber(Integer.parseInt(subscriber));
+		}else{
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "传入参数的值为空或其他错误情况");
+			return jsonObject.toString();
 		}
 		
 		JSONArray array = JSON.parseArray(JSONObject.toJSONString(stars,

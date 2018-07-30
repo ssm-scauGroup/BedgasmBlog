@@ -86,7 +86,7 @@ public class CommentController {
             Comment comment = commentService.findById(commentId);
             if(comment==null){
             	jsonObject.put("success",false);
-            	jsonObject.put("reason","no this comment");
+            	jsonObject.put("msg","no this comment");
             	return jsonObject.toString();
             }
             Article article = articleService.findById(comment.getArticleid());
@@ -94,7 +94,7 @@ public class CommentController {
             res = articleService.updateArticle(article);
             resultTotal = commentService.deleteComment(commentId);
         }
-        if(resultTotal==i&&res==i){
+        if(resultTotal > 0 && res > 0){
         	jsonObject.put("success", true);
         }else {
         	jsonObject.put("success", false);

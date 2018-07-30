@@ -8,6 +8,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>
 	success
 </title>
-<p>${sessionScope.user.username }</p>
-<p>${sessionScope.user.password }</p>
+<p>${user.username }</p>
+<p>${user.password }</p>
 </HTML>
