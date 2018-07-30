@@ -153,7 +153,6 @@ public class UserController {
 		
 		System.out.println(user);
 		
-		// 要用'|'不能用'||','||'会短路.第一个判断true就不判断了.
 		if(!user.getUsername().equals(getUser(session).getUsername()) && 
 				getUser(session).getRole()==1){
 			jsonObject.put("success", false);

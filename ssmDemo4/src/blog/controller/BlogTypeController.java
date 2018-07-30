@@ -15,14 +15,16 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import blog.entity.BlogType;
+import blog.entity.*;
+import blog.service.ArticleService;
 import blog.service.BlogTypeService;
 import blog.util.PageBean;
 
 @Controller
 @RequestMapping("/category")
 public class BlogTypeController {
-	
+	@Autowired
+	private ArticleService articleService;
 	@Autowired
 	private BlogTypeService blogTypeService;
 	
@@ -153,17 +155,31 @@ public class BlogTypeController {
 	@RequestMapping(value="/delete",produces="application/json;charset=UTF-8")
 	public String deleteCategory(@RequestParam("id") String id){
 		JSONObject jsonObject = new JSONObject();
-		
 		int resultTotal = 0;
-		
+		int res=0;
+		int re=0;
+		Map<String, Object> map = new HashMap<String, Object>();
         String[] blogTypesId = id.split(",");
         for(int i = 0; i < blogTypesId.length; i++) {
             int blogTypeId = Integer.parseInt(blogTypesId[i]);
             //TODO 将为类别的文章的类别设置为'未分类',未分类的类别count加上文章数
             //暂时还没写
+            map.put("blogtypeid", blogTypeId);
+            List<Article> articles=articleService.listArticle(map);
+            System.out.println("articles size is "+articles.size());
+            for (int j = 0; j < articles.size(); j++) {
+            	System.out.println("hjj");
+            	articles.get(j).setBlogtypeid(1);
+            	BlogType blogType=blogTypeService.findById(1);
+            	blogType.setTypecount(blogType.getTypecount()+1);
+            	re=blogTypeService.updateBlogType(blogType);
+				res = articleService.updateArticle(articles.get(j));
+				System.out.println(res+" "+re); 
+
+			}
             resultTotal = blogTypeService.deleteBlogType(blogTypeId);
         }
-        if(resultTotal > 0){
+        if(resultTotal > 0&&res>0&&re>0){
         	jsonObject.put("success", true);
         }else {
         	jsonObject.put("success", false);

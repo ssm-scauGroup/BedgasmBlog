@@ -5,12 +5,12 @@ import java.util.Date;
 
 /**
  * @author Administrator
- * 格式化时间
+ * 
  */
 public class FormatDate {
 	
 	/**
-	 * 类似: 2018-07-23 10:10:13 与数据库now()一致
+	 * 锟斤拷锟斤拷: 2018-07-23 10:10:13 锟斤拷锟斤拷锟捷匡拷now()一锟斤拷
 	 * @return
 	 */
 	public static String formatDate(){

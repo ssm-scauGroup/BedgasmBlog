@@ -46,7 +46,7 @@
 				<!--/.nav-collapse -->
  			
 		<div id="prompt-box">
-			<p><a href="#">个人中心</p>
+			<p><a href="info">个人中心</p>
 			<p><a href="index.html">退出登录</a></p>
 		</div>
 			

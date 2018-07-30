@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title!=null and title!=''">
                 and title like "%"#{title}"%"
             </if>
-            <if test="blogtypeid!=null and blogtypeid!=''">
+            <if test="blogtypeid!=null">
                 and blogtypeid=#{blogtypeid}
             </if>
             <if test="tags!=null and tags!=''">
