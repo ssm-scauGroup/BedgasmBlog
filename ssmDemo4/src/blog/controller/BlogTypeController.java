@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import blog.entity.*;
 import blog.service.ArticleService;
 import blog.service.BlogTypeService;
 import blog.util.PageBean;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/category")
@@ -26,6 +29,7 @@ public class BlogTypeController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
 	@Autowired
 	private BlogTypeService blogTypeService;
 	
@@ -57,6 +61,8 @@ public class BlogTypeController {
 		
 		Integer total = pageBean.getResult().size();
 		
+		jsonObject.put("success", true);
+		
 		jsonObject.put("total", total);
 		
 		jsonObject.put("categories", array);
@@ -73,8 +79,20 @@ public class BlogTypeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/save",produces="application/json;charset=UTF-8")
-    public String saveBlogType(BlogType blogType){
-        int resultTotal = 0;
+    public String saveBlogType(BlogType blogType,HttpSession session){
+		
+		JSONObject result = new JSONObject();
+		
+		int resultTotal = 0;
+		
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			result.put("success",false);
+			result.put("msg", "用户没有登录");
+			return result.toString();
+		}
+        
         if(blogType.getId()!=null){
             //更新文章
             resultTotal = blogTypeService.updateBlogType(blogType);
@@ -84,8 +102,6 @@ public class BlogTypeController {
             resultTotal = blogTypeService.addBlogType(blogType);
         }
         
-        JSONObject result = new JSONObject();
-        
         if(resultTotal > 0) {
             result.put("success", true);
             result.put("msg","保存成功");
@@ -93,8 +109,6 @@ public class BlogTypeController {
             result.put("success", false);
             result.put("msg","保存失败");
         }
-        
-        //ResponseUtil.write(response, result);
         
         return result.toString();
 
@@ -124,6 +138,7 @@ public class BlogTypeController {
 		
 		Integer total = blogTypes.size();
 		
+		jsonObject.put("success", true);
 		jsonObject.put("total", total);
 		jsonObject.put("categories", array);
 		
@@ -144,6 +159,8 @@ public class BlogTypeController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
+		jsonObject.put("success", true);
+		
 		jsonObject.put("category", blogType);
 		
 		return jsonObject.toString();
@@ -151,34 +168,62 @@ public class BlogTypeController {
 	}
 	
 	/**
-	 * 删除类别
+	 * 删除类别(只有管理员可以删除)
 	 * @param id
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete",produces="application/json;charset=UTF-8")
-	public String deleteCategory(@RequestParam("id") String id){
+	public String deleteCategory(@RequestParam("id") String id,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
 		int resultTotal = 0;
-		int articleRes=0;
-		int blogTypeRes=0;
 		Map<String, Object> map = new HashMap<String, Object>();
         String[] blogTypesId = id.split(",");
+        
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		//设置成只有管理员才可以删除
+		if(user.getRole()==1){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "无权限");
+			return jsonObject.toString();
+		}
+        
         for(int i = 0; i < blogTypesId.length; i++) {
             int blogTypeId = Integer.parseInt(blogTypesId[i]);
-            //TODO 将为类别的文章的类别设置为'未分类',未分类的类别count加上文章数
+            
+            if(blogTypeId==1){
+            	jsonObject.put("success", false);
+            	jsonObject.put("msg", "未分类类别不能删除");
+            	return jsonObject.toString();
+            }
+            
+            if(blogTypeService.findById(blogTypeId)==null){
+            	jsonObject.put("success", false);
+            	jsonObject.put("msg", "类别不存在");
+            	return jsonObject.toString();
+            }
+            
+            //将为类别的文章的类别设置为'未分类',未分类的类别count加上文章数
+            
             map.put("blogtypeid", blogTypeId);
             List<Article> articles=articleService.listArticle(map);
             for (int j = 0; j < articles.size(); j++) {
             	articles.get(j).setBlogtypeid(1);
             	BlogType blogType=blogTypeService.findById(1);
             	blogType.setTypecount(blogType.getTypecount()+1);
-            	blogTypeRes=blogTypeService.updateBlogType(blogType);
-            	articleRes = articleService.updateArticle(articles.get(j));
+            	blogTypeService.updateBlogType(blogType);
+            	articleService.updateArticle(articles.get(j));
 			}
             resultTotal = blogTypeService.deleteBlogType(blogTypeId);
         }
-        if(resultTotal > 0 && articleRes>0 && blogTypeRes>0){
+        if(resultTotal > 0){
         	jsonObject.put("success", true);
         	jsonObject.put("msg", "删除类别成功");
         }else {

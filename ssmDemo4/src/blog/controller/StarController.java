@@ -2,6 +2,8 @@ package blog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import blog.entity.Star;
+import blog.entity.User;
 import blog.service.StarService;
+import blog.service.UserService;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/star")
@@ -23,6 +28,9 @@ public class StarController {
 	
 	@Autowired
 	private StarService starService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 根据条件查询关注的人或者粉丝
@@ -75,19 +83,46 @@ public class StarController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/subscribe",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String subscribePeople(Star star){
+	public String subscribePeople(Star star,HttpSession session){
 		
         int resultTotal = 0;
         
-        //新增订阅关系
-        resultTotal = starService.addStar(star);
-        
         JSONObject result = new JSONObject();
         
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			result.put("success",false);
+			result.put("msg", "用户没有登录");
+			return result.toString();
+		}
+		
+		if(user.getId()!=star.getSubscriber()){
+			result.put("success",false);
+			result.put("msg", "登录用户id与传值进来的用户id不符合");
+			return result.toString();
+		}
+		
+		User subscribee = userService.findById(star.getSubscribee());
+		
+		System.out.println(subscribee);
+		
+		if(subscribee==null){
+			//如果被关注的人不存在，要返回东西
+			result.put("success", false);
+			result.put("msg", "你要关注的用户id不存在哟~");
+			return result.toString();
+		}
+        
+        //新增订阅关系
+        resultTotal = starService.addStar(star);
+          
         if(resultTotal > 0) {
             result.put("success", true);
+            result.put("msg", "关注成功");
         } else {
             result.put("success", false);
+            result.put("msg", "关注失败");
         }
         
         return result.toString();
@@ -100,19 +135,46 @@ public class StarController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/unsubscribe",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String unsubscribePeople(Star star){
+	public String unsubscribePeople(Star star,HttpSession session){
 		
         int resultTotal = 0;
+
+        JSONObject result = new JSONObject();
+        
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			result.put("success",false);
+			result.put("msg", "用户没有登录");
+			return result.toString();
+		}
+		
+		if(user.getId()!=star.getSubscriber()){
+			result.put("success",false);
+			result.put("msg", "登录用户id与传值进来的用户id不符合");
+			return result.toString();
+		}
+		
+		User subscribee = userService.findById(star.getSubscribee());
+		
+		System.out.println(subscribee);
+		
+		if(subscribee==null){
+			//如果被关注的人不存在，要返回东西
+			result.put("success", false);
+			result.put("msg", "你要取消关注的用户id不存在哟~");
+			return result.toString();
+		}
         
         //删除订阅关系
         resultTotal = starService.deleteStar(star);
         
-        JSONObject result = new JSONObject();
-        
         if(resultTotal > 0) {
             result.put("success", true);
+            result.put("msg", "取消关注成功");
         } else {
             result.put("success", false);
+            result.put("msg", "取消关注失败");
         }
         
         return result.toString();

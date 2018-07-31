@@ -2,8 +2,6 @@ package blog.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import blog.entity.Star;
 
 public interface StarService {

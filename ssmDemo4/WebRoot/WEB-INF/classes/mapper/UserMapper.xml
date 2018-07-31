@@ -59,10 +59,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM t_user
         <where>
         	<if test="email!=null and email!=''">
-        		and email=#{email}
+        		and email like "%"#{email}"%"
         	</if>
         	<if test="username!=null and username!=''">
-        		and user_login=#{username}
+        		and user_login like "%"#{username}"%"
         	</if>
         </where>
     </select>

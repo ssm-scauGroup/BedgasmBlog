@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,11 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import blog.entity.Article;
 import blog.entity.Comment;
+import blog.entity.User;
 import blog.service.ArticleService;
 import blog.service.CommentService;
+import blog.service.UserService;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/comment")
@@ -30,6 +35,9 @@ public class CommentController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 根据条件查询评论(某篇文章|某个用户)
@@ -46,9 +54,21 @@ public class CommentController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		if(articleid!=null){
+			Article article = articleService.findById(Integer.parseInt(articleid));
+			if(article==null){
+				jsonObject.put("success", false);
+				jsonObject.put("msg", "没有这篇文章");
+				return jsonObject.toString();
+			}
 			map.put("articleid",articleid);
 		}
 		if(userid!=null){
+			User user = userService.findById(Integer.parseInt(userid));
+			if(user==null){
+				jsonObject.put("success", false);
+				jsonObject.put("msg", "用户不存在");
+				return jsonObject.toString();
+			}
 			map.put("userid",userid);
 		}
 		
@@ -58,6 +78,8 @@ public class CommentController {
 				SerializerFeature.DisableCircularReferenceDetect));
 		
 		Integer total = comments.size();
+		
+		jsonObject.put("success", true);
 		
 		jsonObject.put("total", total);
 		
@@ -73,20 +95,34 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete",produces="application/json;charset=UTF-8")
-	public String deleteComment(@RequestParam("id") String id){
+	public String deleteComment(@RequestParam("id") String id,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
 		
 		int resultTotal = 0;
 		int res=0;
 		int i=0;
         String[] commentsId = id.split(",");
+        
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+        
         for(i = 0; i < commentsId.length; i++) {
             int commentId = Integer.parseInt(commentsId[i]);
-            //TODO 需要更新对应文章的replayCount 减去相应的数字
             Comment comment = commentService.findById(commentId);
             if(comment==null){
             	jsonObject.put("success",false);
-            	jsonObject.put("msg","no this comment");
+            	jsonObject.put("msg","没有此评论");
+            	return jsonObject.toString();
+            }
+            if(comment.getUserid()!=user.getId() && user.getRole()==1){
+            	//既不是作者也不是管理员
+            	jsonObject.put("success",false);
+            	jsonObject.put("msg","您没有权利删除此评论");
             	return jsonObject.toString();
             }
             Article article = articleService.findById(comment.getArticleid());
@@ -96,8 +132,10 @@ public class CommentController {
         }
         if(resultTotal > 0 && res > 0){
         	jsonObject.put("success", true);
+        	jsonObject.put("msg", "删除成功");
         }else {
         	jsonObject.put("success", false);
+        	jsonObject.put("msg", "删除失败");
 		}
         
         return jsonObject.toString();
@@ -116,6 +154,8 @@ public class CommentController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
+		jsonObject.put("success", true);
+		
 		jsonObject.put("comment", comment);
 		
 		return jsonObject.toString();
@@ -129,31 +169,53 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/save",produces="application/json;charset=UTF-8")
-    public String saveArticle(Comment comment){
-        int resultTotal = 0;
+    public String saveArticle(Comment comment,HttpSession session){
+		
+        int resultTotal = 0; //标识评论更新
         
-        resultTotal = commentService.addComment(comment);
-        
-        //TODO 增加对应文章的replayCount
-        Article article = articleService.findById(comment.getArticleid());
-        
-        article.setReplyCount(article.getReplyCount()+1);
-        
-        int res = articleService.updateArticle(article);
-        
-        
+        int res = 0;	//标识文章更新
         
         JSONObject result = new JSONObject();
         
-        if(resultTotal > 0&&res>0) {
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			result.put("success",false);
+			result.put("msg", "用户没有登录");
+			return result.toString();
+		}
+        
+		if(user.getId()!=comment.getUserid()){
+			result.put("success", false);
+			result.put("msg", "不能以别人的名义发表评论");
+			return result.toString();
+		}
+		
+        //增加对应文章的replayCount
+        Article article = articleService.findById(comment.getArticleid());
+        
+        if(article==null){
+        	result.put("success", false);
+        	result.put("msg", "传入的评论对应文章id不存在");
+        	return result.toString();
+        }
+        
+        resultTotal = commentService.addComment(comment);
+        
+        article.setReplyCount(article.getReplyCount()+1);
+        
+        res = articleService.updateArticle(article);
+        
+        if(resultTotal > 0 && res > 0) {
             result.put("success", true);
+            result.put("msg", "评论成功");
         } else {
             result.put("success", false);
+            result.put("msg", "评论失败");
         }
         
         return result.toString();
 
 	}
-	
 	
 }

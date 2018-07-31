@@ -13,11 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import blog.entity.Article;
 import blog.entity.User;
+import blog.service.ArticleService;
 import blog.service.UserService;
 import blog.util.Md5Encrypt;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/user")
@@ -25,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ArticleService articleService;
 	
 	/**
 	 * 用户登录
@@ -44,6 +53,7 @@ public class UserController {
 		
 		if (user==null){
 			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户不存在");
 		}else{
 			if(Md5Encrypt.getMD5(password).equals(user.getPassword())){
 				jsonObject.put("success", true);
@@ -151,28 +161,22 @@ public class UserController {
 		//先用session判断是否有登录 没有直接拒绝
 		//再判断是不是用户本人或者管理员.(管理员可以用role判断是否是 不能用username判断.如果有多个管理员的话)
 		//0为管理员 1为普通用户
-		if(getUser(session)==null){
+		if(UserisLogin.getUser(session)==null){
 			jsonObject.put("success", false);
-			jsonObject.put("msg", "no login");
+			jsonObject.put("msg", "用户没有登录");
 			return jsonObject.toString();
 		}
-		
-//		if(user==null){
-//			jsonObject.put("success", false);
-//			jsonObject.put("reason", "user is null");
-//			return jsonObject.toString();
-//		}
 		
 		System.out.println(user);
 		
-		if(!user.getUsername().equals(getUser(session).getUsername()) && 
-				getUser(session).getRole()==1){
+		if(!user.getUsername().equals(UserisLogin.getUser(session).getUsername()) && 
+				UserisLogin.getUser(session).getRole()==1){
 			jsonObject.put("success", false);
-			jsonObject.put("msg", "no privileges");
+			jsonObject.put("msg", "无权限");
 			return jsonObject.toString();
 		}
 		if(user.getPassword()!=null){ //TODO 如果修改了密码,前端页面应该在修改成功后提示重新登录 调用logout
-			if(!Md5Encrypt.getMD5(oldpassword).equals(getUser(session).getPassword())){
+			if(!Md5Encrypt.getMD5(oldpassword).equals(UserisLogin.getUser(session).getPassword())){
 				jsonObject.put("success", false);
 				jsonObject.put("msg", "oldpassword error");
 				return jsonObject.toString();
@@ -225,16 +229,16 @@ public class UserController {
 		JSONObject jsonObject = new JSONObject();
 		
 		//判断是否有登录
-		if(getUser(session)==null){
+		if(UserisLogin.getUser(session)==null){
 			jsonObject.put("success", false);
-			jsonObject.put("msg", "no login");
+			jsonObject.put("msg", "用户没有登录");
 			return jsonObject.toString();
 		}
 		
 		//判断是否是管理员
-		if(getUser(session).getRole()==1){
+		if(UserisLogin.getUser(session).getRole()==1){
 			jsonObject.put("success", false);
-			jsonObject.put("msg", "no privileges");
+			jsonObject.put("msg", "无权限");
 			return jsonObject.toString();
 		}
 		
@@ -285,26 +289,119 @@ public class UserController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
+		User user = UserisLogin.getUser(session);
+		
 		//判断是否有登录
-		if(getUser(session)==null){
+		if(user==null){
 			jsonObject.put("success", false);
-			jsonObject.put("msg", "no login");
+			jsonObject.put("msg", "用户没有登录");
 			return jsonObject.toString();
 		}
 		
-		User user = userService.findById(getUser(session).getId());
 		jsonObject.put("success", true);
 		jsonObject.put("user",user);
 		return jsonObject.toString();
 	}
 	
 	/**
-	 * 获取session中的User对象(非处理请求方法)
+	 * 根据条件查询用户
+	 * @param email
+	 * @param username
+	 * @param session
+	 * @return
 	 */
-	public User getUser(HttpSession session){
-		 User user = (User)session.getAttribute("user");
-		 System.out.println(user);
-		 return user;
+	@ResponseBody
+	@RequestMapping(value="/search",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public String listUser(@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "username", required = false) String username,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		User user = UserisLogin.getUser(session);
+		
+		//判断是否有登录
+		if(user==null){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		//如果不是管理员，拒绝
+		if(user.getRole()==1){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "无权限");
+			return jsonObject.toString();
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//因为在mapper.xml已经有test是否为null或者'',所以这里不用再判断
+		map.put("email",email);
+		map.put("username", username);
+		
+		List<User> users = userService.listUser(map);
+		
+		Integer total = users.size();
+
+		JSONArray array = JSON
+				.parseArray(JSONObject.toJSONString(users, SerializerFeature.DisableCircularReferenceDetect));
+		
+		jsonObject.put("success", true);
+		jsonObject.put("total", total);
+		jsonObject.put("users", array);
+
+		return jsonObject.toString();
+	}
+	
+	
+	/**
+	 * 通过id删除用户(单个用户)
+	 * @param id
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/delete",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public String deleteUser(@RequestParam("id") String id,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		User user = UserisLogin.getUser(session);
+		
+		//判断是否有登录
+		if(user==null){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		//如果不是管理员，拒绝
+		if(user.getRole()==1){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "无权限");
+			return jsonObject.toString();
+		}
+		
+		User user2 = userService.findById(Integer.parseInt(id));
+		
+		if(user2==null){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户不存在");
+			return jsonObject.toString();
+		}
+		
+		//TODO 应该考虑删除用户的一些后果。建议搞一个拉黑选项 这样用户不能登录
+		
+		int res = userService.deleteUser(Integer.parseInt(id));
+		
+		if (res > 0) {
+			jsonObject.put("success", true);
+			jsonObject.put("msg", "删除用户成功");
+		}else{
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "删除用户失败");
+		}
+		return jsonObject.toString();
 	}
 
 }

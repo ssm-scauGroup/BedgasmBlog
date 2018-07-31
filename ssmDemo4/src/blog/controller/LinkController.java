@@ -2,6 +2,8 @@ package blog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import blog.entity.Link;
+import blog.entity.User;
 import blog.service.LinkService;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/links")
@@ -41,6 +45,8 @@ public class LinkController {
 		
 		Integer total = links.size();
 		
+		jsonObject.put("success", true);
+		
 		jsonObject.put("total", total);
 		
 		jsonObject.put("links", array);
@@ -59,8 +65,25 @@ public class LinkController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/save",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-    public String saveLink(Link link){
+    public String saveLink(Link link,HttpSession session){
         int resultTotal = 0;
+        
+        JSONObject result = new JSONObject();
+        
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			result.put("success",false);
+			result.put("msg", "用户没有登录");
+			return result.toString();
+		}
+		
+		if(user.getRole()==1){
+			result.put("success",false);
+			result.put("msg", "无权限");
+			return result.toString();
+		}
+        
         if(link.getId()!=null){
             //更新友情链接
             resultTotal = linkService.updateLink(link);
@@ -68,8 +91,6 @@ public class LinkController {
             //新增友情链接
             resultTotal = linkService.addLink(link);
         }
-        
-        JSONObject result = new JSONObject();
         
         if(resultTotal > 0) {
             result.put("success", true);
@@ -88,10 +109,24 @@ public class LinkController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String deleteLink(@RequestParam("id") String id){
+	public String deleteLink(@RequestParam("id") String id,HttpSession session){
 		JSONObject jsonObject = new JSONObject();
 		
 		int resultTotal = 0;
+		
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		if(user.getRole()==1){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "无权限");
+			return jsonObject.toString();
+		}
 		
         String[] linksId = id.split(",");
         for(int i = 0; i < linksId.length; i++) {

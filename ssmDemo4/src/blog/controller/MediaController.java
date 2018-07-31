@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import blog.entity.Media;
+import blog.entity.User;
 import blog.service.MediaService;
 import blog.util.RemoveFile;
 import blog.util.SingleFile;
+import blog.util.UserisLogin;
 
 @Controller
 @RequestMapping("/media")
@@ -37,17 +40,31 @@ public class MediaController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String listByPage(@RequestParam(value="userid",required=false) String userid) {
+	public String listByPage(@RequestParam(value="userid",required=false) String userid,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		
-		System.out.println(userid);
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		if(user.getId()!=Integer.parseInt(userid) && user.getRole()==1){
+			//既不是本人又不是管理员
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "无权限");
+			return jsonObject.toString();
+		}
 		
 		if(userid==null || userid.equals("")){
 			jsonObject.put("success", false);
 			jsonObject.put("reason","no userid");
 			return jsonObject.toString();
 		}
+
 		
 		List<Media> medias = mediaService.listByUserId(Integer.parseInt(userid));
 		
@@ -68,7 +85,23 @@ public class MediaController {
 	
 	@ResponseBody
 	@RequestMapping(value="/upload",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String uploadMedia(SingleFile singleFile,HttpServletRequest request) {
+	public String uploadMedia(SingleFile singleFile,HttpServletRequest request,HttpSession session) {
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
+		
+		if(user.getId()!=singleFile.getUserid()){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "登录用户id与传入进来的文件用户id不符合");
+			return jsonObject.toString();
+		}
 		
 		//父文件夹 这里存放文件
 		String parentPath = "bedgasmBlogContents";
@@ -87,8 +120,6 @@ public class MediaController {
 		if(!targetFile.exists()){
 			targetFile.mkdirs();
 		}
-		
-		JSONObject jsonObject = new JSONObject();
 		
 		//上传
 		try {
@@ -110,7 +141,6 @@ public class MediaController {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			jsonObject.put("success", false);
 			System.out.println("上传失败或者添加数据进数据库失败");
@@ -127,7 +157,17 @@ public class MediaController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete",produces="application/json;charset=UTF-8")
-	public String deleteMedia(@RequestParam("id") String id,HttpServletRequest request){
+	public String deleteMedia(@RequestParam("id") String id,HttpServletRequest request,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		User user = UserisLogin.getUser(session);
+		
+		if(user==null){
+			jsonObject.put("success",false);
+			jsonObject.put("msg", "用户没有登录");
+			return jsonObject.toString();
+		}
 		
 		//父文件夹 这里存放文件
 		String parentPath = "bedgasmBlogContents";
@@ -136,8 +176,6 @@ public class MediaController {
 		
 		String filename;
 		
-		JSONObject jsonObject = new JSONObject();
-		
 		int resultTotal = 0;
 		
         String[] mediasId = id.split(",");
@@ -145,7 +183,13 @@ public class MediaController {
             int mediaId = Integer.parseInt(mediasId[i]);
             //TODO 前端页面应该提示如果删除了媒体 资源失效 引用到此媒体的文章里面的资源也失效
             try {
-            	filename = mediaService.findById(mediaId).getImagepath();
+            	Media media = mediaService.findById(mediaId);
+            	if(media.getUserid()!=user.getId() && user.getRole()==1){
+            		jsonObject.put("success", false);
+            		jsonObject.put("msg", "无权限");
+            		return jsonObject.toString();
+            	}
+            	filename = media.getImagepath();
             	File targetFile = new File(realpath, filename);
             	if(!targetFile.exists()){
         			jsonObject.put("success", false);
@@ -168,8 +212,10 @@ public class MediaController {
         }
         if(resultTotal > 0){
         	jsonObject.put("success", true);
+        	jsonObject.put("msg", "删除成功");
         }else {
         	jsonObject.put("success", false);
+        	jsonObject.put("msg", "删除失败");
 		}
         
         return jsonObject.toString();
