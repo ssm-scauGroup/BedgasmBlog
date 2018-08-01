@@ -2,39 +2,39 @@ package blog.entity;
 
 /**
  * @author Administrator
- * ÓÃ»§ÊµÌåÀà
+ * ç”¨æˆ·å®ä½“ç±»
  */
 public class User {
 	/**
-	 * ÓÃ»§id
+	 * ç”¨æˆ·id
 	 */
 	private Integer id;
 	/**
-	 * ÓÃ»§Ãû
+	 * ç”¨æˆ·å
 	 */
 	private String username;
 	/**
-	 * ÓÃ»§ÃÜÂë
+	 * ç”¨æˆ·å¯†ç 
 	 */
 	private String password;
 	/**
-	 * ÓÃ»§êÇ³Æ(±ØÌî£¬Ä¬ÈÏºÍ`username`ÏàÍ¬)
+	 * ç”¨æˆ·æ˜µç§°(å¿…å¡«ï¼Œé»˜è®¤å’Œ`username`ç›¸åŒ)
 	 */
 	private String nickname;
 	/**
-	 * ÓÃ»§ÓÊÏä(±ØÌî£¬¿É¿¼ÂÇÓÃÓÚÓÊÏä×¢²á¼¤»îµÈ)
+	 * ç”¨æˆ·é‚®ç®±(å¿…å¡«ï¼Œå¯è€ƒè™‘ç”¨äºé‚®ç®±æ³¨å†Œæ¿€æ´»ç­‰)
 	 */
 	private String email;
 	/**
-	 * ÓÃ»§¸öĞÔÇ©Ãû
+	 * ç”¨æˆ·ä¸ªæ€§ç­¾å
 	 */
 	private String signature;
 	/**
-	 * ÓÃ»§Í·ÏñÂ·¾¶
+	 * ç”¨æˆ·å¤´åƒè·¯å¾„
 	 */
 	private String profile;
 	/**
-	 * ÓÃ»§½ÇÉ«id(0Îª¹ÜÀíÔ±£¬1ÎªÆÕÍ¨ÓÃ»§)
+	 * ç”¨æˆ·è§’è‰²id(0ä¸ºç®¡ç†å‘˜ï¼Œ1ä¸ºæ™®é€šç”¨æˆ·)
 	 */
 	private Integer role;
 	

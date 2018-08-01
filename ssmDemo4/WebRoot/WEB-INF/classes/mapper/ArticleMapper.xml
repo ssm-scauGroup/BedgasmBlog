@@ -14,7 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="content" column="content"/>
         <result property="tags" column="tags"/>
         <result property="blogtypeid" column="blogtypeid"/>
+        <result property="author" column="author"/>
     </resultMap>
+
 
     <select id="listArticle" parameterType="Map" resultMap="ArticleResult">
         SELECT * FROM t_article
@@ -22,8 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title!=null and title!=''">
                 and title like "%"#{title}"%"
             </if>
-            <if test="blogtypeid!=null and blogtypeid!=''">
+            <if test="blogtypeid!=null">
                 and blogtypeid=#{blogtypeid}
+            </if>
+            <if test="tags!=null and tags!=''">
+            	and tags like "%"#{tags}"%"
             </if>
         </where>
         ORDER BY releaseDate DESC
@@ -32,25 +37,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
     </select>
 
+  	
+    <select id="listByPage"  resultMap="ArticleResult">
+        SELECT * FROM t_article ORDER BY releaseDate DESC
+        <if test="start!=null and end!=null">
+            limit #{start},#{end}
+        </if>
+    </select>
+    
     <select id="getTotal" parameterType="Map" resultType="Long">
         SELECT COUNT(*) FROM t_article
         <where>
             <if test="title!=null and title!=''">
                 and title like "%"#{title}"%"
             </if>
-            <if test="blogtypeid!=null and blogtypeid!=''">
+            <if test="blogtypeid!=null">
                 and blogtypeid=#{blogtypeid}
+            </if>
+            <if test="author!=null">
+            	and author=#{author}
             </if>
         </where>
     </select>
 
-
-    <select id="getBlogByTypeId" parameterType="Integer" resultType="Integer">
-        select count(*) from t_article where blogtypeid=#{blogtypeid}
-    </select>
-
     <insert id="addArticle" parameterType="Article">
-        insert into t_article (title,summary,releaseDate,clickCount,replyCount,content,tags,blogtypeid) VALUES (#{title},#{summary},now(),0,0,#{content},#{tags},#{blogtypeid})
+        insert into t_article 
+        (title,summary,releaseDate,clickCount,replyCount,content,tags,blogtypeid,author)
+         VALUES (#{title},#{summary},now(),0,0,#{content},#{tags},#{blogtypeid},#{author})
     </insert>
 
     <update id="updateArticle" parameterType="Article">
@@ -80,6 +93,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogtypeid!=null">
                 blogtypeid=#{blogtypeid},
             </if>
+            <if test="author!=null">
+                author=#{author},
+            </if>
         </set>
         where id=#{id}
     </update>
@@ -92,4 +108,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findById" parameterType="java.lang.Integer" resultMap="ArticleResult">
         SELECT * from t_article where id=#{id}
     </select>
+    
+    <select id="listByAuthor" resultMap="ArticleResult">
+    	SELECT * from t_article where author=#{author}
+    </select>
+    
 </mapper> 

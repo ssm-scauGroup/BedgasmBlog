@@ -3,57 +3,70 @@ package blog.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import blog.entity.Article;
 
 /**
  * @author Administrator
- * ÎÄÕÂDaoÀà
+ * æ–‡ç« Daoç±»
  */
 @Repository("articleDao")
 public interface ArticleDao {
 	/**
-	 * ²éÑ¯ËùÓĞÎÄÕÂ
+	 * æ ¹æ®ç›¸å…³æ¡ä»¶æŸ¥è¯¢æ‰€æœ‰æ–‡ç« 
 	 * @param map
 	 * @return
 	 */
 	public List<Article> listArticle(Map<String,Object> map);
+	
+	
 	/**
-	 * »ñÈ¡ÎÄÕÂÊıÄ¿¡£
+	 * åˆ†é¡µæŸ¥è¯¢
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public List<Article> listByPage(@Param("start") Integer start,
+			@Param("end") Integer end);
+	
+	/**
+	 * è·å–æ–‡ç« æ•°ç›®ã€‚
 	 * @param map
 	 * @return
 	 */
 	public Long getTotal(Map<String,Object> map);
+	
 	/**
-	 * ²éÑ¯Ä³¸öÀà±ğÏÂµÄÎÄÕÂÊı
-	 * @param blogtypeid
-	 * @return
-	 */
-	public Integer getBlogByTypeId(Integer blogtypeid);
-	/**
-	 * Ìí¼ÓÎÄÕÂ
+	 * æ·»åŠ æ–‡ç« 
 	 * @param article
 	 * @return
 	 */
 	public Integer addArticle(Article article);
 	/**
-	 * ¸üĞÂÎÄÕÂ
+	 * æ›´æ–°æ–‡ç« 
 	 * @param article
 	 * @return
 	 */
 	public Integer updateArticle(Article article);
 	/**
-	 * É¾³ıÎÄÕÂ
+	 * åˆ é™¤æ–‡ç« 
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteArticle(Integer id);
 	/**
-	 * Í¨¹ıid»ñÈ¡ÎÄÕÂ
+	 * é€šè¿‡idè·å–æ–‡ç« 
 	 * @param id
 	 * @return
 	 */
 	public Article findById(Integer id);
 	
+	/**
+	 * è¿”å›æŸä¸ªä½œè€…çš„æ‰€æœ‰æ–‡ç« 
+	 * @param author
+	 * @return
+	 */
+	public List<Article> listByAuthor(Integer author);
 }

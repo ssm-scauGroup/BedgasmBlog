@@ -5,18 +5,18 @@ import java.util.Date;
 
 /**
  * @author Administrator
- * ¸ñÊ½»¯Ê±¼ä
+ * æ—¥æœŸå·¥å…·ç±»
  */
 public class FormatDate {
 	
 	/**
-	 * ÀàËÆ: 2018-07-23 10:10:13 ÓëÊı¾İ¿ânow()Ò»ÖÂ
+	 * æ—¥æœŸæ ¼å¼å¦‚: 2018-07-23 10:10:13 ä¸mysql now()ä¸€æ ·
 	 * @return
 	 */
 	public static String formatDate(){
 		Date currentTime = new Date();  
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-	    String dateString = formatter.format(currentTime);   
+	    String dateString = formatter.format(currentTime);
 	    return dateString;
 	}
 

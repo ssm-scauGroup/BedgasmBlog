@@ -2,25 +2,25 @@ package blog.entity;
 
 /**
  * @author Administrator
- * Ã½ÌåÊµÌåÀà
+ * åª’ä½“å®ä½“ç±»
  */
 public class Media {
 	
 	/**
-	 * Ã½Ìåid(Ä¬ÈÏ×ÔÔö)
+	 * åª’ä½“id(é»˜è®¤è‡ªå¢)
 	 */
 	private Integer id;
 	/**
-	 * Ã½ÌåÂ·¾¶
+	 * åª’ä½“è·¯å¾„
 	 */
 	private String imagepath;
 	/**
-	 * ÉÏ´«Ã½ÌåµÄÓÃ»§id
+	 * ä¸Šä¼ åª’ä½“çš„ç”¨æˆ·id
 	 */
 	private Integer userid;
 	
 	/**
-	 * ÉÏ´«ÈÕÆÚ
+	 * ä¸Šä¼ æ—¥æœŸ
 	 */
 	private String releaseDate;
 	

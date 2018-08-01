@@ -6,14 +6,6 @@
  * Web script: #
  * 
  */
-$(document).ready(function () {
-    $('.navbar').find('a').each(function () {
-            if (this.href == document.location.href || document.location.href.search(this.href) >= 0) {
-                $(this).parent().addClass('active'); // this.className = 'active';
-            }
-        });
-
-});
 
 function showRegisterForm(){
     $('.loginBox').fadeOut('fast',function(){
@@ -76,7 +68,7 @@ function shakeModal(){
                 $('#loginModal .modal-dialog').removeClass('shake'); 
     }, 1000 ); 
 }
-
+ 
 $(function(){
     (function register(){
     // 用户名框失去焦点
@@ -98,6 +90,26 @@ $(function(){
             $(this).next().css("display","none");
         }
     });
+
+     $("#nickname").blur(function(){
+        reg = /^[a-zA-Z0-9_]{4,16}$/;
+
+        if($(this).val()=="")
+        {
+            $(this).next().html("昵称不能为空！");
+            $(this).next().css("display","block");
+        }
+        else if(!reg.test($("#nickname").val()))
+        {  
+            $(this).next().html("昵称只能由大小写字母，下划线组成!");
+            $(this).next().css("display","block");
+        }
+        else
+        {
+            $(this).next().css("display","none");
+        }
+    });
+
     // 邮箱框失去焦点
     $("#email").blur(function(){
         reg=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
@@ -173,7 +185,7 @@ $(function(){
 
         if($(this).val()=="")
         {
-            $(this).next().html("密码不能为空！");
+            $(this).next().html("密码不能为空！"); 
             $(this).next().css("display","block");
         }
         else
@@ -182,5 +194,15 @@ $(function(){
         }
     });
 
+    
+
 })();
 });
+
+
+ var timer=null;
+// function loginClick(){
+//     $("#loginModal").modal('hide');
+//     $(location).attr('href', 'signin.html');
+// }
+

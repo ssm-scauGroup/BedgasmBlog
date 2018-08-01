@@ -2,6 +2,8 @@ package blog.dao;
 
 import java.util.List;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import blog.entity.User;
@@ -10,34 +12,41 @@ import blog.entity.User;
 public interface UserDao {
 	
 	/**
-	 * Ìí¼ÓÓÃ»§
+	 * å¨£è¯²å§é¢ã„¦åŸ›
 	 * @param user
 	 * @return
 	 */
 	public Integer addUser(User user);
 	/**
-	 * É¾³ıÓÃ»§
+	 * é’çŠ»æ«é¢ã„¦åŸ›
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteUser(Integer id);
 	/**
-	 * ¸ù¾İid»ñÈ¡ÓÃ»§
+	 * éè§„åµidé‘¾å³°å½‡é¢ã„¦åŸ›
 	 * @param id
 	 * @return
 	 */
 	public User findById(Integer id);
 	/**
-	 * ¸üĞÂÓÃ»§
+	 * é‡å­˜æŸŠé¢ã„¦åŸ›
 	 * @param user
 	 * @return
 	 */
 	public Integer updateUser(User user);
 	
 	/**
-	 * ÁĞ³öËùÓĞÓÃ»§
+	 * éè§„åµé‰â€²æ¬¢éŒãƒ¨î‡—
+	 * @param map
 	 * @return
 	 */
-	public List<User> listUser();
-
+	public List<User> listUser(Map<String, Object> map);
+	
+	/**
+	 * éè§„åµé¢ã„¦åŸ›éšå¶†ç…¡é‘çƒ˜æ•¼é¢ã„¦åŸ›
+	 * @param username
+	 * @return
+	 */
+	public User fingByUserLogin(String username);
 }

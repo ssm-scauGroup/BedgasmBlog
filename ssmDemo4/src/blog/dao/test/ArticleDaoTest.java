@@ -1,5 +1,7 @@
 package blog.dao.test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -13,7 +15,7 @@ import blog.util.FormatDate;
 
 /**
  * @author Administrator
- * ÎÄÕÂ²âÊÔÀà
+ * æ–‡ç« æµ‹è¯•ç±»
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:beans.xml")
@@ -24,9 +26,18 @@ public class ArticleDaoTest {
 	
 //	@Test
 //    public void addArticle() throws Exception {
-//        Article article = new Article("hello1","½ñÌìÊÇ¸öºÃÈÕ×Ó","hhhhhhhhhhhhh","demo",1);
-//        int result = articleDao.addArticle(article);
-//        System.out.println("result is "+result);
+//        Article article = new Article();
+//        article.setAuthor(1);
+//        article.setBlogtypeid(11);
+//        article.setContent("ä»Šå¤©æ˜¯ä¸ªå¥½æ—¥å­");
+//        article.setSummary("è¿™æ˜¯æ‘˜è¦");
+//        article.setTags("è¿™æ˜¯æ ‡ç­¾,åˆ†å·éš”å¼€");
+//        article.setTitle("è¿™æ˜¯æ ‡é¢˜");
+//        for (int i = 0; i < 10; i++) {
+//        	int result = articleDao.addArticle(article);
+//        	System.out.println("result is "+result);
+//		}
+//        
 //    }
 	
 //	@Test
@@ -49,9 +60,18 @@ public class ArticleDaoTest {
 	
 //	@Test
 //	public void updateArticle() throws Exception{
-//		Article article = new Article(4,"helladfasdfo1","½ñÌìÊÇ¸öºÃadsfadfÈÕ×Ó",FormatDate.formatDate(), null, null, "hhhhhhhhhhhhh","demo",1);
+//		Article article = new Article(4,"helladfasdfo1","ä»Šå¤©æ˜¯ä¸ªå¥½adsfadfæ—¥å­",FormatDate.formatDate(), null, null, "hhhhhhhhhhhhh","demo",1);
 //		Integer res = articleDao.updateArticle(article);
 //		System.out.println("result is "+res);
 //	}
 	
+//	@Test
+//	public void listByPage(){
+//		Integer start = 0;
+//		Integer end = 2;
+//		List<Article> articles = articleDao.listByPage(start, end);
+//		for (Article article : articles) {
+//			System.out.println(article);
+//		}
+//	}
 }

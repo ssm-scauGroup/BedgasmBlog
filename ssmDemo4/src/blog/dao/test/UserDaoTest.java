@@ -21,8 +21,13 @@ public class UserDaoTest {
 	
 //	@Test
 //	public void addUser() throws Exception{
-//		User u = new User("ronething","123456","axing","178965100@qq.com","这是一个个性签名","images/touxiang",1);
-//		Integer res = userDao.addUser(u);
+//		User user = new User();
+//		user.setUsername("nihao");
+//		user.setEmail("123@qq.com");
+//		user.setPassword("123456");
+//		user.setNickname("nihao");
+//		//User u = new User("ronething","123456","axing","178965100@qq.com","鏉╂瑦妲告稉锟芥稉顏冮嚋閹咁劮閸氾拷","images/touxiang",1);
+//		Integer res = userDao.addUser(user);
 //		System.out.println(res);
 //	}
 	
@@ -33,8 +38,8 @@ public class UserDaoTest {
 //		user.setUsername("demo");
 //		user.setPassword("12345678");
 //		user.setEmail("axingfly@gmail.com");
-//		user.setSignature("这是一个测试");
-//		user.setProfile("这是一个profile");
+//		user.setSignature("鏉╂瑦妲告稉锟芥稉顏呯ゴ鐠囷拷");
+//		user.setProfile("鏉╂瑦妲告稉锟芥稉鐚祌ofile");
 //		user.setRole(0);
 //		int res = userDao.updateUser(user);
 //		System.out.println(res);
@@ -46,11 +51,17 @@ public class UserDaoTest {
 //		System.out.println(user);
 //	}
 	
-	@Test
-	public void listUser() throws Exception{
-		List<User> users = userDao.listUser();
-		for (User user : users) {
-			System.out.println(user);
-		}
-	}
+//	@Test
+//	public void listUser() throws Exception{
+//		List<User> users = userDao.listUser();
+//		for (User user : users) {
+//			System.out.println(user);
+//		}
+//	}
+	
+//	@Test
+//	public void fingByUserLogin() throws Exception{
+//		User user = userDao.fingByUserLogin("demo");
+//		System.out.println(user.getPassword());
+//	}
 }

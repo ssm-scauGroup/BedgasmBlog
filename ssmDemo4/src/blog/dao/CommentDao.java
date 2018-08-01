@@ -1,6 +1,7 @@
 package blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -8,58 +9,51 @@ import blog.entity.Comment;
 
 /**
  * @author Administrator
- * ÆÀÂÛDaoÀà
+ * ç’‡å‹®î†‘Daoç»«ï¿½
  */
 @Repository("commentDao")
 public interface CommentDao {
 	/**
-	 * Ôö¼ÓÆÀÂÛ
+	 * æ¾§ç‚²å§ç’‡å‹®î†‘
 	 * @param comment
 	 * @return
 	 */
 	public Integer addComment(Comment comment);
 	/**
-	 * É¾³ıÆÀÂÛ
+	 * é’çŠ»æ«ç’‡å‹®î†‘
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteComment(Integer id);
 	/**
-	 * Í¨¹ıid»ñÈ¡ÆÀÂÛ
+	 * é–«æ°³ç¹ƒidé‘¾å³°å½‡ç’‡å‹®î†‘
 	 * @param id
 	 * @return
 	 */
 	public Comment findById(Integer id);
 	/**
-	 * ¸üĞÂÆÀÂÛ
+	 * é‡å­˜æŸŠç’‡å‹®î†‘
 	 * @param comment
 	 * @return
 	 */
 	public Integer updateComment(Comment comment);
 	
 	/**
-	 * »ñÈ¡Ä³ÆªÎÄÕÂµÄËùÓĞÆÀÂÛ
+	 * éè§„åµé‰â€²æ¬¢éŒãƒ¨î‡—ç’‡å‹®î†‘
 	 * @param articleid
 	 * @return
 	 */
-	public List<Comment> listByArticleId(Integer articleid);
+	public List<Comment> listComment(Map<String, Object> map);
 	
 	/**
-	 * Ä³¸öÈËµÄËùÓĞÆÀÂÛ
-	 * @param userid
-	 * @return
-	 */
-	public List<Comment> listByUserId(Integer userid);
-	
-	/**
-	 * »ñÈ¡Ä³ÆªÎÄÕÂµÄÆÀÂÛ×ÜÊı
+	 * é‘¾å³°å½‡éŒæ„®ç˜’é‚å›©ç·é¨å‹®ç˜ç’çƒ˜ï¿½ç»˜æšŸ
 	 * @param articleid
 	 * @return
 	 */
 	public Long getTotalByArticleId(Integer articleid);
 	
 	/**
-	 * »ñÈ¡Ä³ÓÃ»§ÆÀÂÛµÄ×ÜÊı
+	 * é‘¾å³°å½‡éŒæ„®æ•¤é´ç–¯ç˜ç’è™¹æ®‘é¬ç»˜æšŸ
 	 * @param userid
 	 * @return
 	 */

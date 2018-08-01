@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
     
     <insert id="addUser" parameterType="User">
-        insert into t_user (user_login,user_pass,user_nickname,email,signature,user_profile,role) VALUES (#{username},md5(#{password}),#{nickname},#{email},#{signature},#{profile},#{role})
+        insert into t_user (user_login,user_pass,user_nickname,email,signature,user_profile,role) VALUES (#{username},#{password},#{nickname},#{email},#{signature},#{profile},#{role})
     </insert>
     
     <delete id="deleteUser">
@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 user_login=#{username},
             </if>
             <if test="password!=null and password!=''">
-                user_pass=md5(#{password}),
+                user_pass=#{password},
             </if>
             <if test="nickname!=null and nickname!=''">
             	user_nickname=#{nickname},
@@ -54,9 +54,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findById" resultMap="UserResult">
     	SELECT * from t_user where id=#{id}
     </select>
-    
-    <select id="listUser" resultMap="UserResult">
+   
+    <select id="listUser" parameterType="Map" resultMap="UserResult">
         SELECT * FROM t_user
+        <where>
+        	<if test="email!=null and email!=''">
+        		and email like "%"#{email}"%"
+        	</if>
+        	<if test="username!=null and username!=''">
+        		and user_login like "%"#{username}"%"
+        	</if>
+        </where>
+    </select>
+    
+    <select id="fingByUserLogin" resultMap="UserResult">
+    	SELECT * FROM t_user WHERE user_login=#{username}
     </select>
     
 </mapper> 

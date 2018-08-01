@@ -2,20 +2,20 @@ package blog.entity;
 
 /**
  * @author Administrator
- * Á´½ÓÊµÌåÀà
+ * é“¾æ¥å®ä½“ç±»
  */
 public class Link {
 	
 	/**
-	 * Á´½Óid
+	 * é“¾æ¥id
 	 */
 	private Integer id;
 	/**
-	 * Á´½ÓÃû×Ö
+	 * é“¾æ¥åå­—
 	 */
 	private String linkname;
 	/**
-	 * Á´½Óurl
+	 * é“¾æ¥url
 	 */
 	private String linkurl;
 	

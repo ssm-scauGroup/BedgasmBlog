@@ -43,14 +43,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where id=#{id}
     </update>
-    
-    <select id="listByArticleId" resultMap="CommentResult">
-        SELECT * FROM t_comment where articleid=#{articleid}
-        ORDER BY commentDate DESC
-    </select>
-    
-    <select id="listByUserId" resultMap="CommentResult">
-        SELECT * FROM t_comment where userid=#{userid}
+    <select id="listComment" parameterType="Map" resultMap="CommentResult">
+        SELECT * FROM t_comment
+		<where>
+			<if test="articleid!=null">
+				and articleid=#{articleid}
+			</if>
+			<if test="userid!=null">
+				and userid=#{userid}
+			</if>
+		</where>
         ORDER BY commentDate DESC
     </select>
     
