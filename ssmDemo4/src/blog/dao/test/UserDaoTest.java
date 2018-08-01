@@ -26,7 +26,7 @@ public class UserDaoTest {
 //		user.setEmail("123@qq.com");
 //		user.setPassword("123456");
 //		user.setNickname("nihao");
-//		//User u = new User("ronething","123456","axing","178965100@qq.com","这是一个个性签名","images/touxiang",1);
+//		//User u = new User("ronething","123456","axing","178965100@qq.com","杩欐槸涓�涓釜鎬х鍚�","images/touxiang",1);
 //		Integer res = userDao.addUser(user);
 //		System.out.println(res);
 //	}
@@ -38,8 +38,8 @@ public class UserDaoTest {
 //		user.setUsername("demo");
 //		user.setPassword("12345678");
 //		user.setEmail("axingfly@gmail.com");
-//		user.setSignature("这是一个测试");
-//		user.setProfile("这是一个profile");
+//		user.setSignature("杩欐槸涓�涓祴璇�");
+//		user.setProfile("杩欐槸涓�涓猵rofile");
 //		user.setRole(0);
 //		int res = userDao.updateUser(user);
 //		System.out.println(res);

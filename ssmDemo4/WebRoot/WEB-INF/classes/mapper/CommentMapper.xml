@@ -43,7 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where id=#{id}
     </update>
-    
     <select id="listComment" parameterType="Map" resultMap="CommentResult">
         SELECT * FROM t_comment
 		<where>
