@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <p>发生错误<p><br>
-<a href="http://localhost:8080/ssmDemo4/">
+<a href="/static/index.html">
     <button>返回首页</button>
 </a>
 
