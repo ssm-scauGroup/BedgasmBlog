@@ -25,6 +25,11 @@ public class Comment {
 	 * 被评论的文章id
 	 */
 	private Integer articleid;
+	
+	/**
+	 * 评论用户id
+	 */
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -55,6 +60,13 @@ public class Comment {
 	}
 	public void setArticleid(Integer articleid) {
 		this.articleid = articleid;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	@Override

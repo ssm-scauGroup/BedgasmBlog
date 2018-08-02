@@ -97,7 +97,7 @@ public class StarController {
 			return result.toString();
 		}
 		
-		if(user.getId()!=star.getSubscriber()){
+		if(!user.getId().equals(star.getSubscriber())){
 			result.put("success",false);
 			result.put("msg", "登录用户id与传值进来的用户id不符合");
 			return result.toString();
@@ -149,7 +149,7 @@ public class StarController {
 			return result.toString();
 		}
 		
-		if(user.getId()!=star.getSubscriber()){
+		if(!user.getId().equals(star.getSubscriber())){
 			result.put("success",false);
 			result.put("msg", "登录用户id与传值进来的用户id不符合");
 			return result.toString();

@@ -18,9 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-import blog.entity.Article;
 import blog.entity.User;
-import blog.service.ArticleService;
 import blog.service.UserService;
 import blog.util.Md5Encrypt;
 import blog.util.UserisLogin;
@@ -31,9 +29,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private ArticleService articleService;
 	
 	/**
 	 * 用户登录
@@ -366,41 +361,45 @@ public class UserController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
-		User user = UserisLogin.getUser(session);
+//		User user = UserisLogin.getUser(session);
+//		
+//		//判断是否有登录
+//		if(user==null){
+//			jsonObject.put("success", false);
+//			jsonObject.put("msg", "用户没有登录");
+//			return jsonObject.toString();
+//		}
+//		
+//		//如果不是管理员，拒绝
+//		if(user.getRole()==1){
+//			jsonObject.put("success", false);
+//			jsonObject.put("msg", "无权限");
+//			return jsonObject.toString();
+//		}
+//		
+//		User user2 = userService.findById(Integer.parseInt(id));
+//		
+//		if(user2==null){
+//			jsonObject.put("success", false);
+//			jsonObject.put("msg", "用户不存在");
+//			return jsonObject.toString();
+//		}
+//		
+//		//TODO 应该考虑删除用户的一些后果。建议搞一个拉黑选项 这样用户不能登录
+//		
+//		int res = userService.deleteUser(Integer.parseInt(id));
+//		
+//		if (res > 0) {
+//			jsonObject.put("success", true);
+//			jsonObject.put("msg", "删除用户成功");
+//		}else{
+//			jsonObject.put("success", false);
+//			jsonObject.put("msg", "删除用户失败");
+//		}
 		
-		//判断是否有登录
-		if(user==null){
-			jsonObject.put("success", false);
-			jsonObject.put("msg", "用户没有登录");
-			return jsonObject.toString();
-		}
+		jsonObject.put("success", false);
+		jsonObject.put("msg", "接口未实现");
 		
-		//如果不是管理员，拒绝
-		if(user.getRole()==1){
-			jsonObject.put("success", false);
-			jsonObject.put("msg", "无权限");
-			return jsonObject.toString();
-		}
-		
-		User user2 = userService.findById(Integer.parseInt(id));
-		
-		if(user2==null){
-			jsonObject.put("success", false);
-			jsonObject.put("msg", "用户不存在");
-			return jsonObject.toString();
-		}
-		
-		//TODO 应该考虑删除用户的一些后果。建议搞一个拉黑选项 这样用户不能登录
-		
-		int res = userService.deleteUser(Integer.parseInt(id));
-		
-		if (res > 0) {
-			jsonObject.put("success", true);
-			jsonObject.put("msg", "删除用户成功");
-		}else{
-			jsonObject.put("success", false);
-			jsonObject.put("msg", "删除用户失败");
-		}
 		return jsonObject.toString();
 	}
 

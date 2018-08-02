@@ -10,10 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="commentDate" column="commentDate"/>
         <result property="userid" column="userid"/>
         <result property="articleid" column="articleid"/>
+        <result property="username" column="username"/>
     </resultMap>
     
     <insert id="addComment" parameterType="Comment">
-        insert into t_comment (content,commentDate,userid,articleid) VALUES (#{content},now(),#{userid},#{articleid})
+        insert into t_comment (content,commentDate,userid,articleid,username) VALUES (#{content},now(),#{userid},#{articleid},#{username})
     </insert>
     
     <delete id="deleteComment" parameterType="java.lang.Integer">
@@ -39,6 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="articleid!=null">
                 articleid=#{articleid},
+            </if>
+            <if test="username!=null and username!=''">
+            	username=#{username},
             </if>
         </set>
         where id=#{id}

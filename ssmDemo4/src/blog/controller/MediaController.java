@@ -52,7 +52,7 @@ public class MediaController {
 			return jsonObject.toString();
 		}
 		
-		if(user.getId()!=Integer.parseInt(userid) && user.getRole()==1){
+		if(!user.getId().equals(Integer.parseInt(userid)) && user.getRole()==1){
 			//既不是本人又不是管理员
 			jsonObject.put("success",false);
 			jsonObject.put("msg", "无权限");
@@ -97,7 +97,7 @@ public class MediaController {
 			return jsonObject.toString();
 		}
 		
-		if(user.getId()!=singleFile.getUserid()){
+		if(!user.getId().equals(singleFile.getUserid())){
 			jsonObject.put("success",false);
 			jsonObject.put("msg", "登录用户id与传入进来的文件用户id不符合");
 			return jsonObject.toString();
@@ -184,7 +184,7 @@ public class MediaController {
             //TODO 前端页面应该提示如果删除了媒体 资源失效 引用到此媒体的文章里面的资源也失效
             try {
             	Media media = mediaService.findById(mediaId);
-            	if(media.getUserid()!=user.getId() && user.getRole()==1){
+            	if(!media.getUserid().equals(user.getId()) && user.getRole()==1){
             		jsonObject.put("success", false);
             		jsonObject.put("msg", "无权限");
             		return jsonObject.toString();

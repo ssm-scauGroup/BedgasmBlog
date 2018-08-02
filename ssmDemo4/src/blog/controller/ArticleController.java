@@ -135,6 +135,7 @@ public class ArticleController {
 	public String saveArticle(Article article,HttpSession session) {
 		
 		JSONObject result = new JSONObject();
+		
 		int resultTotal = 0;
 		
 		User user = UserisLogin.getUser(session);
@@ -156,15 +157,15 @@ public class ArticleController {
 				return result.toString();
 			}
 			
-			if(oldArticle.getAuthor()!=user.getId() || user.getId()!=article.getAuthor()){
+			if(!oldArticle.getAuthor().equals(user.getId()) || !user.getId().equals(article.getAuthor())){
 				result.put("success", false);
 				result.put("msg", "文章不是自己的，或者将自己的文章作者id改为别人的id");
 				return result.toString();
 			}
 			
-			//如果传入为空或者传入的和原来的一样
+			//如果 blogtypeid 传入为空或者传入的和原来的一样
 			
-			if (article.getBlogtypeid() == null || oldArticle.getBlogtypeid()==article.getBlogtypeid()) {
+			if (article.getBlogtypeid() == null || oldArticle.getBlogtypeid().equals(article.getBlogtypeid())) {
 				
 				resultTotal = articleService.updateArticle(article);
 			
@@ -193,11 +194,18 @@ public class ArticleController {
 			
 			// 新增文章
 			
-			if (user.getId()!=article.getAuthor()) {
+//			System.out.println("userid is");
+//			System.out.println(user.getId());
+//			System.out.println("author is ");
+//			System.out.println(article.getAuthor());
+//			System.out.println(user.getId()==article.getAuthor());
+			
+			if (!user.getId().equals(article.getAuthor())) {
 				result.put("success", false);
 				result.put("msg", "不能以别人的名义发表文章");
 				return result.toString();
 			}
+			
 			BlogType blogType = blogTypeService.findById(article.getBlogtypeid());
 			
 			if(blogType==null){
@@ -206,7 +214,14 @@ public class ArticleController {
 				return result.toString();
 			}
 			
-			resultTotal = articleService.addArticle(article);
+			try {
+				resultTotal = articleService.addArticle(article);
+			} catch (Exception e) {
+				// TODO: handle exception
+				result.put("success", false);
+				result.put("msg", "保存过程中出现错误");
+				return result.toString();
+			}	
 			
 			// 更新类别文章数目
 			blogType.setTypecount(blogType.getTypecount() + 1);
@@ -344,7 +359,7 @@ public class ArticleController {
 				jsonObject.put("msg","文章不存在");
 				return jsonObject.toString();
 			}
-			if(article.getAuthor()!=user.getId() && user.getRole()==1){
+			if(!article.getAuthor().equals(user.getId()) && user.getRole()==1){
 				//既不是作者也不是管理员
 				jsonObject.put("success", false);
 				jsonObject.put("msg","您没有权限删除此文章");

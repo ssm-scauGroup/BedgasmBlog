@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="tags" column="tags"/>
         <result property="blogtypeid" column="blogtypeid"/>
         <result property="author" column="author"/>
+        <result property="username" column="username"/>
     </resultMap>
 
 
@@ -62,8 +63,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="addArticle" parameterType="Article">
         insert into t_article 
-        (title,summary,releaseDate,clickCount,replyCount,content,tags,blogtypeid,author)
-         VALUES (#{title},#{summary},now(),0,0,#{content},#{tags},#{blogtypeid},#{author})
+        (title,summary,releaseDate,clickCount,replyCount,content,tags,blogtypeid,author,username)
+         VALUES (#{title},#{summary},now(),0,0,#{content},#{tags},#{blogtypeid},#{author},#{username})
     </insert>
 
     <update id="updateArticle" parameterType="Article">
@@ -95,6 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             <if test="author!=null">
                 author=#{author},
+            </if>
+            <if test="username!=null and username!=''">
+            	username=#{username}
             </if>
         </set>
         where id=#{id}

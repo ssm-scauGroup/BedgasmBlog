@@ -35,10 +35,20 @@ id="WebApp_ID" version="3.1">
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
     </servlet>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+    <servlet> 
+         <servlet-name>log4jInit</servlet-name> 
+         <servlet-class>blog.util.Log4jInit</servlet-class> 
+         <init-param> 
+           <param-name>log4j</param-name> 
+           <param-value>/WEB-INF/classes/log4jSetting.properties</param-value> 
+         </init-param> 
+         <load-on-startup>0</load-on-startup> 
+       </servlet> 
 
  <!-- 服务器配置允许跨域 -->
  <filter>
