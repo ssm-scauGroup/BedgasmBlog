@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>媒体库</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
+	<link rel="stylesheet" type="text/css" href="css/persomhome.css">
+
+	<link rel="stylesheet" type="text/css" href="pubu/css/style1.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="pubu/js/modernizr-custom.js"></script>
+
+</head>
+<body class="user-select">
+
+	<div class="container-fluid" id="fluid">
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">	
+						<li><a id="navlogo" href="signin.html"></a></li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li id="account"><a id="accountname" href="" onmouseover="showPromptBox()" onmouseout="closePromptBox()">用户名</a></li>
+
+					</ul>
+
+				</div>
+				<!--/.nav-collapse -->
+
+				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+					<!-- <p><a href="personHome.html">个人中心</p> -->
+							<p><a href="personHome.html">我的首页</a></p>	
+						<p><a href="userpanel.html">管理站点</a></p>	
+						<p><a href="#">帮助</a></p>	
+						<p><a href="index.html">退出登录</a></p>
+					</div>			
+				</nav>
+		</header>
+			<div class="row">
+
+				<aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="userpanel.html"><span class="  glyphicon glyphicon-dashboard">&nbsp</span>仪表盘</a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a href="articleManager.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>文章</a></li>
+						<li class="active"><a href="#"><span class="glyphicon glyphicon-picture">&nbsp</span>媒体</a></li>
+						<li><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
+						<li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li>
+						<!-- <li><a href="#">栏目</a></li> -->
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-star  ">&nbsp</span>订阅</a>
+							<ul class="dropdown-menu" aria-labelledby="otherMenu">
+								<li><a href="mystar.html"><span class="glyphicon glyphicon-star-empty">&nbsp</span>我的订阅</a></li>
+								<li><a href="myfans.html"><span class="glyphicon glyphicon-heart">&nbsp</span>我的粉丝</a></li>
+							</ul>
+						</li>
+						
+						<!-- <li><a href="#">栏目</a></li> -->
+						<li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
+							<ul class="dropdown-menu" aria-labelledby="otherMenu">
+								<li><a href="friendlink.html"><span class="glyphicon glyphicon-star">&nbsp</span>友情链接</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog">&nbsp</span>设置</a>
+							<ul class="dropdown-menu" aria-labelledby="userMenu">
+								<li><a href="personInfo.html" ><span class="glyphicon glyphicon-user">&nbsp</span>个人资料</a></li>
+								<li><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>安全设置</a></li>
+							</ul>
+						</li>
+
+					</ul>
+				</aside>
+				 
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+				 <h1 class="page-header" style="margin:6px 20px;">MEDIA GALLERY</h1>
+<!-- <div class="container"> -->
+	<div class="content">
+		<div class="grid">
+			<div class="grid__item" data-size="1280x853"> <a href="pubu/images/weix/1.png" class="img-wrap"><img src="pubu/images/weix/1.png" alt="img1" />
+				</a> </div>
+			<div class="grid__item" data-size="958x1280"> <a href="pubu/images/weix/2.png" class="img-wrap"><img src="pubu/images/weix/2.png" alt="img2" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x853"> <a href="pubu/images/weix/3.png" class="img-wrap"><img src="pubu/images/weix/3.png" alt="img3" />
+				</a> </div>
+			<div class="grid__item" data-size="865x1280"> <a href="pubu/images/weix/4.png" class="img-wrap"><img src="pubu/images/weix/4.png" alt="img4" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x1280"> <a href="pubu/images/weix/5.png" class="img-wrap"><img src="pubu/images/weix/5.png" alt="img5" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/6.png" class="img-wrap"><img src="pubu/images/weix/6.png" alt="img6" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/7.png" class="img-wrap"><img src="pubu/images/weix/7.png" alt="img7" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/8.png" class="img-wrap"><img src="pubu/images/weix/8.png" alt="img8" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/9.png" class="img-wrap"><img src="pubu/images/weix/9.png" alt="img9" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/1.png" class="img-wrap"><img src="pubu/images/weix/1.png" alt="img10" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/2.png" class="img-wrap"><img src="pubu/images/weix/2.png" alt="img11" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/3.png" class="img-wrap"><img src="pubu/images/weix/3.png" alt="img19" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/4.png" class="img-wrap"><img src="pubu/images/weix/4.png" alt="img13" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/5.png" class="img-wrap"><img src="pubu/images/weix/5.png" alt="img14" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/6.png" class="img-wrap"><img src="pubu/images/weix/6.png" alt="img15" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/7.png" class="img-wrap"><img src="pubu/images/weix/7.png" alt="img16" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/8.png" class="img-wrap"><img src="pubu/images/weix/8.png" alt="img17" />
+				</a> </div>
+			<div class="grid__item" data-size="1280x850"> <a href="pubu/images/weix/9.png" class="img-wrap"><img src="pubu/images/weix/9.png" alt="img18" />
+				</a> </div>
+			<div class="grid__item"  data-size="510x510" > <a href="images/1.jpg" class="img-wrap"><img src="images/1.jpg" alt="img12" />
+			</a> </div>
+		</div>
+		<!-- /grid -->
+		<div class="preview">
+			<button class="action action--close"><i class="fa fa-times">x</i><span class="text-hidden">Close</span></button>
+			<div class="description description--preview"></div>
+		</div>
+		<!-- /preview -->
+	</div>
+<!-- </div> -->
+					<!-- 	<div class="footer-bottom">
+							<h5>感谢使用Bedgasm Blog</h5>
+							<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
+
+						</div> -->
+				</div>
+			</div>
+
+			
+
+	</div>
+
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/admin-scripts.js"></script> 
+<script type="text/javascript" src="js/prompt.js"></script>
+<script src="pubu/js/imagesloaded.pkgd.min.js"></script>
+<script src="pubu/js/masonry.pkgd.min.js"></script>
+<script src="pubu/js/classie.js"></script>
+<script src="pubu/js/main.js"></script>
+<script>
+	(function() {
+		// create SVG circle overlay and append it to the preview element
+		function createCircleOverlay(previewEl) {
+			var dummy = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+			dummy.setAttributeNS(null, 'version', '1.1');
+			dummy.setAttributeNS(null, 'width', '100%');
+			dummy.setAttributeNS(null, 'height', '100%');
+			dummy.setAttributeNS(null, 'class', 'overlay');
+			var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+			var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+			circle.setAttributeNS(null, 'cx', 0);
+			circle.setAttributeNS(null, 'cy', 0);
+			circle.setAttributeNS(null, 'r', Math.sqrt(Math.pow(previewEl.offsetWidth,2) + Math.pow(previewEl.offsetHeight,2)));
+			dummy.appendChild(g);
+			g.appendChild(circle);
+			previewEl.appendChild(dummy);
+		}
+		
+		new GridFx(document.querySelector('.grid'), {
+			onInit : function(instance) {
+				createCircleOverlay(instance.previewEl);
+			},
+			onResize : function(instance) {
+				instance.previewEl.querySelector('svg circle').setAttributeNS(null, 'r', Math.sqrt(Math.pow(instance.previewEl.offsetWidth,2) + Math.pow(instance.previewEl.offsetHeight,2)));
+			},
+			onOpenItem : function(instance, item) {
+				// item's image
+				var gridImg = item.querySelector('img'),
+					gridImgOffset = gridImg.getBoundingClientRect(),
+					win = {width: document.documentElement.clientWidth, height: window.innerHeight},
+					SVGCircleGroupEl = instance.previewEl.querySelector('svg > g'),
+					SVGCircleEl = SVGCircleGroupEl.querySelector('circle');
+					
+				SVGCircleEl.setAttributeNS(null, 'r', Math.sqrt(Math.pow(instance.previewEl.offsetWidth,2) + Math.pow(instance.previewEl.offsetHeight,2)));
+				// set the transform for the SVG g node. This will animate the circle overlay. The origin of the circle depends on the position of the clicked item.
+				if( gridImgOffset.left + gridImg.offsetWidth/2 < win.width/2 ) {
+					SVGCircleGroupEl.setAttributeNS(null, 'transform', 'translate(' + win.width + ', ' + (gridImgOffset.top + gridImg.offsetHeight/2 < win.height/2 ? win.height : 0) + ')');
+				}
+				else {
+					SVGCircleGroupEl.setAttributeNS(null, 'transform', 'translate(0, ' + (gridImgOffset.top + gridImg.offsetHeight/2 < win.height/2 ? win.height : 0) + ')');
+				}
+			}
+		});
+	})();
+</script>
+</body>
+</html>

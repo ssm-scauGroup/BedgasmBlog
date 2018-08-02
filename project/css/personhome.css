@@ -1,6 +1,6 @@
 @media (min-width: 750px){
 #prompt-box {
-    width: 150px;
+    width: 180px;
     height: 50px;
     background-color: #222;
     position: fixed;
@@ -12,11 +12,11 @@
 
 @media (max-width: 750px){
 #prompt-box {
-    width: 150px;
+     width: 100%;
     height: 50px;
     background-color: #222;
     position: fixed;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
     display: none;
 }
 }
@@ -75,8 +75,18 @@
         background-size: 100%;
         float: left;
         margin: 20px;
-
     } 
+    .star{
+        /*border: none;*/
+        position: relative;
+        top:-82px;
+        left: 200px;
+        width: 100px;
+        margin-left: 6px;
+        font-family: "Microsoft Yahei",Georgia,Serif;
+        font-size: 14px;
+        padding-left: 10px;
+    }
 
 }
 
@@ -115,6 +125,13 @@
         float: left;
         margin: 20px;
 
+    }
+     .star{
+        border: none;
+        background-color: white;
+        font-family: "Microsoft Yahei",Georgia,Serif;
+        font-size: 16px;
+        padding-left: 10px;
     }
 }
 

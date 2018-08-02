@@ -19,6 +19,23 @@ public class Link {
 	 */
 	private String linkurl;
 	
+	public Link(){
+		
+	}
+	
+	public Link(String linkname, String linkurl) {
+		super();
+		this.linkname = linkname;
+		this.linkurl = linkurl;
+	}
+
+	public Link(Integer id, String linkname, String linkurl) {
+		super();
+		this.id = id;
+		this.linkname = linkname;
+		this.linkurl = linkurl;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
