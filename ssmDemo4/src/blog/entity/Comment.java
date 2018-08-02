@@ -26,25 +26,10 @@ public class Comment {
 	 */
 	private Integer articleid;
 	
-	public Comment(){
-		
-	}
-	
-	public Comment(String content, Integer userid, Integer articleid) {
-		super();
-		this.content = content;
-		this.userid = userid;
-		this.articleid = articleid;
-	}
-	
-	public Comment(Integer id, String content, String commentDate, Integer userid, Integer articleid) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.commentDate = commentDate;
-		this.userid = userid;
-		this.articleid = articleid;
-	}
+	/**
+	 * 评论用户id
+	 */
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -75,6 +60,13 @@ public class Comment {
 	}
 	public void setArticleid(Integer articleid) {
 		this.articleid = articleid;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package blog.dao.test;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -24,9 +26,18 @@ public class ArticleDaoTest {
 	
 //	@Test
 //    public void addArticle() throws Exception {
-//        Article article = new Article("hello1","今天是个好日子","hhhhhhhhhhhhh","demo",1);
-//        int result = articleDao.addArticle(article);
-//        System.out.println("result is "+result);
+//        Article article = new Article();
+//        article.setAuthor(1);
+//        article.setBlogtypeid(11);
+//        article.setContent("今天是个好日子");
+//        article.setSummary("这是摘要");
+//        article.setTags("这是标签,分号隔开");
+//        article.setTitle("这是标题");
+//        for (int i = 0; i < 10; i++) {
+//        	int result = articleDao.addArticle(article);
+//        	System.out.println("result is "+result);
+//		}
+//        
 //    }
 	
 //	@Test
@@ -54,4 +65,13 @@ public class ArticleDaoTest {
 //		System.out.println("result is "+res);
 //	}
 	
+//	@Test
+//	public void listByPage(){
+//		Integer start = 0;
+//		Integer end = 2;
+//		List<Article> articles = articleDao.listByPage(start, end);
+//		for (Article article : articles) {
+//			System.out.println(article);
+//		}
+//	}
 }

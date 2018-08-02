@@ -1,9 +1,10 @@
 package blog.service;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import blog.entity.BlogType;
+import blog.util.PageBean;
 
 public interface BlogTypeService {
 	public Integer addBlogType(BlogType blogType);
@@ -13,8 +14,10 @@ public interface BlogTypeService {
 	public BlogType findById(Integer id);
 
 	public Integer updateBlogType(BlogType blogType);
-
-	public List<BlogType> listBlogType(@Param("start") Integer start, @Param("end") Integer end);
+	
+	public PageBean<BlogType> listByPage(PageBean<BlogType> pageBean);
+	
+	public List<BlogType> listBlogType(Map<String, Object> map);
 
 	public Long getTotal();
 }

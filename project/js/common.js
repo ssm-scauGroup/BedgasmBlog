@@ -1,5 +1,6 @@
 
 window.onload = function(){
+
   var btn = document.getElementById('backtopbtn');
   var timer = null;
   var isTop = true;
@@ -43,6 +44,35 @@ window.onload = function(){
     },30);
   };
 };
+
+// var flag=0;
+function follow(){
+  
+    var star=$("#star");
+     if(star.hasClass("btn-warning")){
+      console.log("follow");
+        star.html("<span class='glyphicon glyphicon-star-empty' id='plus'></span>&nbsp已订阅");
+      // plus.removeClass("glyphicon-plus");
+      // plus.addClass("glyphicon-star");
+      star.removeClass("btn-warning");
+      star.addClass("btn-default");
+      
+
+  }
+  else{
+    var con=window.confirm("确定取消订阅该博主？");
+    if(con==true){
+      flag=0;
+      star.removeClass("btn-default");
+      star.addClass("btn-warning");
+    }
+    
+      
+  }
+  
+ } 
+
+
 
 
 //  var timer=null;

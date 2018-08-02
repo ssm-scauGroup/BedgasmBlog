@@ -36,7 +36,7 @@ public class StarDaoTest {
 //	public void findBySubscriber() throws Exception{
 //		List<Star> stars = starDao.findBySubscriber(2);
 //		for (Star star : stars) {
-//			System.out.println("用户 2 关注的人是 "+star.getSubscribee());
+//			System.out.println("鐢ㄦ埛 2 鍏虫敞鐨勪汉鏄� "+star.getSubscribee());
 //		}
 //	}
 	
@@ -44,20 +44,20 @@ public class StarDaoTest {
 //	public void findBySubscribee() throws Exception{
 //		List<Star> stars = starDao.findBySubscribee(2);
 //		for (Star star : stars) {
-//			System.out.println("用户 2 的粉丝是 "+star.getSubscriber());
+//			System.out.println("鐢ㄦ埛 2 鐨勭矇涓濇槸 "+star.getSubscriber());
 //		}
 //	}
 	
 //	@Test
 //	public void getTotalSubscriber() throws Exception{
 //		Long res = starDao.getTotalSubscriber(2);
-//		System.out.println("用户2关注的总人数"+res);
+//		System.out.println("鐢ㄦ埛2鍏虫敞鐨勬�讳汉鏁�"+res);
 //	}
 //	
 //	@Test
 //	public void getTotalSubscribee() throws Exception{
 //		Long res = starDao.getTotalSubscribee(4);
-//		System.out.println("用户4粉丝总人数"+res);
+//		System.out.println("鐢ㄦ埛4绮変笣鎬讳汉鏁�"+res);
 //	}
 	
 }

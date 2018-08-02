@@ -2,7 +2,6 @@ package blog.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import blog.entity.Star;
@@ -23,7 +22,10 @@ public interface StarDao {
 	 * @param subscribee
 	 * @return
 	 */
-	public Integer deleteStar(@Param("subscriber") Integer subscriber,@Param("subscribee") Integer subscribee);
+	public Integer deleteStar(Star star);
+	
+	
+	//public Integer deleteStar(Star star);
 	
 	
 	//public Integer deleteStar(Star star);

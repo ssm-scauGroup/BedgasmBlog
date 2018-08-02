@@ -39,9 +39,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT id,typename,typecount from t_blogtype
             where id = #{id}
     </select>
-    <select id="listBlogType" resultMap="BlogTypeResult">
+    <select id="listByPage" resultMap="BlogTypeResult">
     	SELECT id,typename,typecount from t_blogtype limit #{start},#{end}
     </select>
+    
+    <select id="listBlogType" parameterType="Map" resultMap="BlogTypeResult">
+    	SELECT id,typename,typecount from t_blogtype
+    	<where>
+            <if test="typename!=null and typename!=''">
+                and typename like "%"#{typename}"%"
+            </if>
+    	</where>
+    </select>
+    
     <!-- 更新语句 -->
     <update id="updateBlogType" parameterType="BlogType">
         update t_blogtype

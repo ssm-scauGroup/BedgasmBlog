@@ -1,6 +1,7 @@
 package blog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import blog.entity.User;
 
@@ -13,7 +14,7 @@ public interface UserService {
 
 	public Integer updateUser(User user);
 	
-	public List<User> listUser();
+	public List<User> listUser(Map<String, Object> map);
 	
 	public User fingByUserLogin(String username);
 	

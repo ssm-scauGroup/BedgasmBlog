@@ -21,12 +21,12 @@ public class BlogTypeDaoTest {
 	@Resource
 	private BlogTypeDao blogTypeDao;
 	
-	@Test
-	public void addBlogType() throws Exception{
-		BlogType blogType = new BlogType("这是一个测试",0);
-		int res = blogTypeDao.addBlogType(blogType);
-		System.out.println(res);
-	}
+//	@Test
+//	public void addBlogType() throws Exception{
+//		BlogType blogType = new BlogType("这是一个测试",0);
+//		int res = blogTypeDao.addBlogType(blogType);
+//		System.out.println(res);
+//	}
 	
 //	@Test
 //	public void findById() throws Exception{
