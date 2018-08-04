@@ -70,4 +70,10 @@ public class ArticleServiceImpl implements ArticleService{
 		return ado.listByAuthor(author);
 	}
 
+	@Override
+	public List<Article> listByClickCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return ado.listByClickCount(map);
+	}
+
 }

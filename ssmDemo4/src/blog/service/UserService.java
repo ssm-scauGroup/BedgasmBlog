@@ -18,4 +18,6 @@ public interface UserService {
 	
 	public User fingByUserLogin(String username);
 	
+	public User findSimpleUser(Integer id);
+	
 }

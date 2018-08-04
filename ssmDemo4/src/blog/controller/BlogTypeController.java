@@ -42,7 +42,7 @@ public class BlogTypeController {
 	@ResponseBody
 	@RequestMapping(value="/list",produces="application/json;charset=UTF-8")
 	public String listByPage(@RequestParam(value="page",required=false) String page,
-			@RequestParam(value="rows",required=false) String rows){
+			@RequestParam(value="rows",required=false) String rows,HttpSession session){
 		if(page==null){
 			page="1";
 		}
@@ -92,6 +92,12 @@ public class BlogTypeController {
 			result.put("msg", "用户没有登录");
 			return result.toString();
 		}
+		
+		if(user.getRole()==1){
+			result.put("success", false);
+			result.put("msg", "无权限");
+			return result.toString();
+		}
         
         if(blogType.getId()!=null){
             //更新文章
@@ -121,7 +127,7 @@ public class BlogTypeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/search",produces="application/json;charset=UTF-8")
-	public String SearchByTitle(@RequestParam(value="keyword",required=false) String keyword) {
+	public String SearchByTitle(@RequestParam(value="keyword",required=false) String keyword,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -153,7 +159,7 @@ public class BlogTypeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/detail",produces="application/json;charset=UTF-8")
-	public String detialBlogType(@RequestParam("id") String id){
+	public String detialBlogType(@RequestParam("id") String id,HttpSession session){
 		
 		BlogType blogType = blogTypeService.findById(Integer.parseInt(id));
 		

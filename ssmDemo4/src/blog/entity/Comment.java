@@ -30,6 +30,11 @@ public class Comment {
 	 * 评论用户id
 	 */
 	private String username;
+	
+	/**
+	 * 评论用户
+	 */
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -69,10 +74,17 @@ public class Comment {
 		this.username = username;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", commentDate=" + commentDate + ", userid=" + userid
-				+ ", articleid=" + articleid + "]";
+				+ ", articleid=" + articleid + ", username=" + username + ", user=" + user + "]";
 	}
 	
 }

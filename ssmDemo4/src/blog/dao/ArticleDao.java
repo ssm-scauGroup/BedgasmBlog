@@ -69,4 +69,11 @@ public interface ArticleDao {
 	 * @return
 	 */
 	public List<Article> listByAuthor(Integer author);
+	
+	/**
+	 * 根据阅读次数(热度)列出文章
+	 * @param map
+	 * @return
+	 */
+	public List<Article> listByClickCount(Map<String, Object> map);
 }

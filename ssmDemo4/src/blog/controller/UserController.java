@@ -63,6 +63,10 @@ public class UserController {
 			}			
 		}
 		
+		//String jsonp = callback+"("+jsonObject.toString()+")";
+		
+		//System.out.println(jsonp);
+		
 		return jsonObject.toString();
 	}
 	
@@ -73,7 +77,7 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/register",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String userRegister(User user){
+	public String userRegister(User user,HttpSession session){
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -84,6 +88,14 @@ public class UserController {
 		user.setRole(1); //0为管理员 1为普通用户
 		user.setNickname(user.getUsername()); //昵称和用户名默认一样.	
 		user.setPassword(Md5Encrypt.getMD5(user.getPassword()));//md5 password后存进user.password
+		
+		String base64Img = "data:image/png;base64,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";
+		
+		user.setProfile(base64Img);
+		
+		String signature = "这个人很懒，什么都没有留下";
+		
+		user.setSignature(signature);
 		
 		res = userService.addUser(user);
 		
@@ -109,7 +121,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/isValid",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String searchIfValid(@RequestParam(value="username",required=false) String username,
-							@RequestParam(value="email",required=false) String email) {
+							@RequestParam(value="email",required=false) String email,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -284,7 +296,11 @@ public class UserController {
 		
 		JSONObject jsonObject = new JSONObject();
 		
-		User user = UserisLogin.getUser(session);
+		//User user = UserisLogin.getUser(session);
+		
+		System.out.println("userinfo sessionid "+session.getId());
+		
+		User user = (User)session.getAttribute("user");
 		
 		//判断是否有登录
 		if(user==null){
@@ -295,7 +311,46 @@ public class UserController {
 		
 		jsonObject.put("success", true);
 		jsonObject.put("user",user);
+		
+		//String jsonp = callback+"("+jsonObject.toString()+")";
+		
+		//System.out.println("jsonp is "+jsonp);
+		
 		return jsonObject.toString();
+	}
+	
+	/**
+	 * 通过id查询用户信息
+	 * @param id
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/userinfobyid",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public String userInfobyId(@RequestParam(value="id",required=false) String id,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		if(id==null){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "没有传入用户id");
+			return jsonObject.toString();
+		}
+		
+		User user = userService.findSimpleUser(Integer.parseInt(id));
+		
+		//判断是否存在
+		if(user==null){
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "用户不存在");
+			return jsonObject.toString();
+		}
+		
+		jsonObject.put("success", true);
+		jsonObject.put("user",user);
+		
+		return jsonObject.toString();
+		
 	}
 	
 	/**

@@ -21,4 +21,6 @@ public interface ArticleService {
 	public Article findById(Integer id);
 	
 	public List<Article> listByAuthor(Integer author);
+	
+	public List<Article> listByClickCount(Map<String, Object> map);
 }

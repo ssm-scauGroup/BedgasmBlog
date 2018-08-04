@@ -41,7 +41,7 @@ public class StarController {
 	@ResponseBody
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String listStar(@RequestParam(value="subscriber",required=false) String subscriber,
-			@RequestParam(value="subscribee",required=false) String subscribee) {
+			@RequestParam(value="subscribee",required=false) String subscribee,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		

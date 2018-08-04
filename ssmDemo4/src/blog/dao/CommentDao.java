@@ -9,51 +9,51 @@ import blog.entity.Comment;
 
 /**
  * @author Administrator
- * 璇勮Dao绫�
+ * 评论Dao类
  */
 @Repository("commentDao")
 public interface CommentDao {
 	/**
-	 * 澧炲姞璇勮
+	 * 增加评论
 	 * @param comment
 	 * @return
 	 */
 	public Integer addComment(Comment comment);
 	/**
-	 * 鍒犻櫎璇勮
+	 * 删除评论
 	 * @param id
 	 * @return
 	 */
 	public Integer deleteComment(Integer id);
 	/**
-	 * 閫氳繃id鑾峰彇璇勮
+	 * 通过id获取评论
 	 * @param id
 	 * @return
 	 */
 	public Comment findById(Integer id);
 	/**
-	 * 鏇存柊璇勮
+	 * 更新评论
 	 * @param comment
 	 * @return
 	 */
 	public Integer updateComment(Comment comment);
 	
 	/**
-	 * 鏍规嵁鏉′欢鏌ヨ璇勮
+	 * 根据条件查询评论
 	 * @param articleid
 	 * @return
 	 */
 	public List<Comment> listComment(Map<String, Object> map);
 	
 	/**
-	 * 鑾峰彇鏌愮瘒鏂囩珷鐨勮瘎璁烘�绘暟
+	 * 获取某篇文章的评论总数
 	 * @param articleid
 	 * @return
 	 */
 	public Long getTotalByArticleId(Integer articleid);
 	
 	/**
-	 * 鑾峰彇鏌愮敤鎴疯瘎璁虹殑鎬绘暟
+	 * 获取某用户评论的总数
 	 * @param userid
 	 * @return
 	 */

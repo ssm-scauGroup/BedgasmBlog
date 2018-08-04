@@ -24,23 +24,6 @@ public class Media {
 	 */
 	private String releaseDate;
 	
-	public Media(){
-		
-	}
-		
-	public Media(String imagepath, Integer userid) {
-		super();
-		this.imagepath = imagepath;
-		this.userid = userid;
-	}
-
-	public Media(Integer id, String imagepath, Integer userid, String releaseDate) {
-		super();
-		this.id = id;
-		this.imagepath = imagepath;
-		this.userid = userid;
-		this.releaseDate = releaseDate;
-	}
 	public Integer getId() {
 		return id;
 	}

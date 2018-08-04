@@ -83,6 +83,13 @@ public class MediaController {
 		
 	}
 	
+	/**
+	 * 上传媒体
+	 * @param singleFile
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/upload",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String uploadMedia(SingleFile singleFile,HttpServletRequest request,HttpSession session) {
@@ -105,6 +112,14 @@ public class MediaController {
 		
 		//父文件夹 这里存放文件
 		String parentPath = "bedgasmBlogContents";
+		
+		System.out.println(request.getServletPath());
+		
+		System.out.println(request.getServerName());
+		
+		System.out.println(request.getServerPort());
+		
+		System.out.println(request.getRequestURI());
 		
 		String realpath = request.getServletContext().getRealPath(parentPath);
 		String fileName = singleFile.getSingleFile().getOriginalFilename();
