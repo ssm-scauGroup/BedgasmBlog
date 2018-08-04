@@ -21,6 +21,7 @@ import blog.entity.*;
 import blog.service.ArticleService;
 import blog.service.BlogTypeService;
 import blog.service.CommentService;
+import blog.util.FormatDate;
 import blog.util.PageBean;
 import blog.util.UserisLogin;
 
@@ -48,7 +49,7 @@ public class ArticleController {
 	@ResponseBody
 	@RequestMapping(value = "/list", produces = "application/json;charset=UTF-8")
 	public String listByPage(@RequestParam(value = "page", required = false) String page,
-			@RequestParam(value = "rows", required = false) String rows) {
+			@RequestParam(value = "rows", required = false) String rows,HttpSession session) {
 
 		if (page == null) {
 			page = "1";
@@ -56,6 +57,8 @@ public class ArticleController {
 		if (rows == null) {
 			rows = "5";
 		}
+		
+		System.out.println("sessionid is "+session.getId());
 
 		PageBean<Article> pageBean = new PageBean<Article>(Integer.parseInt(page), Integer.parseInt(rows));
 
@@ -79,6 +82,41 @@ public class ArticleController {
 		return jsonObject.toString();
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/hot", produces = "application/json;charset=UTF-8")
+	public String listBy(@RequestParam(value = "rows", required = false) String rows,HttpSession session) {
+
+		if (rows == null) {
+			rows = "5";
+		}
+		
+		System.out.println("sessionid is "+session.getId());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("rows", Integer.parseInt(rows));
+
+		List<Article> articles = articleService.listByClickCount(map);
+
+		JSONObject jsonObject = new JSONObject();
+
+		JSONArray array = JSON.parseArray(
+				JSONObject.toJSONString(articles, SerializerFeature.DisableCircularReferenceDetect));
+
+		Integer total = articles.size();
+		
+		jsonObject.put("success", true);
+
+		jsonObject.put("total", total);
+
+		jsonObject.put("posts", array);
+
+		System.out.println(jsonObject.toString());
+
+		return jsonObject.toString();
+
+	}
 
 	/**
 	 * 根据标题或者标签搜索
@@ -89,7 +127,7 @@ public class ArticleController {
 	@ResponseBody
 	@RequestMapping(value = "/search", produces = "application/json;charset=UTF-8")
 	public String SearchByTitle(@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "tags", required = false) String tags) {
+			@RequestParam(value = "tags", required = false) String tags,HttpSession session) {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -182,6 +220,7 @@ public class ArticleController {
 					oldBlogType.setTypecount(oldBlogType.getTypecount() - 1);
 					blogTypeService.updateBlogType(newBlogType);
 					blogTypeService.updateBlogType(oldBlogType);
+					article.setReleaseDate(FormatDate.formatDate());
 					resultTotal = articleService.updateArticle(article);
 				} catch (Exception e) {
 					result.put("success", false);
@@ -252,11 +291,17 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/detail", produces = "application/json;charset=UTF-8")
-	public String detialArticle(@RequestParam("id") String id) {
+	public String detialArticle(@RequestParam("id") String id,HttpSession session) {
+		
+		JSONObject jsonObject = new JSONObject();
 
 		Article article = articleService.findById(Integer.parseInt(id));
 
-		JSONObject jsonObject = new JSONObject();
+		if (article==null) {
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "文章id不存在");
+			return jsonObject.toString();
+		}
 		
 		jsonObject.put("success", true);
 
@@ -267,6 +312,41 @@ public class ArticleController {
 		return jsonObject.toString();
 
 	}
+	
+	/**
+	 * when article is been viewed , increase clickcount
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/increaseclick", produces = "application/json;charset=UTF-8")
+	public String increaseCount(@RequestParam("id") String id,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		Article article = articleService.findById(Integer.parseInt(id));
+		
+		if (article==null) {
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "文章id不存在");
+			return jsonObject.toString();
+		}
+		
+		article.setClickCount(article.getClickCount()+1);
+		
+		try {
+			articleService.updateArticle(article);
+		} catch (Exception e) {
+			// TODO: handle exception
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "更新失败");
+		}
+		
+		jsonObject.put("success", true);
+		jsonObject.put("msg","阅读数增加成功");
+		
+		return jsonObject.toString();
+	}
 
 	/**
 	 * 列出某位作者的所有文章
@@ -276,7 +356,7 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/author", produces = "application/json;charset=UTF-8")
-	public String listByAuthor(@RequestParam("id") String id) {
+	public String listByAuthor(@RequestParam("id") String id,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("author", id);
 
@@ -306,7 +386,7 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/category", produces = "application/json;charset=UTF-8")
-	public String listByCategory(@RequestParam("id") String id) {
+	public String listByCategory(@RequestParam("id") String id,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 
 		Map<String, Object> map = new HashMap<String, Object>();

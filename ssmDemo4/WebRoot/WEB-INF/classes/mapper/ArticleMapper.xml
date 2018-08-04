@@ -117,4 +117,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	SELECT * from t_article where author=#{author}
     </select>
     
+    <select id="listByClickCount" parameterType="Map" resultMap="ArticleResult">
+        SELECT * FROM t_article ORDER BY clickcount DESC
+        <if test="rows!=null">
+            limit #{rows}
+        </if>
+    </select>
+    
 </mapper> 

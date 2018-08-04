@@ -48,7 +48,7 @@ public class CommentController {
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String listCommentByArticleId(@RequestParam(value="articleid",required=false) 
 						String articleid,@RequestParam(value="userid",required=false) 
-						String userid) {
+						String userid,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -148,7 +148,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/detail",produces="application/json;charset=UTF-8")
-	public String detialComment(@RequestParam("id") String id){
+	public String detialComment(@RequestParam("id") String id,HttpSession session){
 		
 		Comment comment = commentService.findById(Integer.parseInt(id));
 		

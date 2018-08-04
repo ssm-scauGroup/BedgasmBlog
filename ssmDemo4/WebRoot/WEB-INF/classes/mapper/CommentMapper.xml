@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <id property="id" column="id"/>
         <result property="content" column="content"/>
         <result property="commentDate" column="commentDate"/>
-        <result property="userid" column="userid"/>
         <result property="articleid" column="articleid"/>
         <result property="username" column="username"/>
+        <association property="user" column="userid" select="blog.dao.UserDao.findSimpleUser"></association>
     </resultMap>
     
     <insert id="addComment" parameterType="Comment">
@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where id=#{id}
     </update>
+    
     <select id="listComment" parameterType="Map" resultMap="CommentResult">
         SELECT * FROM t_comment
 		<where>

@@ -54,7 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findById" resultMap="UserResult">
     	SELECT * from t_user where id=#{id}
     </select>
-   
+    
+    <select id="findSimpleUser" resultMap="UserResult">
+    	SELECT id,user_login,signature,user_profile from t_user where id=#{id}
+    </select>
+    
     <select id="listUser" parameterType="Map" resultMap="UserResult">
         SELECT * FROM t_user
         <where>
