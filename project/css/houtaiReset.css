@@ -429,6 +429,11 @@ textarea::-webkit-scrollbar-thumb {
      height:100px;
 }
 }
+@media(max-width: 768px){
+	.footer-bottom{
+		display: none;
+	}
+}
 
 .operation {
 	display: inline-block;
@@ -448,8 +453,7 @@ textarea::-webkit-scrollbar-thumb {
 .operation {
 	display: none;
 }
-.pagenav {
-}
+
 }
 .form-seting {
 	width: auto;
@@ -680,4 +684,26 @@ input,select,textarea {
 }
 .form-group label{
 	font-weight: 500;
+}
+
+.jumppage{
+	padding: 0px 10px;
+	font-size: 14px;
+}
+.jumppage input{
+	padding: 6px 10px;
+	margin-right: 10px;
+	text-align: center;
+	font-size: 14px;
+	background-color: white;
+}
+.pagearea{
+	width: 80px;
+}
+
+#totalpage{
+	font-size: 14px;
+	padding-top: 10px;
+	text-align: right;
+	margin-right: 12px; 
 }
