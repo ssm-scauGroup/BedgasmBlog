@@ -1,4 +1,5 @@
  window.onload =function(){
+    testfunction();
     loadDetailAjax();
     increaseclick();
     loadHotAjax();
@@ -6,6 +7,7 @@
     loadHeadAjax();
  }
 
+var isLogin=false;
 var articleId;
 var regex = /.*?id=([0-9]*)/ig;
     var detailUrl = window.location.href;
@@ -13,11 +15,39 @@ var regex = /.*?id=([0-9]*)/ig;
 var username=sessionStorage.getItem("username");
 var myid=sessionStorage.getItem("id");
 var myhead=sessionStorage.getItem("profile");
+
+function testfunction() {
+        var settings = {
+            url: "http://www.bedgasmblog.cn/user/userinfo",
+              crossDomain:"true",
+              async:false,
+        xhrFields:{
+            withCredentials:"true"
+        },
+            type: "POST",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                //用户没登录
+                if(data.success==false){
+                    console.log(isLogin);
+                }
+                else{
+                    isLogin=true;
+                    console.log(isLogin);
+                }
+                // console.log("userinfo:"+data.success);
+                
+            }
+        };
+        $.ajax(settings);
+}
 function loadHeadAjax(){
     $("#myhead").css("background",`url(${myhead}) no-repeat`);
     $("#myhead").css("background-position",`center center`);
     $("#myhead").css("background-size",`100%`);
 }
+
 
 function loadDetailAjax() {
     //正则表达式匹配id
@@ -58,7 +88,7 @@ function loadDetailAjax() {
                             <h2>${title}</h2>
                             <div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span<i class="fa fa-comment-o"></i>${replyCount}</span>
                             </div>
-                            <div style="text-align: left">${content}</div>
+                            <div style="text-align: left" class="wenzhang">${content}</div>
                         </div>
                     </article>`;
                 console.log(res);
@@ -70,7 +100,7 @@ function loadDetailAjax() {
             }
         })
     } else {
-        alert("没有id");
+        swal("没有id");
     }
     loadCateAjax();
 }
@@ -303,36 +333,39 @@ function loadCommentAjax(){
     }
 }
 
-function addComment(){
-
-     var mycomment=$("#mycomment").val();
-        if(mycomment.length<140){
+function addComment() {
+    if (isLogin) {
+        var mycomment = $("#mycomment").val();
+        if (mycomment.length < 140) {
             var settings = {
-        url: "http://www.bedgasmblog.cn/comment/save",
-          crossDomain:"true",
-        xhrFields:{
-            withCredentials:"true"
-        },
-        type: "POST",
-        data: {
-            'content': mycomment,
-            'userid': myid,
-            'articleid': articleId
-        },
-        dataType: "json",
-        success: function(res) {
-            console.log(res);
-            console.log("add success");
-           window.location.reload(); 
-        },
+                url: "http://www.bedgasmblog.cn/comment/save",
+                crossDomain: "true",
+                xhrFields: {
+                    withCredentials: "true"
+                },
+                type: "POST",
+                data: {
+                    'content': mycomment,
+                    'userid': myid,
+                    'articleid': articleId
+                },
+                dataType: "json",
+                success: function(res) {
+                    console.log(res);
+                    console.log("add success");
+                    window.location.reload();
+                },
 
-        error: function(res) {
-            console.log("add error");
-        }
-    };
-    $.ajax(settings);
+                error: function(res) {
+                    console.log("add error");
+                }
+            };
+            $.ajax(settings);
+        } else
+            swal("评论过长！最多140字！")
+    } else {
+        swal('登录之后才能评论喔~');
+        // confirm("登录之后才能评论喔");
     }
-    else
-        alert("评论过长！最多140字！")
-      
+
 }

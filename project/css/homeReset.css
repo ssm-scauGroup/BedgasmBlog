@@ -48,6 +48,7 @@ a, a:hover, a:focus {
 img{
     border:none;
     display: block;
+    max-width: 96%;
 }   
 
 
@@ -517,4 +518,23 @@ footer .footer-bottom {
 }
 .js-load-more:hover{
     background-color: #222;
+}
+
+.wenzhang ul>li{
+    list-style: disc;
+}
+
+.wenzhang ol>li{
+    list-style: decimal;
+}
+
+.contactme{
+    margin-top: 60px;
+}
+#conme{
+    margin-bottom:100px;
+}
+#coninfo{
+    line-height: 160%;
+    font-size: 22px;
 }

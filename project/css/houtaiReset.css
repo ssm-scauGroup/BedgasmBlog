@@ -265,14 +265,14 @@ textarea::-webkit-scrollbar-thumb {
 	width: 110px;
 	height: 110px;
 	border-radius: 50%;
-	background:  url("../images/pakho.jpg") no-repeat;
+	/*background:  url("../images/pakho.jpg") no-repeat;*/
 	background-position: center center;
     background-size: 100%;
     margin:10px auto;
     transition: transform 0.3s ease-in-out;
 }
 .nav-sidebar .myhead:hover{
-	background:  url("../images/pakho.jpg") no-repeat;
+	/*background:  url("../images/pakho.jpg") no-repeat;*/
 	background-position: center center;
     background-size: 100%;
 	transform: scale(1.2);
@@ -536,9 +536,10 @@ input,select,textarea {
     -o-border-radius:5px;
     -webkit-border-radius:5px;
 }
-/*.article-title{
-	width: 400px;
-}*/
+.article-title{
+	padding: 5px;
+	width: 200px;
+}
 /*summernote富文本编辑器样式*/
 .note-editor.note-frame {
     border:none !important;
@@ -706,4 +707,27 @@ input,select,textarea {
 	padding-top: 10px;
 	text-align: right;
 	margin-right: 12px; 
+}
+
+#prompt-box p>a{
+	cursor: pointer;
+}
+
+#category-list{
+    width: 98%;
+    height: 34px;
+}
+#category-list input{
+    width: 100%;
+    height: 34px;
+}
+.adduser{
+	border-bottom: solid 1px #ddd;
+	margin-bottom: 10px;
+}
+.inputtext{
+	width: 95%;
+	font-size: 16px;
+	padding: 5px;
+	margin: 5px;
 }

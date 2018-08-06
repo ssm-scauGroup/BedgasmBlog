@@ -1,13 +1,18 @@
-window.onload=function(){
+window.onload=function(){ 
+	loadImage();
 	getCateSelection();
-	var myDate = new Date();//获取系统当前时间
+ 
 
-	console.log(myDate.toLocaleString());
-	$("#nowtime").val(myDate.toLocaleString());
 };
+
+// var articleId;
+// var regex = /.*?id=([0-9]*)/ig;
+//     var detailUrl = window.location.href;
+//     articleId = regex.exec(detailUrl)[1];
 
 var username=sessionStorage.getItem("username");
 var author=sessionStorage.getItem("id");
+
 function getCateSelection(){
 	var settings = {
 		url: "http://www.bedgasmblog.cn/category/search",
@@ -47,6 +52,8 @@ function getCateSelection(){
 	};
 	$.ajax(settings);
 }
+
+
 function writeAjax(){
 	 
 	
@@ -55,6 +62,7 @@ function writeAjax(){
 	 var tags=$("#tags").val();
 	 console.log(tags);
 	 var content=testEditor.getHTML();
+   var mdcontent=testEditor.getMarkdown();
 	 var summary = testEditor.getMarkdown().substr(0,30); 
 	 var blogtypeid=$("#category-list").val();
 	 if (title == null || title == '') {
@@ -78,13 +86,16 @@ function writeAjax(){
             "content": content,
             "tags": tags,
             "blogtypeid": blogtypeid,
-            "author": author
+            "author": author,
+            "username":username,
+             "mdcontent": mdcontent
         },
         // dataType:"json",
        	 success: function (res) {
               console.log(res);
+              swal({text:'发布成功！请返回文章管理查看！',timer:3000});
               console.log("write success");
-                   location.href="articleManager.html";
+             
                  },
            error: function (res) {
                     console.log("write error");
@@ -94,3 +105,91 @@ function writeAjax(){
                 }
 	 
 }
+
+var imgurl;
+ function loadImage() {
+
+   var form = document.forms.namedItem("fileinfo");
+   form.addEventListener('submit', function(ev) {
+
+     var oOutput = document.querySelector("div"),
+       oData = new FormData(form);
+     var id = sessionStorage.getItem("id");
+     oData.append("userid", id);
+
+     $.ajax({
+       url: "http://www.bedgasmblog.cn/media/upload",
+       type: "POST",
+       data: oData,
+       "crossDomain": true,
+       "xhrFields": {
+         "withCredentials": true
+       },
+       processData: false, // 不处理数据
+       contentType: false, // 不设置内容类型
+       error: function() {
+         console.log("upload error");
+       },
+       success: function(data) {
+         console.log(data);
+
+         var parentPath = data.parentPath;
+         var filePath = data.filePath;
+         console.log(parentPath);
+         imgurl = "http://www.bedgasmblog.cn/" + parentPath + "/" + filePath;
+         var outimgurl = "![](http://www.bedgasmblog.cn/" + parentPath + "/" + filePath + ")";
+         console.log(imgurl);
+         testEditor.cm.replaceSelection(outimgurl);
+
+       }
+     });
+
+     ev.preventDefault();
+   }, false);
+
+ }
+
+
+ // testEditor.cm.replaceSelection("fasdfasdf");
+ // function loadOldArticle() {
+
+ //   console.log("articleId: " + articleId);
+ //   var settings = {
+ //     url: "http://www.bedgasmblog.cn/article/detail",
+ //     crossDomain: "true",
+ //     xhrFields: {
+ //       withCredentials: "true"
+ //     },
+ //     type: "POST",
+ //     data: {
+ //       'id': articleId
+ //     },
+ //     dataType: "json",
+ //     success: function(res) {
+ //       var title, blogtypeid, content, tags;
+ //       console.log("loadarticlesuccess");
+
+ //       // if(res.total==0){
+ //       //  $(".js-load-more").hide();
+ //       //  articleDiv.innerHTML = "抱歉，搜索不到您要的内容";
+
+ //       // }
+ //       title = res['post']['title'];
+ //       blogtypeid = res['post']['blogtypeid'];
+ //       content = res['post']['content'];
+ //       tags = res['post']['tags'];
+ //       $("#title").val(title);
+ //       $("#category-list").val(blogtypeid);
+ //       testEditor.cm.replaceSelection(content);
+ //       $("#tags").val(tags);
+
+ //     },
+
+ //     error: function(res) {
+ //       console.log("loadartilce error");
+ //     }
+
+ //   };
+ //   $.ajax(settings);
+
+ // }

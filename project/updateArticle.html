@@ -5,11 +5,10 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>写文章2</title>
+<title>修改文章</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
   <link rel="stylesheet" type="text/css" href="css/personhome.css">
-    <script src="js/sweetalert2.all.min.js"></script>
 
     <link rel="stylesheet" href="editor.md-master/css/editormd.css" />
 <style type="text/css">
@@ -62,11 +61,15 @@
 
         <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
           <!-- <p><a href="personHome.html">个人中心</p> -->
-          <p><a onclick="gohome()">我的首页</a></p>
-              <p><a onclick="gomanager()">管理站点</a></p>
-                <p><a href="#">帮助</a></p> 
-                <p><a onclick="pHlogout()">退出登录</a></p>
-          </div>        
+            <p>
+        <a onclick="gohome()">我的首页</a>
+      </p>
+      <p>
+        <a onclick="gomanager()">管理站点</a>
+      </p>
+            <p><a href="#">帮助</a></p> 
+            <p><a onclick="pHlogout()">退出登录</a></p>
+          </div>      
         </nav>
     </header>
   <div class="row">
@@ -114,7 +117,7 @@
         <div class="add-article-form">
           <div class="col-md-9">
           <!--   <button class="btn btn-default" id="change-editor" onclick="javascrtpt:window.location.href='write-article.html'">切换到富文本编辑器</button> -->
-            <h1 class="page-header">撰写新文章</h1>
+            <h1 class="page-header">修改文章</h1>
             <div class="form-group">
               <label for="article-title" class="sr-only">标题</label>
               <input type="text"  name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off" id="title">
@@ -152,7 +155,7 @@
               <h2 class="add-article-box-title"><span>图片上传</span></h2>
               <div class="add-article-box-content">
                 <form enctype="multipart/form-data" method="post" name="fileinfo">
-                   <input  id="selectImg" type="file" name="singleFile" required  accept="image/x-png,image/gif,image/jpeg,image/bmp"/>
+                  <input  id="selectImg" type="file" name="singleFile" required  accept="image/x-png,image/gif,image/jpeg,image/bmp" />
                   <!-- <input type="submit" value="Stash the file!" /> -->
                   <div class="add-article-box-footer">
                        <button id="loadImg" class="btn btn-primary" type="submit" name="submit" ">上传</button>
@@ -180,7 +183,7 @@
                 <input type="text" class="form-control" placeholder="输入新标签" name="tags" autocomplete="off" id="tags">
                 <span class="prompt-text">多个标签请用英文逗号,隔开</span> </div>
                 <div class="add-article-box-footer">
-                <button class="btn btn-primary" type="button" name="submit" onclick="writeAjax()">发布</button>
+                <button class="btn btn-primary" type="button" name="submit" onclick="updatearticle()">确认修改并发布</button>
               </div>
             </div>
         
@@ -212,7 +215,8 @@
 <script src="lib/ueditor/ueditor.all.min.js"> </script> 
 <script src="lib/ueditor/lang/zh-cn/zh-cn.js"></script>  
 <script type="text/javascript" src="js/prompt.js"></script>
-<script type="text/javascript" src="js/write.js"></script>
+<script type="text/javascript" src="js/updateArticle.js"></script>
+
     <script src="js/sweetalert2.all.min.js"></script>
 <!-- <script id="uploadEditor" type="text/plain" style="display:none;"></script> -->
 <script src="editor.md-master/editormd.min.js"></script>

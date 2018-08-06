@@ -91,10 +91,14 @@
 							<div class="error"></div>
 							<div class="form loginBox">
 								<form method="post" accept-charset="UTF-8">
-									<input id="nameoremail" class="form-control" type="text" placeholder="用户名或邮箱" name="nameoremail">
+									<input id="nameoremail" class="form-control" type="text" placeholder="用户名" name="nameoremail">
 									<span class="error error5"></span>
 									<input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
 									<span class="error error6"></span>
+									<div>
+										<input id="validatecode" name="validatecode" class="form-control" type="text" placeholder="请输入右侧验证码" style="display: inline-block;width:50%;"><img id="validatecodeimg" style="display: inline-block;width:50%;" src="http://www.bedgasmblog.cn/user/validatecode" onclick="refreshvalidatecode()"/>
+										<span class="error error7"></span>
+									</div>
 									<input id="loginBtn" class="btn btn-default btn-login" type="button" value="登 录" onclick="loginAjax()">
 									<span class="error" id="loginfail"></span>
 								</form>
@@ -125,8 +129,11 @@
 				</div>
 				<div class="modal-footer">
 					<div class="forgot login-footer">
-						<span>还没账号？
-							<a href="javascript: showRegisterForm();">去注册</a>
+						<span>还没账号?
+							<a href="javascript: showRegisterForm();">去注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</span>
+						<span>
+							<a href="forgetpassword.html">(忘记密码?)</a>
 						</span>
 					</div>
 					<div class="forgot register-footer" style="display:none">
@@ -273,6 +280,7 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.bxslider.js"></script>
 		<script src="js/mooz.scripts.min.js"></script>
+		<script src="js/sweetalert2.all.min.js"></script>
 		<script src="js/nav.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>

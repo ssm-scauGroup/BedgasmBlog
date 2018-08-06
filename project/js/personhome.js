@@ -2,22 +2,14 @@ $(function () {
     backtotop();
    loadPerArticleAjax();
     loadUserinfoAjax();     
-    // (function loadpage() {
-    //     console.log("load ph");
-    //     console.log(sessionStorage.getItem("signature"));
-    //     if (sessionStorage.getItem("nickname") != null) {
-    //         $("#pH_nickname").text(sessionStorage.getItem("nickname"));
-    //         if (sessionStorage.getItem("signature")=="undefined")
-    //         {
-    //             $("#pH_signature").text("这个博主很懒，什么都没留下");
-    //         }
-    //         else{
-    //         $("#pH_signature").text(sessionStorage.getItem("signature"));
-    //         }
-    //     }
-
-    // })();
-
+    isFollowed();
+    if(sessionStorage.id==userid){
+        $("#star").css("display","none");
+    }
+    else if (sessionStorage.id!=userid){
+        $("#star").css("display","block");
+        
+    }
     
 });
 
@@ -174,6 +166,120 @@ function loadUserinfoAjax(){
             // }
         },
 
+        error: function(res) {
+            console.log("error");
+        }
+    };
+    $.ajax(settings);
+}
+
+// var followed=false;
+function isFollowed(){
+    var settings = {
+        url: "http://www.bedgasmblog.cn/star/list",
+          crossDomain:"true",
+        xhrFields:{
+            withCredentials:"true"
+        },
+        async:false,
+        type: "POST",
+        data: {
+            "subscriber": sessionStorage.id
+        }, 
+        dataType: "json",
+        success: function(res) {
+            for (var key in res['data']) {
+                if(userid == res['data'][key]['subscribee']){
+                    // followed = true;
+                    console.log("followed");
+                    $("#star").html("<span class='glyphicon glyphicon-star-empty' id='plus'></span>&nbsp已订阅");
+                    $("#star").removeClass("btn-warning");
+                    $("#star").addClass("btn-default");
+                    break;
+                }
+                // else{
+                //     console.log("notfollow");
+                // }
+            }
+
+            
+        },
+        error: function(res) {
+            console.log("error");
+        }
+    };
+    $.ajax(settings);
+}
+
+function followorquit () {
+    if($("#star").hasClass("btn-warning")){
+        follow();
+    }
+    else if ($("#star").hasClass("btn-default")){
+        quit();
+    }
+}
+
+function follow() {
+    var settings = {
+        url: "http://www.bedgasmblog.cn/star/subscribe",
+        crossDomain: "true",
+        xhrFields: {
+            withCredentials: "true"
+        },
+        async: false,
+        type: "POST",
+        data: {
+            "subscriber": sessionStorage.id,
+            "subscribee":userid
+        },
+        dataType: "json",
+        success: function(res) {
+            if (res.success) {
+                swal({text:'订阅成功',timer:2000,showConfirmButton:false});
+                $("#star").html("<span class='glyphicon glyphicon-star-empty' id='plus'></span>&nbsp已订阅");
+                $("#star").removeClass("btn-warning");
+                $("#star").addClass("btn-default");
+            }
+            else {
+                swal('订阅失败');
+            }
+
+        },
+        error: function(res) {
+            console.log("error");
+        }
+    };
+    $.ajax(settings);
+}
+
+function quit () {
+    // body... 
+    var settings = {
+        url: "http://www.bedgasmblog.cn/star/unsubscribe",
+        crossDomain: "true",
+        xhrFields: {
+            withCredentials: "true"
+        },
+        async: false,
+        type: "POST",
+        data: {
+            "subscriber": sessionStorage.id,
+            "subscribee":userid
+        },
+        dataType: "json",
+        success: function(res) {
+            if (res.success) {
+                swal({text:'取消订阅成功',timer:2000,showConfirmButton:false});
+                $("#star").html("<span class='glyphicon glyphicon-plus' id='plus'></span>&nbsp订阅");
+                $("#star").removeClass("btn-default");
+                $("#star").addClass("btn-warning");
+            }
+            else {
+                swal('订阅失败');
+            }
+
+        },
         error: function(res) {
             console.log("error");
         }
