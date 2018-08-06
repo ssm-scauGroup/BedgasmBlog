@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService {
 		return udo.fingByUserLogin(username);
 	}
 
+	@Override
+	public User findSimpleUser(Integer id) {
+		// TODO Auto-generated method stub
+		return udo.findSimpleUser(id);
+	}
+
 }

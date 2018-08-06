@@ -41,7 +41,7 @@ public class StarController {
 	@ResponseBody
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String listStar(@RequestParam(value="subscriber",required=false) String subscriber,
-			@RequestParam(value="subscribee",required=false) String subscribee) {
+			@RequestParam(value="subscribee",required=false) String subscribee,HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -97,7 +97,7 @@ public class StarController {
 			return result.toString();
 		}
 		
-		if(user.getId()!=star.getSubscriber()){
+		if(!user.getId().equals(star.getSubscriber())){
 			result.put("success",false);
 			result.put("msg", "登录用户id与传值进来的用户id不符合");
 			return result.toString();
@@ -149,7 +149,7 @@ public class StarController {
 			return result.toString();
 		}
 		
-		if(user.getId()!=star.getSubscriber()){
+		if(!user.getId().equals(star.getSubscriber())){
 			result.put("success",false);
 			result.put("msg", "登录用户id与传值进来的用户id不符合");
 			return result.toString();

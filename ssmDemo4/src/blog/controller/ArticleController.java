@@ -21,6 +21,7 @@ import blog.entity.*;
 import blog.service.ArticleService;
 import blog.service.BlogTypeService;
 import blog.service.CommentService;
+import blog.util.FormatDate;
 import blog.util.PageBean;
 import blog.util.UserisLogin;
 
@@ -48,7 +49,7 @@ public class ArticleController {
 	@ResponseBody
 	@RequestMapping(value = "/list", produces = "application/json;charset=UTF-8")
 	public String listByPage(@RequestParam(value = "page", required = false) String page,
-			@RequestParam(value = "rows", required = false) String rows) {
+			@RequestParam(value = "rows", required = false) String rows,HttpSession session) {
 
 		if (page == null) {
 			page = "1";
@@ -56,6 +57,8 @@ public class ArticleController {
 		if (rows == null) {
 			rows = "5";
 		}
+		
+		System.out.println("sessionid is "+session.getId());
 
 		PageBean<Article> pageBean = new PageBean<Article>(Integer.parseInt(page), Integer.parseInt(rows));
 
@@ -79,6 +82,41 @@ public class ArticleController {
 		return jsonObject.toString();
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/hot", produces = "application/json;charset=UTF-8")
+	public String listBy(@RequestParam(value = "rows", required = false) String rows,HttpSession session) {
+
+		if (rows == null) {
+			rows = "5";
+		}
+		
+		System.out.println("sessionid is "+session.getId());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("rows", Integer.parseInt(rows));
+
+		List<Article> articles = articleService.listByClickCount(map);
+
+		JSONObject jsonObject = new JSONObject();
+
+		JSONArray array = JSON.parseArray(
+				JSONObject.toJSONString(articles, SerializerFeature.DisableCircularReferenceDetect));
+
+		Integer total = articles.size();
+		
+		jsonObject.put("success", true);
+
+		jsonObject.put("total", total);
+
+		jsonObject.put("posts", array);
+
+		System.out.println(jsonObject.toString());
+
+		return jsonObject.toString();
+
+	}
 
 	/**
 	 * 根据标题或者标签搜索
@@ -89,7 +127,7 @@ public class ArticleController {
 	@ResponseBody
 	@RequestMapping(value = "/search", produces = "application/json;charset=UTF-8")
 	public String SearchByTitle(@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "tags", required = false) String tags) {
+			@RequestParam(value = "tags", required = false) String tags,HttpSession session) {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -135,6 +173,7 @@ public class ArticleController {
 	public String saveArticle(Article article,HttpSession session) {
 		
 		JSONObject result = new JSONObject();
+		
 		int resultTotal = 0;
 		
 		User user = UserisLogin.getUser(session);
@@ -156,15 +195,15 @@ public class ArticleController {
 				return result.toString();
 			}
 			
-			if(oldArticle.getAuthor()!=user.getId() || user.getId()!=article.getAuthor()){
+			if(!oldArticle.getAuthor().equals(user.getId()) || !user.getId().equals(article.getAuthor())){
 				result.put("success", false);
 				result.put("msg", "文章不是自己的，或者将自己的文章作者id改为别人的id");
 				return result.toString();
 			}
 			
-			//如果传入为空或者传入的和原来的一样
+			//如果 blogtypeid 传入为空或者传入的和原来的一样
 			
-			if (article.getBlogtypeid() == null || oldArticle.getBlogtypeid()==article.getBlogtypeid()) {
+			if (article.getBlogtypeid() == null || oldArticle.getBlogtypeid().equals(article.getBlogtypeid())) {
 				
 				resultTotal = articleService.updateArticle(article);
 			
@@ -181,6 +220,7 @@ public class ArticleController {
 					oldBlogType.setTypecount(oldBlogType.getTypecount() - 1);
 					blogTypeService.updateBlogType(newBlogType);
 					blogTypeService.updateBlogType(oldBlogType);
+					article.setReleaseDate(FormatDate.formatDate());
 					resultTotal = articleService.updateArticle(article);
 				} catch (Exception e) {
 					result.put("success", false);
@@ -193,11 +233,18 @@ public class ArticleController {
 			
 			// 新增文章
 			
-			if (user.getId()!=article.getAuthor()) {
+//			System.out.println("userid is");
+//			System.out.println(user.getId());
+//			System.out.println("author is ");
+//			System.out.println(article.getAuthor());
+//			System.out.println(user.getId()==article.getAuthor());
+			
+			if (!user.getId().equals(article.getAuthor())) {
 				result.put("success", false);
 				result.put("msg", "不能以别人的名义发表文章");
 				return result.toString();
 			}
+			
 			BlogType blogType = blogTypeService.findById(article.getBlogtypeid());
 			
 			if(blogType==null){
@@ -206,7 +253,14 @@ public class ArticleController {
 				return result.toString();
 			}
 			
-			resultTotal = articleService.addArticle(article);
+			try {
+				resultTotal = articleService.addArticle(article);
+			} catch (Exception e) {
+				// TODO: handle exception
+				result.put("success", false);
+				result.put("msg", "保存过程中出现错误");
+				return result.toString();
+			}	
 			
 			// 更新类别文章数目
 			blogType.setTypecount(blogType.getTypecount() + 1);
@@ -237,11 +291,17 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/detail", produces = "application/json;charset=UTF-8")
-	public String detialArticle(@RequestParam("id") String id) {
+	public String detialArticle(@RequestParam("id") String id,HttpSession session) {
+		
+		JSONObject jsonObject = new JSONObject();
 
 		Article article = articleService.findById(Integer.parseInt(id));
 
-		JSONObject jsonObject = new JSONObject();
+		if (article==null) {
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "文章id不存在");
+			return jsonObject.toString();
+		}
 		
 		jsonObject.put("success", true);
 
@@ -252,6 +312,41 @@ public class ArticleController {
 		return jsonObject.toString();
 
 	}
+	
+	/**
+	 * when article is been viewed , increase clickcount
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/increaseclick", produces = "application/json;charset=UTF-8")
+	public String increaseCount(@RequestParam("id") String id,HttpSession session){
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		Article article = articleService.findById(Integer.parseInt(id));
+		
+		if (article==null) {
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "文章id不存在");
+			return jsonObject.toString();
+		}
+		
+		article.setClickCount(article.getClickCount()+1);
+		
+		try {
+			articleService.updateArticle(article);
+		} catch (Exception e) {
+			// TODO: handle exception
+			jsonObject.put("success", false);
+			jsonObject.put("msg", "更新失败");
+		}
+		
+		jsonObject.put("success", true);
+		jsonObject.put("msg","阅读数增加成功");
+		
+		return jsonObject.toString();
+	}
 
 	/**
 	 * 列出某位作者的所有文章
@@ -261,7 +356,7 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/author", produces = "application/json;charset=UTF-8")
-	public String listByAuthor(@RequestParam("id") String id) {
+	public String listByAuthor(@RequestParam("id") String id,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("author", id);
 
@@ -291,7 +386,7 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/category", produces = "application/json;charset=UTF-8")
-	public String listByCategory(@RequestParam("id") String id) {
+	public String listByCategory(@RequestParam("id") String id,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -344,7 +439,7 @@ public class ArticleController {
 				jsonObject.put("msg","文章不存在");
 				return jsonObject.toString();
 			}
-			if(article.getAuthor()!=user.getId() && user.getRole()==1){
+			if(!article.getAuthor().equals(user.getId()) && user.getRole()==1){
 				//既不是作者也不是管理员
 				jsonObject.put("success", false);
 				jsonObject.put("msg","您没有权限删除此文章");

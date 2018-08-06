@@ -52,7 +52,7 @@ public class MediaController {
 			return jsonObject.toString();
 		}
 		
-		if(user.getId()!=Integer.parseInt(userid) && user.getRole()==1){
+		if(!user.getId().equals(Integer.parseInt(userid)) && user.getRole()==1){
 			//既不是本人又不是管理员
 			jsonObject.put("success",false);
 			jsonObject.put("msg", "无权限");
@@ -83,6 +83,13 @@ public class MediaController {
 		
 	}
 	
+	/**
+	 * 上传媒体
+	 * @param singleFile
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/upload",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String uploadMedia(SingleFile singleFile,HttpServletRequest request,HttpSession session) {
@@ -97,7 +104,7 @@ public class MediaController {
 			return jsonObject.toString();
 		}
 		
-		if(user.getId()!=singleFile.getUserid()){
+		if(!user.getId().equals(singleFile.getUserid())){
 			jsonObject.put("success",false);
 			jsonObject.put("msg", "登录用户id与传入进来的文件用户id不符合");
 			return jsonObject.toString();
@@ -105,6 +112,14 @@ public class MediaController {
 		
 		//父文件夹 这里存放文件
 		String parentPath = "bedgasmBlogContents";
+		
+		System.out.println(request.getServletPath());
+		
+		System.out.println(request.getServerName());
+		
+		System.out.println(request.getServerPort());
+		
+		System.out.println(request.getRequestURI());
 		
 		String realpath = request.getServletContext().getRealPath(parentPath);
 		String fileName = singleFile.getSingleFile().getOriginalFilename();
@@ -184,7 +199,7 @@ public class MediaController {
             //TODO 前端页面应该提示如果删除了媒体 资源失效 引用到此媒体的文章里面的资源也失效
             try {
             	Media media = mediaService.findById(mediaId);
-            	if(media.getUserid()!=user.getId() && user.getRole()==1){
+            	if(!media.getUserid().equals(user.getId()) && user.getRole()==1){
             		jsonObject.put("success", false);
             		jsonObject.put("msg", "无权限");
             		return jsonObject.toString();

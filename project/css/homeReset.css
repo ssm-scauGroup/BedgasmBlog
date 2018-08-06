@@ -48,6 +48,7 @@ a, a:hover, a:focus {
 img{
     border:none;
     display: block;
+    max-width: 96%;
 }   
 
 
@@ -77,6 +78,10 @@ nav{
 #navbar{
     margin:0 26px;
 
+
+}
+.navbar{
+       margin-bottom: 0px;
 }
 
 .navbar-nav li{
@@ -92,6 +97,9 @@ nav{
         background-color:#efefef;
     /*background-color: #fff;*/
     padding: 0;
+}
+#wrap-col{
+    margin-top: 30px;
 }
 
 .logo{
@@ -203,8 +211,8 @@ nav{
     font-family: "Open Sans", Sans-serif;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 1.7px;
+    font-size: 14px;
+    letter-spacing: 2px;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
@@ -244,7 +252,7 @@ nav{
     width:222px;
 }
 
-#search form input[type="submit"] {
+#search form input[type="button"] {
     background:url(../images/search_btn.png) no-repeat 0 0;
     border:none;
     cursor:pointer;
@@ -333,12 +341,12 @@ input,select,textarea {
     padding-bottom: 20px;
     width: 100%;
 }
-.widget-post:last-child {
+/*.widget-post:last-child {
     border-bottom: none;
     padding-bottom: 0px;
     margin: 0px;
 }
-
+*/
 get-post .post-body {
     overflow: hidden;
 }
@@ -390,6 +398,7 @@ get-post .post-body {
 }
 .cate li a{
     color: black;
+    cursor:pointer;
    
 }
 
@@ -491,4 +500,41 @@ footer .footer-bottom {
     display: none;
 }*/
 
+}
+
+.js-load-more{
+    padding:0 15px;
+    width:90%;
+    height:30px;
+    background-color:#545454;
+    color:#fff;
+    line-height:30px;
+    text-align:center;
+    border-radius:10px;
+    margin:20px auto;
+    border:0 none;
+    font-size:16px;
+    display:block;
+}
+.js-load-more:hover{
+    background-color: #222;
+}
+
+.wenzhang ul>li{
+    list-style: disc;
+}
+
+.wenzhang ol>li{
+    list-style: decimal;
+}
+
+.contactme{
+    margin-top: 60px;
+}
+#conme{
+    margin-bottom:100px;
+}
+#coninfo{
+    line-height: 160%;
+    font-size: 22px;
 }

@@ -46,6 +46,11 @@ public class Article {
 	 * 作者id
 	 */
 	private Integer author;
+	
+	/**
+	 * 作者名字
+	 */
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -110,11 +115,18 @@ public class Article {
 		this.author = author;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", summary=" + summary + ", releaseDate=" + releaseDate
 				+ ", clickCount=" + clickCount + ", replyCount=" + replyCount + ", content=" + content + ", tags="
-				+ tags + ", blogtypeid=" + blogtypeid + ", author=" + author + "]";
+				+ tags + ", blogtypeid=" + blogtypeid + ", author=" + author + ", username=" + username + "]";
 	}
 	
 }

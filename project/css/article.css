@@ -105,3 +105,11 @@
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
+
+.comment-content span{
+	   font-weight: 400;
+    font-size: 11px;
+    color: #B1B1B1;
+    font-family: "Lora";
+    font-style: italic;
+}

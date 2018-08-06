@@ -27,9 +27,6 @@ public interface StarDao {
 	
 	//public Integer deleteStar(Star star);
 	
-	
-	//public Integer deleteStar(Star star);
-	
 	/**
 	 * 列出关注的人
 	 * @param subscriber

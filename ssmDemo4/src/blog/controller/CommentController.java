@@ -48,7 +48,7 @@ public class CommentController {
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String listCommentByArticleId(@RequestParam(value="articleid",required=false) 
 						String articleid,@RequestParam(value="userid",required=false) 
-						String userid) {
+						String userid,HttpSession session) {
 		JSONObject jsonObject = new JSONObject();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -119,7 +119,7 @@ public class CommentController {
             	jsonObject.put("msg","没有此评论");
             	return jsonObject.toString();
             }
-            if(comment.getUserid()!=user.getId() && user.getRole()==1){
+            if(!comment.getUserid().equals(user.getId()) && user.getRole()==1){
             	//既不是作者也不是管理员
             	jsonObject.put("success",false);
             	jsonObject.put("msg","您没有权利删除此评论");
@@ -148,7 +148,7 @@ public class CommentController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/detail",produces="application/json;charset=UTF-8")
-	public String detialComment(@RequestParam("id") String id){
+	public String detialComment(@RequestParam("id") String id,HttpSession session){
 		
 		Comment comment = commentService.findById(Integer.parseInt(id));
 		
@@ -185,7 +185,7 @@ public class CommentController {
 			return result.toString();
 		}
         
-		if(user.getId()!=comment.getUserid()){
+		if(!user.getId().equals(comment.getUserid())){
 			result.put("success", false);
 			result.put("msg", "不能以别人的名义发表评论");
 			return result.toString();
@@ -200,7 +200,14 @@ public class CommentController {
         	return result.toString();
         }
         
-        resultTotal = commentService.addComment(comment);
+        try {
+        	resultTotal = commentService.addComment(comment);
+		} catch (Exception e) {
+			// TODO: handle exception
+			result.put("success", false);
+			result.put("msg", "保存过程中出现错误");
+			return result.toString();
+		}
         
         article.setReplyCount(article.getReplyCount()+1);
         

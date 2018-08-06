@@ -25,6 +25,16 @@ public class Comment {
 	 * 被评论的文章id
 	 */
 	private Integer articleid;
+	
+	/**
+	 * 评论用户id
+	 */
+	private String username;
+	
+	/**
+	 * 评论用户
+	 */
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -57,10 +67,24 @@ public class Comment {
 		this.articleid = articleid;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", commentDate=" + commentDate + ", userid=" + userid
-				+ ", articleid=" + articleid + "]";
+				+ ", articleid=" + articleid + ", username=" + username + ", user=" + user + "]";
 	}
 	
 }

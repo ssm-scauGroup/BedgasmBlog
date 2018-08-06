@@ -34,7 +34,7 @@ public class LinkController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/list",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
-	public String listByPage() {
+	public String listByPage(HttpSession session) {
 		
 		JSONObject jsonObject = new JSONObject();
 		
