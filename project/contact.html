@@ -89,10 +89,14 @@
 							<div class="error"></div>
 							<div class="form loginBox">
 								<form method="post" accept-charset="UTF-8">
-									<input id="nameoremail" class="form-control" type="text" placeholder="用户名或邮箱" name="nameoremail">
+									<input id="nameoremail" class="form-control" type="text" placeholder="用户名" name="nameoremail">
 									<span class="error error5"></span>
 									<input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
 									<span class="error error6"></span>
+									<div>
+										<input id="validatecode" name="validatecode" class="form-control" type="text" placeholder="请输入右侧验证码" style="display: inline-block;width:50%;"><img id="validatecodeimg" style="display: inline-block;width:50%;" src="http://www.bedgasmblog.cn/user/validatecode" onclick="refreshvalidatecode()"/>
+										<span class="error error7"></span>
+									</div>
 									<input id="loginBtn" class="btn btn-default btn-login" type="button" value="登 录" onclick="loginAjax()">
 									<span class="error" id="loginfail"></span>
 								</form>
@@ -123,8 +127,11 @@
 				</div>
 				<div class="modal-footer">
 					<div class="forgot login-footer">
-						<span>还没账号？
-							<a href="javascript: showRegisterForm();">去注册</a>
+						<span>还没账号?
+							<a href="javascript: showRegisterForm();">去注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</span>
+						<span>
+							<a href="forgetpassword.html">(忘记密码?)</a>
 						</span>
 					</div>
 					<div class="forgot register-footer" style="display:none">
@@ -148,11 +155,11 @@
 						<!-- <div class="blog-post-image">
 							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
 						</div> -->
-						<div class="blog-post-body">
-							<h2>Contact us !</h2>
-							<p>Email:admin@ronething.cn</p>
-							<p>Address:广东省广州市天河区华南农业大学</p>
-							<p>负责人：Cheuk Fung</p>
+						<div class="blog-post-body contactme">
+							<h2 id="conme">Contact us !</h2>
+							<p id="coninfo">Email:admin@ronething.cn</p>
+							<p id="coninfo">Address:广东省广州市天河区华南农业大学</p>
+							<p id="coninfo">负责人：Zhuo Feng<br>&emsp;&emsp;&emsp;&emsp;Zheng Wan Xing<br>&emsp;&emsp;&emsp;&emsp;Yang Tai Xing<br>&emsp;&emsp;&emsp;&emsp;Wu Shi Hong<br>&emsp;&emsp;&emsp;&emsp;Xu Jia Xing<br></p>
 						</div>
 					</article>
 				</div>

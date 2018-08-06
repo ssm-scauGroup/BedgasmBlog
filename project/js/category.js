@@ -14,7 +14,7 @@ $(function () {
                     var $li = $("<tr>\
                         <td style=\"display: none;\">"+ data.categories[i].id + "</td>\
                         <td><input type=\"checkbox\" class=\"input-control\" name=\"checkbox[]\" value=\"\" /></td>\
-                        <td class=\"article-title\">"+ data.categories[i].typename + "</td>\
+                        <td><input class=\"article-title\" value=\""+ data.categories[i].typename +"\"></td>\
                         <td name=\"total\">"+ data.categories[i].typecount + "</td>\
                         <td><a href=\"update-article.html\">修改</a> <a onclick=\"itemdelete(this)\" rel=\"6\">删除</a></td>\
                         </tr>");

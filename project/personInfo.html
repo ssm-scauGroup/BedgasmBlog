@@ -12,13 +12,44 @@
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
 	<link rel="stylesheet" type="text/css" href="css/personInfo.css">
  <link rel="stylesheet" href="css/cropper.min.css">
- <link rel="stylesheet" href="css/ImgCropping2.css">
+ <link rel="stylesheet" href="css/ImgCropping.css">
 	<script src="js/jquery.min.js"></script>
+		<script src="js/sweetalert2.all.min.js"></script>
 
 </head>
 <body class="user-select"> 
 
 	<div class="container-fluid" id="fluid">
+		<!--图片裁剪框 start-->
+		<div style="display: none" class="tailoring-container">
+		    <div class="black-cloth" onclick="closeTailor(this)"></div>
+		    <div class="tailoring-content" draggable="true"> 
+		            <div class="tailoring-content-one">
+		                <label title="上传图片" for="chooseImg" class="l-btn btn-primary choose-btn">
+		                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+		                    选择图片
+		                </label>
+		                <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+		            </div>
+		            <div class="tailoring-content-two">
+		                <div class="tailoring-box-parcel">
+		                    <img id="tailoringImg">
+		                </div>
+		                <div class="preview-box-parcel">
+		                    <p>图片预览：</p>
+		                    <div class="square previewImg"></div>
+		                    <div class="circular previewImg"></div>
+		                </div>
+		            </div>
+		            <div class="tailoring-content-three">
+		                <button class="l-btn btn-primary cropper-reset-btn">复位</button>
+		                <button class="l-btn btn-primary cropper-rotate-btn">旋转</button>
+		                <button class="l-btn btn-primary cropper-scaleX-btn">换向</button>
+		                <button class="l-btn btn-primary sureCut" id="sureCut">确定</button>
+		            </div>
+		        </div>
+		</div>
+		<!--图片裁剪框 end-->
 		<header>
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				
@@ -102,14 +133,14 @@
 
 					<div class="container" style="margin-bottom: 140px;">
 
-						<form  method="post" class="mainForm infoForm">
+						<form  method="post" class="mainForm ">
 							
 						      <h1 class="page-header">个人资料</h1>
 						      
 						      <div class="col-md-2">
 						      	<!-- <div class="headimg" id="finalImg"></div> -->
 						      	<div style="width: 120px;height: 120px;/*border: solid 1px #555;*/padding: 5px;margin-top: 10px" class="becenter">
-    								<img id="finalImg" src="images/pakho.jpg" width="100%">
+    								<img id="finalImg" src="" width="100%">
 								</div>
 						      	<div class="change">
 						      		<ul>
@@ -121,15 +152,15 @@
 
 
 
-						      <div class="col-md-8 col-md-offset-1 basicinfo" >
+						      <div class="col-md-8 col-md-offset-1 basicinfo infoForm" >
 						      		<div class="username">
 						      			<label class="col-md-2 control-label">用户名:</label>
-						      			<label class="col-md-9" style="margin-left: 10px">Cheuk Fung</label>
+						      			<label class="col-md-9 username2" style="margin-left: 10px" id="username" ></label>
 						      		</div>
 						      		<div class="form-group">
 						      			<label class="col-md-2 control-label">昵称：</label>
 						      			<div class="col-md-9">
-						      				<input type="text" class="form-control" name="nickname" value="Cheuk Fung2018" theone="false" id="nickname">
+						      				<input type="text" class="form-control" name="nickname" value="" theone="false" id="nickname">
 						      			<!-- <div class="lable-name-desc" style="">昵称只能由大小写字母，下划线组成</div> -->
 						      			<span class="error error1">昵称只能由大小写字母，下划线组成</span>
 						      			</div>
@@ -137,7 +168,7 @@
 						      		<div class="form-group">
 						      			<label class="col-md-2 control-label">邮箱：</label>
 						      			<div class="col-md-9">
-						      				<input type="text" class="form-control" name="email" value="123456789@qq.com" id="email">
+						      				<input type="text" class="form-control" name="email" value="" id="email">
 						      			<!-- <div class="emailformat" >请输入正确的邮箱格式！</div> -->
 						      			<span class="error error2"></span>
 						      			</div>
@@ -145,36 +176,16 @@
 						      		<div class="form-group">
 						      			<label class="col-md-2 control-label">个性签名：</label>
 						      			<div class="col-md-9">
-						      				<input type="text" class="form-control" name="signature" value="im Cheuk Fung">
+						      				<input type="text" class="form-control" name="signature" value="" id="signature">
 						      			</div>
 						      		</div>
-						      		<input type="submit" class="saveinfo btn btn-primary" name="submit" value="保存">
+						      		<input type="button" class="saveinfo btn btn-primary" name="submit" value="保存" onclick="saveInfoAjax()">
 						      </div>
 
-		 				 </form>
-		 				 <form  method="post" class="mainForm pwdForm" style="display: none;">
-							
-						      <h1 class="page-header">修改密码</h1>
-						      
-						      <div class="col-md-2">
-						      	<!-- <div class="headimg" id="finalImg"></div> -->
-						      	<div style="width: 120px;height: 120px;/*border: solid 1px #555;*/padding: 5px;margin-top: 10px" class="becenter">
-    								<img id="finalImg" src="images/pakho.jpg" width="100%">
-								</div>
-						      	<div class="change">
-						      		<ul>
-						      			<li><span class="glyphicon glyphicon-camera"></span><a href="#" class="changehead" id="replaceImg">&nbsp;修改头像</a></li>
-						      			<li><span class="glyphicon glyphicon-edit"></span><a href="javascript:tab()" class="changepasswd">&nbsp;修改密码</a></li>
-						      		</ul>
-						      	</div>
-						      </div>
-
-
-
-						      <div class="col-md-8 col-md-offset-1 basicinfo" >
+						      <div class="col-md-8 col-md-offset-1 basicinfo pwdForm" style="display: none;" >
 						      		<div class="username">
 						      			<label class="col-md-2 control-label">用户名:</label>
-						      			<label class="col-md-9" style="margin-left: 10px" id="username">Cheuk Fung</label>
+						      			<label class="col-md-9 username2" style="margin-left: 10px"></label>
 						      		</div>
 						      		<div class="form-group">
 						      			<label class="col-md-2 control-label">原密码：</label>
@@ -199,43 +210,15 @@
 						      				<span class="error error3"></span>
 						      			</div>
 						      		</div>
-						      		<input type="submit" class="savepwd btn btn-warning" name="submit" value="确认修改">
+						      		<input type="button" class="savepwd btn btn-warning" name="button" value="确认修改" onclick="changePwd()">
 						      		<input type="button" class="back btn btn-primary" name="button" value="返回" onclick="tab()">
 						      </div>
 
 		 				 </form>
-<!--图片裁剪框 start-->
-<div style="display: none" class="tailoring-container">
-    <div class="black-cloth" onclick="closeTailor(this)"></div>
-    <div class="tailoring-content">
-            <div class="tailoring-content-one">
-                <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
-                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
-                    选择图片
-                </label>
-                <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
-            </div>
-            <div class="tailoring-content-two">
-                <div class="tailoring-box-parcel">
-                    <img id="tailoringImg">
-                </div>
-                <div class="preview-box-parcel">
-                    <p>图片预览：</p>
-                    <div class="square previewImg"></div>
-                    <div class="circular previewImg"></div>
-                </div>
-            </div>
-            <div class="tailoring-content-three">
-                <button class="l-btn cropper-reset-btn">复位</button>
-                <button class="l-btn cropper-rotate-btn">旋转</button>
-                <button class="l-btn cropper-scaleX-btn">换向</button>
-                <button class="l-btn sureCut" id="sureCut">确定</button>
-            </div>
-        </div>
-</div>
-<!--图片裁剪框 end-->
+
 
 					</div>
+
 						<div class="footer-bottom">
 							<h5>感谢使用Bedgasm Blog</h5>
 							<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
@@ -252,8 +235,10 @@
 <script src="js/admin-scripts.js"></script> 
 <script type="text/javascript" src="js/prompt.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/personInfo.js"></script>
 <script src="js/cropper.min.js"></script>
 <script>
+
 	function tab(){
 		$(".infoForm").toggle();
 		$(".pwdForm").toggle();

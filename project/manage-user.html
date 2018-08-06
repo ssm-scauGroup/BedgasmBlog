@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
 	<link rel="stylesheet" type="text/css" href="css/personhome.css">
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
+		<script src="js/sweetalert2.all.min.js"></script>
 
 	<script src="js/jquery.min.js"></script>
 
@@ -110,80 +111,20 @@
 						      <h1 class="page-header">用户管理<span class="badge">7</span></h1>
 						
 						      <div class="table-responsive">
-							      <table class="table table-striped table-hover">
-							      		<thead>
-							      			<tr>
-							      				<th><span class="glyphicon glyphicon-th-large"></span> <span class="visible-lg">选择</span></th>
-							      				<th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">名称</span></th>
-							      				<th><span class="glyphicon glyphicon-link"></span> <span class="visible-lg">URL</span></th>
-							      				<th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
-							      			</tr>
-							      		</thead>
-							      		<tbody>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="#">https://www.baidu.com</a></td>
-							      				<td><a href="#">删除用户</a></td>
-							      			</tr>
-							      		</tbody>
-							      	</table>
+						      	<!-- 管理员添加用户 -->
+							      <div class="adduser">
+								<div >
+									<h3 style="margin-bottom: 5px;margin-left: 5px">添加用户</h3>
+									<input type="text" id="addusername" class="inputtext" placeholder="在此处输入用户名称" required autocomplete="off"><br>
+									<input type="password" id="addpassword" class="inputtext" placeholder="在此处输入用户密码" required autocomplete="off"><br>
+									<input type="text" id="addemail" class="inputtext" placeholder="在此处输入用户email" required autocomplete="off"><br>
+									<input type="text" id="addrole" class="inputtext inputlast" placeholder="在此处输入用户角色(0为管理员，1为普通用户)" required autocomplete="off">
+								</div>
+								<button onclick="adduser()" class="btn btn-primary" type="button" style="margin-top:5px;margin-left: 5px;margin-bottom: 10px;">添加用户</button>
+							</div>
+
 		      					</div>
-						      <footer class="message_footer">
-					          <nav>
-					            <div class="btn-toolbar operation" role="toolbar">
-					              <div class="btn-group" role="group"> <a class="btn btn-default" onClick="select()">全选</a> <a class="btn btn-default" onClick="reverse()">反选</a> <a class="btn btn-default" onClick="noselect()">不选</a> </div>
-					              <div class="btn-group" role="group">
-					                <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="删除全部选中" name="checkbox_delete">删除</button>
-					              </div>
-					            </div>
-					            <ul class="pagination pagenav">
-					              <li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-					              <li class="active"><a href="#">1</a></li>
-					              <li><a href="#">2</a></li>
-					              <li><a href="#">3</a></li>
-					              <li><a href="#">4</a></li>
-					              <li><a href="#">5</a></li>
-					              <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
-					            </ul>
-					          </nav>
-					        </footer>
+						      
 		 				 </form>
 					
 						<div class="footer-bottom">
@@ -201,29 +142,6 @@
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/admin-scripts.js"></script> 
 <script type="text/javascript" src="js/prompt.js"></script>
-<script>
-//是否确认删除
-$(function(){   
-	$("#main table tbody tr td a").click(function(){
-		var name = $(this);
-		var id = name.attr("rel"); //对应id  
-		if (event.srcElement.outerText == "删除") 
-		{
-			if(window.confirm("此操作不可逆，是否确认？"))
-			{
-				$.ajax({
-					type: "POST",
-					url: "/Article/delete",
-					data: "id=" + id,
-					cache: false, //不缓存此页面   
-					success: function (data) {
-						window.location.reload();
-					}
-				});
-			};
-		};
-	});   
-});
-</script>
+<script type="text/javascript" src="js/manage-user.js"></script>
 </body>
 </html>

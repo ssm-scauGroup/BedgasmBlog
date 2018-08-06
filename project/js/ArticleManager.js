@@ -15,6 +15,8 @@ window.onload = function() {
     
 };
 
+
+
 var adminPagenumber=1;
 var adminPagetotal;
 var userPagenumber=1;
@@ -88,14 +90,14 @@ function listUserAllArticleAjax(page) {
         },
         data: {
             "page":page,
-            "rows":5,
+            "rows":10,
             "authorid": sessionStorage.id
         },
         dataType: "json",
         success: function(res) {
             var detail = "";
             var articleDiv = document.getElementById("allarticle");
-            var title , typename , tags , replyCount , releaseDate , url ,nickname , articleid;
+            var title , typename , tags , replyCount , releaseDate , url ,nickname , articleid,murl;
             for (var key in res['posts']) {
                 articleid = res['posts'][key]['id'];
                 typename = getArticleType(res['posts'][key]['blogtypeid']);
@@ -105,6 +107,8 @@ function listUserAllArticleAjax(page) {
                 releaseDate = res['posts'][key]['releaseDate'];
                 tags = res['posts'][key]['tags'];
                 nickname = res['posts'][key]['user']['nickname'];
+                // var aid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+                murl="./updateArticle.html?id="+articleid;
                 // var url = "./article.html?id=" + data.posts[i].author;
                 if(res['posts'][key].hasOwnProperty("tags")){
                     detail +=`<tr>
@@ -116,7 +120,7 @@ function listUserAllArticleAjax(page) {
                     <td class="hidden-sm">${tags}</td>
                     <td class="hidden-sm">${replyCount}</td>
                     <td>${releaseDate}</td>
-                    <td><a href="update-article.html">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
+                    <td><a href="${murl}">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
                 }
                 else
@@ -129,7 +133,7 @@ function listUserAllArticleAjax(page) {
                     <td class="hidden-sm">暂无标签</td>
                     <td class="hidden-sm">${replyCount}</td>
                     <td>${releaseDate}</td>
-                    <td><a href="update-article.html">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
+                    <td><a href="${murl}">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
                 }
             }
@@ -162,7 +166,7 @@ function getArticleType(blogtypeid) {
         }
     };
     $.ajax(settings);
-    console.log("gettype ok");
+    // console.log("gettype ok");
     return typename;
 }
 
@@ -178,7 +182,7 @@ function listAllArticleAjax(page){
         async: false,
         data: {
             'page': page,
-            'rows': "5"
+            'rows': "10"
         }, 
         dataType: "json",
         success: function(res) {
@@ -245,12 +249,12 @@ function getTotalPage(){
         },
         dataType: "json",
         success: function (data) {
-            if (data.total%5==0){
-                adminPagetotal=data.total/5;
+            if (data.total%10==0){
+                adminPagetotal=data.total/10;
                 $("#totalpage").text('共'+adminPagetotal+'页');
             }
             else{
-                adminPagetotal= Math.floor(data.total/5+1);
+                adminPagetotal= Math.floor(data.total/10+1);
                 $("#totalpage").text('共'+adminPagetotal+'页');
             }
             console.log("所有文章共"+data.total+"篇");
@@ -271,12 +275,12 @@ function getUserTotalPage(){
         },
         dataType: "json",
         success: function (data) {
-            if (data.total%5==0){
-                userPagetotal=data.total/5;
+            if (data.total%10==0){
+                userPagetotal=data.total/10;
                 $("#totalpage").text('共'+userPagetotal+'页');
             }
             else{
-                userPagetotal=Math.floor(data.total/5+1);
+                userPagetotal=Math.floor(data.total/10+1);
                 $("#totalpage").text('共'+userPagetotal+'页');
             }
             console.log(userid+"该用户共"+data.total+"篇");
@@ -350,9 +354,10 @@ function searcharticle(){
 }
 
 function itemdelete(clickeditem) {
-    var r = confirm("确认删除评论？");
+    var r = confirm("确认删除文章？");
     if (r == true) {
         var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+        
         console.log(linkid);
         var settings = {
             url: "http://www.bedgasmblog.cn/article/delete",
@@ -418,4 +423,11 @@ function selecteddelete() {
             });
         }
     }
+}
+
+
+function modifyAtricle(){
+     var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+     var url="./write-article2.html?id="+linkid;
+     window.onload.href(url);
 }
