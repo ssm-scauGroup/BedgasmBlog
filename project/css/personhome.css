@@ -70,17 +70,22 @@
     .basicinfo .headimage{
         width: 100px;
         height: 100px;
-        background: url("../images/touxiang.jpg") no-repeat;
+        /*background: url("../images/touxiang.jpg") no-repeat;*/
         background-position: center center;
         background-size: 100%;
         float: left;
         margin: 20px;
     } 
+    .headmessg{
+        display: block;
+        position: relative;
+    }
     .star{
         /*border: none;*/
-        position: relative;
-        top:-82px;
-        left: 200px;
+        position: absolute;
+        top:16px;
+        right: -100px;
+       /* left: 200px;*/
         width: 100px;
         margin-left: 6px;
         font-family: "Microsoft Yahei",Georgia,Serif;

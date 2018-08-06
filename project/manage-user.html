@@ -8,7 +8,7 @@
 	<title>用户管理</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
-	<link rel="stylesheet" type="text/css" href="css/persomhome.css">
+	<link rel="stylesheet" type="text/css" href="css/personhome.css">
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
 
 	<script src="js/jquery.min.js"></script>
@@ -30,7 +30,7 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">	
-						<li><a id="navlogo" href="signin.html"></a></li>
+						<li><a id="navlogo" href="index.html"></a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -43,10 +43,14 @@
 
 				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
 					<!-- <p><a href="personHome.html">个人中心</p> -->
-						<p><a href="personHome.html">我的首页</a></p>	
-						<p><a href="userpanel.html">管理站点</a></p>	
+						<p>
+				<a onclick="gohome()">我的首页</a>
+			</p>
+			<p>
+				<a onclick="gomanager()">管理站点</a>
+			</p>
 						<p><a href="#">帮助</a></p>	
-						<p><a href="index.html">退出登录</a></p>
+						<p><a onclick="pHlogout()">退出登录</a></p>
 					</div>			
 				</nav>
 		</header>
@@ -54,7 +58,7 @@
 
 				<aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
+						<li  class="myhead" id="headimage"></li>
 					</ul>
 					<ul class="nav nav-sidebar">
 						<li><a href="userpanel.html"><span class="  glyphicon glyphicon-dashboard">&nbsp</span>仪表盘</a></li>
@@ -62,7 +66,7 @@
 					<ul class="nav nav-sidebar">
 						<li><a href="articleManager.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>文章</a></li>
 						<li><a href="media.html"><span class="glyphicon glyphicon-picture">&nbsp</span>媒体</a></li>
-						<li><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
+						<li id="categoryside" style="display: none"><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
 						<li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li>
 						<!-- <li><a href="#">栏目</a></li> -->
 					</ul>
@@ -70,12 +74,12 @@
 						<li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-star  ">&nbsp</span>订阅</a>
 							<ul class="dropdown-menu" aria-labelledby="otherMenu">
 								<li><a href="mystar.html"><span class="glyphicon glyphicon-star-empty">&nbsp</span>我的订阅</a></li>
-								<li class="active"><a href="myfans.html"><span class="glyphicon glyphicon-heart">&nbsp</span>我的粉丝</a></li>
+								<li><a href="myfans.html"><span class="glyphicon glyphicon-heart">&nbsp</span>我的粉丝</a></li>
 							</ul>
 						</li>
 						<!-- <li><a href="#"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li> -->
 						<!-- <li><a href="#">栏目</a></li> -->
-						<li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
+						<li id="moreside" style="display: none"><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
 							<ul class="dropdown-menu" aria-labelledby="otherMenu">
 								<li><a href="friendlink.html"><span class="glyphicon glyphicon-star">&nbsp</span>友情链接</a></li>
 							</ul>
@@ -85,7 +89,7 @@
 						<li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog">&nbsp</span>设置</a>
 							<ul class="dropdown-menu" aria-labelledby="userMenu">
 								<li><a href="personInfo.html"><span class="glyphicon glyphicon-user">&nbsp</span>个人资料</a></li>
-								<li><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>用户管理</a></li>
+								<li class="active" id="safeside" style="display: none"><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>安全设置</a></li>
 							</ul>  
 						</li>
 
