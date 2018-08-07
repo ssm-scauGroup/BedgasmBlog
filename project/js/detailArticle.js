@@ -329,7 +329,7 @@ function loadCommentAjax(){
             }
         })
     } else {
-        alert("没有id");
+        swal("没有id");
     }
 }
 

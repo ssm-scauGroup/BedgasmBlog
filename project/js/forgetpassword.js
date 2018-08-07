@@ -15,10 +15,10 @@ function sendemail() {
 		dataType: "json",
 		success:function(response) {
 			if(response['success']==false){
-				alert("邮箱格式错误或邮箱还未被注册！");
+				swal("邮箱格式错误或邮箱还未被注册！","","error");
 			}
 			else {
-				alert("已发送邮件！请到您的邮箱接收！");
+				swal("已发送邮件！请到您的邮箱接收！","","success");
 			}
 	}
 	}
@@ -27,7 +27,7 @@ function sendemail() {
 	}
 
 	else{
-		alert("请输入邮箱！")
+		swal("请输入邮箱！","","warning");
 	}
 
 }

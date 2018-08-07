@@ -179,7 +179,8 @@ function getCateSelection(){
         // dataType:"json",
         success: function(res){
           console.log(res);
-          swal({text:'发布成功！请返回文章管理查看！',timer:3000});
+          swal('发布成功！三秒后跳到文章管理','','success');
+          setTimeout("location.href='articleManager.html'",4000);
           console.log("update success");
 
         },

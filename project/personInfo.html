@@ -144,7 +144,7 @@
 								</div>
 						      	<div class="change">
 						      		<ul>
-						      			<li><span class="glyphicon glyphicon-camera"></span><a href="#" class="changehead" id="replaceImg">&nbsp;修改头像</a></li>
+						      			<li id="replacehead"><span class="glyphicon glyphicon-camera"></span><a href="#" class="changehead" id="replaceImg">&nbsp;修改头像</a></li>
 						      			<li><span class="glyphicon glyphicon-edit"></span><a href="javascript:tab()" class="changepasswd">&nbsp;修改密码</a></li>
 						      		</ul>
 						      	</div>
@@ -240,6 +240,7 @@
 <script>
 
 	function tab(){
+		$('#replacehead').toggle();
 		$(".infoForm").toggle();
 		$(".pwdForm").toggle();
 	}
@@ -339,6 +340,5 @@
 
 
 </script>
-<script type="text/javascript" src="js/houtai.js"></script>
 </body>
 </html>

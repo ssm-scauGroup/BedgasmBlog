@@ -274,6 +274,11 @@ $(function() {
                 $(this).next().css("display", "none");
             }
         });
+        //验证码框聚焦
+        $("#validatecode").focus(function() {
+            $(".error7").css("display", "none");
+        });
+
         //验证码框失去焦点
         $("#validatecode").blur(function() {
 

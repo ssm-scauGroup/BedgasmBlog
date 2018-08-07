@@ -1,80 +1,71 @@
 window.onload = function() {
-    console.log("role"+sessionStorage.role);
-    if(sessionStorage.role==1){
+    console.log("role" + sessionStorage.role);
+    if (sessionStorage.role == 1) {
         console.log(sessionStorage.role);
         getUserTotalPage();
         listUserAllArticleAjax(userPagenumber);
-    }
-    else{
+    } else {
         console.log(sessionStorage.role);
-        $("#searcharea").css("display","block");
+        $("#searcharea").css("display", "block");
         getTotalPage();
         listAllArticleAjax(adminPagenumber);
     }
-    
-    
+
+
 };
 
 
 
-var adminPagenumber=1;
+var adminPagenumber = 1;
 var adminPagetotal;
-var userPagenumber=1;
+var userPagenumber = 1;
 var userPagetotal;
-var userid=sessionStorage.getItem("id");
+var userid = sessionStorage.getItem("id");
 
-function backArticlePage(){
-    if(adminPagenumber>1 && sessionStorage.role==0){
+function backArticlePage() {
+    if (adminPagenumber > 1 && sessionStorage.role == 0) {
         $("#backpage").removeClass('disable');
-        adminPagenumber-=1;
+        adminPagenumber -= 1;
         listAllArticleAjax(adminPagenumber);
-    }
-    else if(adminPagenumber==1 && sessionStorage.role==0) {
+    } else if (adminPagenumber == 1 && sessionStorage.role == 0) {
         $("#backpage").addClass('disable');
-    }
-    else if (userPagenumber>1 && sessionStorage.role==1){
+    } else if (userPagenumber > 1 && sessionStorage.role == 1) {
         $("#backpage").removeClass('disable');
-        userPagenumber-=1;
+        userPagenumber -= 1;
         listUserAllArticleAjax(userPagenumber);
-    }
-    else if (userPagenumber==1 && sessionStorage.role==1){
+    } else if (userPagenumber == 1 && sessionStorage.role == 1) {
         $("#backpage").addClass('disable');
     }
 }
 
-function nextArticlePage(){
-    
-    if(adminPagenumber < adminPagetotal && sessionStorage.role==0){
-        adminPagenumber+=1;
+function nextArticlePage() {
+
+    if (adminPagenumber < adminPagetotal && sessionStorage.role == 0) {
+        adminPagenumber += 1;
         listAllArticleAjax(adminPagenumber);
-    }
-    else if (adminPagenumber == adminPagetotal && sessionStorage.role==0){
+    } else if (adminPagenumber == adminPagetotal && sessionStorage.role == 0) {
         $("#nextpage").addClass('disable');
-    }
-    else if(userPagenumber < userPagetotal && sessionStorage.role==1){
-        userPagenumber+=1;
+    } else if (userPagenumber < userPagetotal && sessionStorage.role == 1) {
+        userPagenumber += 1;
         listUserAllArticleAjax(userPagenumber);
-    }
-    else if (userPagenumber == userPagetotal && sessionStorage.role==1){
+    } else if (userPagenumber == userPagetotal && sessionStorage.role == 1) {
         $("#nextpage").addClass('disable');
     }
-    
+
 }
 
-function jumpArticlePage(){
+function jumpArticlePage() {
     var jumppage = $('#jumppage').val();
-    if (jumppage<=adminPagetotal && sessionStorage.role==0) {
-        console.log("跳到"+jumppage);
-        adminPagenumber=jumppage;
-        listAllArticleAjax(jumppage); 
-    }
-    else if (jumppage<=userPagetotal && sessionStorage.role==1){
-        console.log("跳到"+jumppage);
-        userPagenumber=jumppage;
-        listUserAllArticleAjax(jumppage); 
-    }
-    else if (jumppage>adminPagetotal || jumppage>userPagetotal)
-        alert("超过页数！");
+    if (jumppage <= adminPagetotal && sessionStorage.role == 0) {
+        console.log("跳到" + jumppage);
+        adminPagenumber = jumppage;
+        listAllArticleAjax(jumppage);
+    } else if (jumppage <= userPagetotal && sessionStorage.role == 1) {
+        console.log("跳到" + jumppage);
+        userPagenumber = jumppage;
+        listUserAllArticleAjax(jumppage);
+    } else if (jumppage > adminPagetotal || jumppage > userPagetotal)
+        swal("超过页数！","","warning");
 }
 
 //用户界面列出所有文章
@@ -89,15 +80,15 @@ function listUserAllArticleAjax(page) {
             withCredentials: "true"
         },
         data: {
-            "page":page,
-            "rows":10,
+            "page": page,
+            "rows": 10,
             "authorid": sessionStorage.id
         },
         dataType: "json",
         success: function(res) {
             var detail = "";
             var articleDiv = document.getElementById("allarticle");
-            var title , typename , tags , replyCount , releaseDate , url ,nickname , articleid,murl;
+            var title, typename, tags, replyCount, releaseDate, url, nickname, articleid, murl;
             for (var key in res['posts']) {
                 articleid = res['posts'][key]['id'];
                 typename = getArticleType(res['posts'][key]['blogtypeid']);
@@ -107,11 +98,8 @@ function listUserAllArticleAjax(page) {
                 releaseDate = res['posts'][key]['releaseDate'];
                 tags = res['posts'][key]['tags'];
                 nickname = res['posts'][key]['user']['nickname'];
-                // var aid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
-                murl="./updateArticle.html?id="+articleid;
-                // var url = "./article.html?id=" + data.posts[i].author;
-                if(res['posts'][key].hasOwnProperty("tags")){
-                    detail +=`<tr>
+                murl = "./updateArticle.html?id=" + articleid;
+                    detail += `<tr>
                     <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
@@ -122,25 +110,12 @@ function listUserAllArticleAjax(page) {
                     <td>${releaseDate}</td>
                     <td><a href="${murl}">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
-                }
-                else
-                {
-                    detail +=`<tr>
-                    <td style="display: none;">${articleid}</td>
-                    <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                    <td class="article-title"><a href="${url}">${title}</a></td>
-                    <td>${typename}</td>
-                    <td class="hidden-sm">暂无标签</td>
-                    <td class="hidden-sm">${replyCount}</td>
-                    <td>${releaseDate}</td>
-                    <td><a href="${murl}">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
-                  </tr>`;
-                }
+                
             }
-            allarticle.innerHTML = detail;
-            console.log("总页数"+adminPagetotal);
+            articleDiv.innerHTML = detail;
+            console.log("总页数" + userPagetotal);
             console.log("success get");
-            console.log("当前页"+adminPagenumber);
+            console.log("当前页" + userPagenumber);
         },
 
         error: function(res) {
@@ -161,7 +136,7 @@ function getArticleType(blogtypeid) {
             "id": blogtypeid
         },
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             typename = data.category.typename;
         }
     };
@@ -170,7 +145,7 @@ function getArticleType(blogtypeid) {
     return typename;
 }
 
-function listAllArticleAjax(page){
+function listAllArticleAjax(page) {
 
     var settings = {
         url: "http://www.bedgasmblog.cn/article/list",
@@ -183,12 +158,12 @@ function listAllArticleAjax(page){
         data: {
             'page': page,
             'rows': "10"
-        }, 
+        },
         dataType: "json",
         success: function(res) {
             var detail = "";
             var articleDiv = document.getElementById("allarticle");
-            var title , typename , tags , replyCount , releaseDate , url, nickname , articleid;
+            var title, typename, tags, replyCount, releaseDate, url, nickname, articleid;
             for (var key in res['posts']) {
                 // console.log(data.posts[i].blogtypeid);
                 typename = getArticleType(res['posts'][key]['blogtypeid']);
@@ -199,8 +174,7 @@ function listAllArticleAjax(page){
                 releaseDate = res['posts'][key]['releaseDate'];
                 tags = res['posts'][key]['tags'];
                 nickname = res['posts'][key]['user']['nickname'];
-                if(res['posts'][key].hasOwnProperty("tags")){
-                    detail +=`<tr>
+                    detail += `<tr>
                     <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
@@ -211,25 +185,12 @@ function listAllArticleAjax(page){
                     <td>${releaseDate}</td>
                     <td><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
-                }
-                else
-                {
-                    detail +=`<tr>
-                    <td style="display: none;">${articleid}</td>
-                    <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                    <td class="article-title"><a href="${url}">${title}</a></td>
-                    <td>${typename}</td>
-                    <td class="hidden-sm">暂无标签</td>
-                    <td class="hidden-sm">${replyCount}</td>
-                    <td>${releaseDate}</td>
-                    <td><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
-                  </tr>`;
-                }
+
             }
-            allarticle.innerHTML = detail;
-            console.log("总页数"+adminPagetotal);
+            articleDiv.innerHTML = detail;
+            console.log("总页数" + adminPagetotal);
             console.log("success get");
-            console.log("当前页"+adminPagenumber);
+            console.log("当前页" + adminPagenumber);
         },
 
         error: function(res) {
@@ -240,110 +201,98 @@ function listAllArticleAjax(page){
 }
 
 //管理员界面获取所有文章总数
-function getTotalPage(){
+function getTotalPage() {
     var settings = {
         url: "http://www.bedgasmblog.cn/article/getTotal",
-        async:false,
+        async: false,
         type: "POST",
-        data: {
-        },
+        data: {},
         dataType: "json",
-        success: function (data) {
-            if (data.total%10==0){
-                adminPagetotal=data.total/10;
-                $("#totalpage").text('共'+adminPagetotal+'页');
+        success: function(data) {
+            if (data.total % 10 == 0) {
+                adminPagetotal = data.total / 10;
+                $("#totalpage").text('共' + adminPagetotal + '页');
+            } else {
+                adminPagetotal = Math.floor(data.total / 10 + 1);
+                $("#totalpage").text('共' + adminPagetotal + '页');
             }
-            else{
-                adminPagetotal= Math.floor(data.total/10+1);
-                $("#totalpage").text('共'+adminPagetotal+'页');
-            }
-            console.log("所有文章共"+data.total+"篇");
-            console.log("所有文章共"+adminPagetotal+"页");
+            console.log("所有文章共" + data.total + "篇");
+            console.log("所有文章共" + adminPagetotal + "页");
 
         }
     };
     $.ajax(settings);
 }
 //用户界面获取该用户文章总数
-function getUserTotalPage(){
+function getUserTotalPage() {
     var settings = {
         url: "http://www.bedgasmblog.cn/article/getTotal",
-        async:false,
+        async: false,
         type: "POST",
         data: {
-            "authorid":userid
+            "authorid": userid
         },
         dataType: "json",
-        success: function (data) {
-            if (data.total%10==0){
-                userPagetotal=data.total/10;
-                $("#totalpage").text('共'+userPagetotal+'页');
+        success: function(data) {
+            if (data.total % 10 == 0) {
+                userPagetotal = data.total / 10;
+                $("#totalpage").text('共' + userPagetotal + '页');
+            } else {
+                userPagetotal = Math.floor(data.total / 10 + 1);
+                $("#totalpage").text('共' + userPagetotal + '页');
             }
-            else{
-                userPagetotal=Math.floor(data.total/10+1);
-                $("#totalpage").text('共'+userPagetotal+'页');
-            }
-            console.log(userid+"该用户共"+data.total+"篇");
-            console.log(userid+"该用户共"+userPagetotal+"页");
+            console.log(userid + "该用户共" + data.total + "篇");
+            console.log(userid + "该用户共" + userPagetotal + "页");
         }
     };
     $.ajax(settings);
 }
 
-function searcharticle(){
-        var searchkey=$("#searchkey").val();
-        console.log(searchkey);
-    
-        var settings = {
+function searcharticle() {
+    var searchkey = $("#searchkey").val();
+    console.log(searchkey);
+
+    var settings = {
         url: "http://www.bedgasmblog.cn/article/search",
-          crossDomain:"true",
-        xhrFields:{
-            withCredentials:"true"
+        crossDomain: "true",
+        xhrFields: {
+            withCredentials: "true"
         },
         type: "POST",
         data: {
             'keyword': searchkey
-        }, 
+        },
         dataType: "json",
         success: function(res) {
             var detail = "";
             var articleDiv = document.getElementById("allarticle");
-            var title , typename , tags , replyCount , releaseDate , url;
+            var title, typename, tags, replyCount, releaseDate, url,nickname,articleid;
             for (var key in res['articles']) {
                 typename = getArticleType(res['articles'][key]['blogtypeid']);
+                articleid = res['articles'][key]['id'];
                 url = "./article.html?id=" + res['articles'][key]['id'];
                 title = res['articles'][key]['title'];
                 replyCount = res['articles'][key]['replyCount'];
                 releaseDate = res['articles'][key]['releaseDate'];
+                 nickname = res['articles'][key]['user']['nickname'];
                 tags = res['articles'][key]['tags'];
-                if(res['articles'][key].hasOwnProperty("tags")){
-                    detail +=`<tr>
+                    detail += `<tr>
+                    <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
+                     <td>${nickname}</td>
                     <td>${typename}</td>
                     <td class="hidden-sm">${tags}</td>
                     <td class="hidden-sm">${replyCount}</td>
                     <td>${releaseDate}</td>
                     <td><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
-                }
-                else
-                {
-                    detail +=`<tr>
-                    <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                    <td class="article-title"><a href="${url}">${title}</a></td>
-                    <td>${typename}</td>
-                    <td class="hidden-sm">暂无标签</td>
-                    <td class="hidden-sm">${replyCount}</td>
-                    <td>${releaseDate}</td>
-                    <td><a onclick="itemdelete(this)" id="articleid">删除</a></td>
-                  </tr>`;
-                }
+                
             }
-            allarticle.innerHTML = detail;
-            console.log("总页数"+adminPagetotal);
+            articleDiv.innerHTML = detail;
+            console.log("总页数" + adminPagetotal);
             console.log("success search");
-            console.log("当前页"+adminPagenumber);
+            console.log("当前页" + adminPagenumber);
         },
 
         error: function(res) {
@@ -357,7 +306,7 @@ function itemdelete(clickeditem) {
     var r = confirm("确认删除文章？");
     if (r == true) {
         var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
-        
+
         console.log(linkid);
         var settings = {
             url: "http://www.bedgasmblog.cn/article/delete",
@@ -372,7 +321,7 @@ function itemdelete(clickeditem) {
                 withCredentials: true
             },
 
-            success: function (data) {
+            success: function(data) {
                 if (data.success == true) {
                     $(clickeditem.parentNode.parentNode).remove();
                     location.reload();
@@ -390,7 +339,7 @@ function selecteddelete() {
     r = confirm("确认删除所选中的" + count + "项？（此操作不可逆）");
     var isdelete = true;
     if (r == true) {
-        $("input[name*=checkbox]:checked").each(function () {
+        $("input[name*=checkbox]:checked").each(function() {
             var linkid = $(this.parentNode.parentNode).children().eq(0).text();
             var settings = {
                 url: "http://www.bedgasmblog.cn/article/delete",
@@ -405,8 +354,8 @@ function selecteddelete() {
                     withCredentials: true
                 },
 
-                success: function (data) {
-                    
+                success: function(data) {
+
                     if (data.success == false) {
                         console.log("批量操作出错！");
                         isdelete = false;
@@ -417,7 +366,7 @@ function selecteddelete() {
         });
 
         if (isdelete) {
-            $("input[name*=checkbox]:checked").each(function () {
+            $("input[name*=checkbox]:checked").each(function() {
                 $(this.parentNode.parentNode).remove();
                 location.reload();
             });
@@ -426,8 +375,8 @@ function selecteddelete() {
 }
 
 
-function modifyAtricle(){
-     var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
-     var url="./write-article2.html?id="+linkid;
-     window.onload.href(url);
+function modifyAtricle() {
+    var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+    var url = "./write-article2.html?id=" + linkid;
+    window.onload.href(url);
 }

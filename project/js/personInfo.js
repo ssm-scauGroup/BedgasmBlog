@@ -83,8 +83,8 @@ function saveInfoAjax(){
         dataType:"json",
         success: function (res) {
             console.log(res);
-            console.log("save success");
-            location.reload();
+            swal('修改成功！','','success');
+            setTimeout("location.reload()",2000);
         },
         error: function (res){
         	console.log("save error");
@@ -116,10 +116,6 @@ function changePwd(){
 
     var oldpwd=$("#oldpwd").val();
     var pwd=$("#pwd").val();
-    console.log(oldpwd);
-    console.log(pwd);
-    console.log(id);
-    console.log(username);
     var settings = {
         url: "http://www.bedgasmblog.cn/user/modify",
         type: "POST",
@@ -135,16 +131,36 @@ function changePwd(){
         },
         dataType:"json",
         success: function (res) {
-            console.log(res);
-            console.log("changepwd success");
-            // location.reload();
-            console.log("new pwd:"+pwd);
+            if(res.success==true){
+                swal('密码修改成功！即将退出登录！','','success');
+                setTimeout('pHlogout()',2000);
+            }
+            else if (res.success==false){
+                swal('密码修改失败！原密码错误，请重试！','','error');
+            }
         },
         error: function (res){
             console.log(oldpwd+"--"+pwd);
             console.log(res);
             console.log("changepwd error");
         }
+    };
+    $.ajax(settings);
+}
+
+function pHlogout() {
+    var settings = {
+        url: "http://www.bedgasmblog.cn/user/logout",
+        type: "POST",
+        data: {},
+        dataType:"json",
+        success: function (data) {
+            if (data.success == true) {
+                console.log("退出！");
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        },
     };
     $.ajax(settings);
 }

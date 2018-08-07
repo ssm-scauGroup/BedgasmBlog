@@ -192,7 +192,7 @@ function loadmoreAjax() {
 		aysnc:false,
 		data: {
 			'page': page,
-			'rows': '3'
+			'rows': '4'
 		}, 
 		dataType: "json",
 		success: function(res) {
@@ -221,7 +221,7 @@ function loadmoreAjax() {
 			console.log("success");
 			page=page+1;
 			console.log(page);
-			if(res['total']<3)
+			if(res['total']<4)
 			{
 				$(".js-load-more").hide();
 			}
