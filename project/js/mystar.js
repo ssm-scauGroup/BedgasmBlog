@@ -16,7 +16,7 @@ $(function() {
                 // console.log(data.articles[1].title);
                 for (var i = 0; i < data.total; i++) {
                     var subscribeename = getname(data.data[i].subscribee);
-                  
+
                     var link = "personHome.html?id=" + data.data[i].subscribee;
                     var $li = $("<tr>\
                         <td style=\"display: none;\">" + data.data[i].subscribee + "</td>\
@@ -74,59 +74,102 @@ function getname(subscribeeid) {
 
 
 function itemdelete(clickeditem) {
-    console.log($(clickeditem.parentNode.parentNode).children().eq(0).text());
-    var r = confirm("确认取消关注？");
-    if (r == true) {
-        var subscribeeid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
-        var settings = {
-            url: "http://www.bedgasmblog.cn/star/unsubscribe",
-            async: false,
-            type: "POST",
-            data: {
-                "subscriber": sessionStorage.getItem("id"),
-                "subscribee": subscribeeid
-            },
-            dataType: "json",
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
 
-            success: function(data) {
-                location.reload();
+    swal({
+        title: '确定取消订阅吗？',
+        text: '你将无法恢复它！',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '确定删除！',
+    }).then(function(isConfirm) {
+        if (isConfirm.hasOwnProperty("value")) {
+            if (isConfirm['value'] == true) {
+                var subscribeeid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+                var settings = {
+                    url: "http://www.bedgasmblog.cn/star/unsubscribe",
+                    async: false,
+                    type: "POST",
+                    data: {
+                        "subscriber": sessionStorage.getItem("id"),
+                        "subscribee": subscribeeid
+                    },
+                    dataType: "json",
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+
+                    success: function(data) {
+                        swal(
+                            '删除！',
+                            '取消订阅成功。',
+                            'success'
+                        );
+                        setTimeout("location.reload()", 1000);
+                    }
+                };
+                $.ajax(settings);
             }
-        };
-        $.ajax(settings);
-    }
+        } else {
+
+        }
+
+    })
+
 }
 
 
 function selecteddelete() {
     var count = $("input[name*=checkbox]:checked").length;
-    r = confirm("确认删除所选中的" + count + "项？（此操作不可逆）");
-    if (r == true) {
-        $("input[name*=checkbox]:checked").each(function() {
-            var subscribeeid = $(this.parentNode.parentNode).children().eq(0).text();
-            var settings = {
-                url: "http://www.bedgasmblog.cn/star/unsubscribe",
-                async: false,
-                type: "POST",
-                data: {
-                    "subscriber": sessionStorage.getItem("id"),
-                    "subscribee": subscribeeid
-                },
-                dataType: "json",
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
+    var msg = "确认取消订阅所选中的" + count + "项？（此操作不可逆）";
+    swal({
+        title: msg,
+        text: '你将无法恢复它！',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '确定删除！',
+    }).then(function(isConfirm) {
+        if (isConfirm.hasOwnProperty("value")) {
+            if (isConfirm['value'] == true) {
+                $("input[name*=checkbox]:checked").each(function() {
+                    $("input[name*=checkbox]:checked").each(function() {
+                        var subscribeeid = $(this.parentNode.parentNode).children().eq(0).text();
+                        var settings = {
+                            url: "http://www.bedgasmblog.cn/star/unsubscribe",
+                            async: false,
+                            type: "POST",
+                            data: {
+                                "subscriber": sessionStorage.getItem("id"),
+                                "subscribee": subscribeeid
+                            },
+                            dataType: "json",
+                            crossDomain: true,
+                            xhrFields: {
+                                withCredentials: true
+                            },
 
-                success: function(data) {
-                    location.reload();
+                            success: function(data) {
+                                swal(
+                                    '删除！',
+                                    '取消订阅成功。',
+                                    'success'
+                                );
+                                setTimeout("location.reload()", 1000);
 
-                }
-            };
-            $.ajax(settings);
-        });
-    }
+                            }
+                        };
+                        $.ajax(settings);
+                    });
+
+                });
+
+            }
+        } else {
+
+        }
+    })
 }

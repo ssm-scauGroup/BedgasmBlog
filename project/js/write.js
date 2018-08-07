@@ -93,8 +93,8 @@ function writeAjax(){
         // dataType:"json",
        	 success: function (res) {
               console.log(res);
-              swal('发布成功！三秒后跳到文章管理','','success');
-              setTimeout("location.href='articleManager.html'",4000);
+              swal('发布成功！3秒后跳到文章管理','','success');
+              setTimeout("location.href='articleManager.html'",2000);
               console.log("write success");
              
                  },
