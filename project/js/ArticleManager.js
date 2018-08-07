@@ -65,7 +65,7 @@ function jumpArticlePage() {
         userPagenumber = jumppage;
         listUserAllArticleAjax(jumppage);
     } else if (jumppage > adminPagetotal || jumppage > userPagetotal)
-        swal("超过页数！","","warning");
+        swal("超过页数！", "", "warning");
 }
 
 //用户界面列出所有文章
@@ -99,7 +99,7 @@ function listUserAllArticleAjax(page) {
                 tags = res['posts'][key]['tags'];
                 nickname = res['posts'][key]['user']['nickname'];
                 murl = "./updateArticle.html?id=" + articleid;
-                    detail += `<tr>
+                detail += `<tr>
                     <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
@@ -110,7 +110,7 @@ function listUserAllArticleAjax(page) {
                     <td>${releaseDate}</td>
                     <td><a href="${murl}">修改</a><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
-                
+
             }
             articleDiv.innerHTML = detail;
             console.log("总页数" + userPagetotal);
@@ -174,7 +174,7 @@ function listAllArticleAjax(page) {
                 releaseDate = res['posts'][key]['releaseDate'];
                 tags = res['posts'][key]['tags'];
                 nickname = res['posts'][key]['user']['nickname'];
-                    detail += `<tr>
+                detail += `<tr>
                     <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
@@ -266,7 +266,7 @@ function searcharticle() {
         success: function(res) {
             var detail = "";
             var articleDiv = document.getElementById("allarticle");
-            var title, typename, tags, replyCount, releaseDate, url,nickname,articleid;
+            var title, typename, tags, replyCount, releaseDate, url, nickname, articleid;
             for (var key in res['articles']) {
                 typename = getArticleType(res['articles'][key]['blogtypeid']);
                 articleid = res['articles'][key]['id'];
@@ -274,9 +274,9 @@ function searcharticle() {
                 title = res['articles'][key]['title'];
                 replyCount = res['articles'][key]['replyCount'];
                 releaseDate = res['articles'][key]['releaseDate'];
-                 nickname = res['articles'][key]['user']['nickname'];
+                nickname = res['articles'][key]['user']['nickname'];
                 tags = res['articles'][key]['tags'];
-                    detail += `<tr>
+                detail += `<tr>
                     <td style="display: none;">${articleid}</td>
                     <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                     <td class="article-title"><a href="${url}">${title}</a></td>
@@ -287,7 +287,7 @@ function searcharticle() {
                     <td>${releaseDate}</td>
                     <td><a onclick="itemdelete(this)" id="articleid"> 删除</a></td>
                   </tr>`;
-                
+
             }
             articleDiv.innerHTML = detail;
             console.log("总页数" + adminPagetotal);
@@ -303,75 +303,110 @@ function searcharticle() {
 }
 
 function itemdelete(clickeditem) {
-    var r = confirm("确认删除文章？");
-    if (r == true) {
-        var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
 
-        console.log(linkid);
-        var settings = {
-            url: "http://www.bedgasmblog.cn/article/delete",
-            async: false,
-            type: "POST",
-            data: {
-                "id": linkid
-            },
-            dataType: "json",
-            crossDomain: true,
-            xhrFields: {
-                withCredentials: true
-            },
+    swal({
+        title: '确定删除吗？',
+        text: '你将无法恢复它！',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '确定删除！',
+    }).then(function(isConfirm) {
+        if (isConfirm.hasOwnProperty("value")) {
+            if (isConfirm['value'] == true) {
+                var linkid = $(clickeditem.parentNode.parentNode).children().eq(0).text();
+                var settings = {
+                    url: "http://www.bedgasmblog.cn/article/delete",
+                    async: false,
+                    type: "POST",
+                    data: {
+                        "id": linkid
+                    },
+                    dataType: "json",
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
 
-            success: function(data) {
-                if (data.success == true) {
-                    $(clickeditem.parentNode.parentNode).remove();
-                    location.reload();
-                }
-                console.log(data);
+                    success: function(data) {
+                        if (data.success == true) {
+                            $(clickeditem.parentNode.parentNode).remove();
+                            swal(
+                                '删除！',
+                                '文章已经被删除。',
+                                'success'
+                            );
+                            setTimeout("location.reload()", 1000);
+                        }
+                    }
+                };
+                $.ajax(settings);
             }
-        };
-        $.ajax(settings);
-    }
+        } else {
+
+        }
+    })
+
 }
 
 
 function selecteddelete() {
-    var count = $("input[name*=checkbox]:checked").length;
-    r = confirm("确认删除所选中的" + count + "项？（此操作不可逆）");
-    var isdelete = true;
-    if (r == true) {
-        $("input[name*=checkbox]:checked").each(function() {
-            var linkid = $(this.parentNode.parentNode).children().eq(0).text();
-            var settings = {
-                url: "http://www.bedgasmblog.cn/article/delete",
-                async: false,
-                type: "POST",
-                data: {
-                    "id": linkid
-                },
-                dataType: "json",
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
+    swal({
+        title: '确定删除吗？',
+        text: '你将无法恢复它！',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '确定删除！',
+    }).then(function(isConfirm) {
+        if (isConfirm.hasOwnProperty("value")) {
+            if (isConfirm['value'] == true) {
+                var count = $("input[name*=checkbox]:checked").length;
+                var isdelete = true;
+                $("input[name*=checkbox]:checked").each(function() {
+                    var linkid = $(this.parentNode.parentNode).children().eq(0).text();
+                    var settings = {
+                        url: "http://www.bedgasmblog.cn/article/delete",
+                        async: false,
+                        type: "POST",
+                        data: {
+                            "id": linkid
+                        },
+                        dataType: "json",
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: true
+                        },
 
-                success: function(data) {
+                        success: function(data) {
 
-                    if (data.success == false) {
-                        console.log("批量操作出错！");
-                        isdelete = false;
-                    }
+                            if (data.success == true) {
+                                swal(
+                                '删除！',
+                                '文章已经被删除。',
+                                'success'
+                            );
+                            setTimeout("location.reload()", 1000);
+                            }
+                        }
+                    };
+                    $.ajax(settings);
+                });
+
+                if (isdelete) {
+                    $("input[name*=checkbox]:checked").each(function() {
+                        $(this.parentNode.parentNode).remove();
+                        location.reload();
+                    });
                 }
-            };
-            $.ajax(settings);
-        });
+            }
+        } else {
 
-        if (isdelete) {
-            $("input[name*=checkbox]:checked").each(function() {
-                $(this.parentNode.parentNode).remove();
-                location.reload();
-            });
         }
-    }
+    })
+
 }
 
 

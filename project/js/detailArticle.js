@@ -351,9 +351,8 @@ function addComment() {
                 },
                 dataType: "json",
                 success: function(res) {
-                    console.log(res);
-                    console.log("add success");
-                    window.location.reload();
+                    swal('评论成功！','','success');
+                    setTimeout('location.reload()',1000);
                 },
 
                 error: function(res) {
@@ -362,9 +361,9 @@ function addComment() {
             };
             $.ajax(settings);
         } else
-            swal("评论过长！最多140字！")
+            swal('评论过长，140字以内！','','success');
     } else {
-        swal('登录之后才能评论喔~');
+        swal('登录之后才能评论喔~','','error');
         // confirm("登录之后才能评论喔");
     }
 
