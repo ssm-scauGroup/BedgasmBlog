@@ -731,3 +731,35 @@ input,select,textarea {
 	padding: 5px;
 	margin: 5px;
 }
+.loadmedia{
+	/*float: left;*/
+	position: relative;
+}
+
+#loadForm input[type=file]{
+	/*height: 34px;*/
+	/*background-color : #286090;*/
+}
+.addMedia{
+	width: 300px;
+	position: absolute;
+	right: 130px;
+	top: 24px;
+	/*float: right;*/
+}
+#selectImg{
+	font-size: 14px;
+	background: #fff;
+	/*height: 34px;*/
+	/*display: none;*/
+}
+#loadImg2{
+	position: absolute;
+	top:0px;
+	left: 200px;
+	font-size: 12px;
+	height: 28px;
+}
+#main{
+	position: relative;
+}

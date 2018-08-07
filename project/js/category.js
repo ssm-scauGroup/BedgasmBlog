@@ -14,9 +14,9 @@ $(function () {
                     var $li = $("<tr>\
                         <td style=\"display: none;\">"+ data.categories[i].id + "</td>\
                         <td><input type=\"checkbox\" class=\"input-control\" name=\"checkbox[]\" value=\"\" /></td>\
-                        <td><input class=\"article-title\" value=\""+ data.categories[i].typename +"\"></td>\
+                        <td class=\"article-title\">"+ "<input style=\"border:none;background-color:transparent\" type=\"text\" disabled=\"true\"  value=\""+data.categories[i].typename+"\"/></td>\
                         <td name=\"total\">"+ data.categories[i].typecount + "</td>\
-                        <td><a href=\"update-article.html\">修改</a> <a onclick=\"itemdelete(this)\" rel=\"6\">删除</a></td>\
+                        <td><a title=\""+data.categories[i].typename+"\" onclick=\"itemmodify(this)\">修改</a> <a onclick=\"itemdelete(this)\" rel=\"6\">删除</a></td>\
                         </tr>");
                     $("#categorylist").append($li);
                 }
@@ -26,7 +26,45 @@ $(function () {
     })();
 });
 
+function itemmodify(modifyitem){
+    if($(modifyitem.parentNode.parentNode).children().eq(0).text()==1){
+        swal("默认类，无法修改",'','error');
+        return false;
+    }
+    var $item=$(modifyitem.parentNode.parentNode).children().eq(2).children().eq(0);
+    if($(modifyitem).text()=="修改"){
+        $item.removeAttr("disabled");
+        $item.css("border","inset");
+        $(modifyitem).text("保存");
+    }
+    else if($(modifyitem).text()=="保存"){
+        if($(modifyitem).attr("title") == $item.val()){
+            return true;
+        }
 
+        var settings = {
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            url: "http://www.bedgasmblog.cn/category/save",
+            type: "POST",
+            data: {
+                "id":$(modifyitem.parentNode.parentNode).children().eq(0).text(),
+                "typename":$item.val()
+            },
+            dataType: "json",
+            success: function (data) {
+                $(modifyitem).text("修改");
+                $item.attr("disabled","disabled");
+                $item.css("border","none");
+            }
+        };
+        $.ajax(settings);
+
+    }
+
+}
 function itemdelete(clickeditem) {
     var r = confirm("确认删除该项？");
     if (r == true) {

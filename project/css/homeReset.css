@@ -515,6 +515,7 @@ footer .footer-bottom {
     border:0 none;
     font-size:16px;
     display:block;
+    cursor: pointer;
 }
 .js-load-more:hover{
     background-color: #222;
@@ -538,3 +539,40 @@ footer .footer-bottom {
     line-height: 160%;
     font-size: 22px;
 }
+#inputemail{
+    width: 350px;
+    height: 50px;
+    font-size: 25px;
+    padding: 15px;
+}
+#inputpass{
+    width: 350px;
+    height: 50px;
+    font-size: 25px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#confirmpass{
+    width: 350px;
+    height: 50px;
+    font-size: 25px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+#sendemail {
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+#resetpass{
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+.forget{
+    padding:30px 0px 20px; 
+    border-bottom: 1px solid #ddd;
+}
+

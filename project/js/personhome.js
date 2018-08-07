@@ -236,7 +236,7 @@ function follow() {
         dataType: "json",
         success: function(res) {
             if (res.success) {
-                swal({text:'订阅成功',timer:2000,showConfirmButton:false});
+                swal('订阅成功','','success');
                 $("#star").html("<span class='glyphicon glyphicon-star-empty' id='plus'></span>&nbsp已订阅");
                 $("#star").removeClass("btn-warning");
                 $("#star").addClass("btn-default");
@@ -270,7 +270,7 @@ function quit () {
         dataType: "json",
         success: function(res) {
             if (res.success) {
-                swal({text:'取消订阅成功',timer:2000,showConfirmButton:false});
+               swal('取消订阅成功','','success');
                 $("#star").html("<span class='glyphicon glyphicon-plus' id='plus'></span>&nbsp订阅");
                 $("#star").removeClass("btn-default");
                 $("#star").addClass("btn-warning");

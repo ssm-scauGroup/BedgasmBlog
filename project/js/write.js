@@ -66,11 +66,11 @@ function writeAjax(){
 	 var summary = testEditor.getMarkdown().substr(0,30); 
 	 var blogtypeid=$("#category-list").val();
 	 if (title == null || title == '') {
-                    alert("系统提示:请输入标题！");
+                    swal("系统提示:请输入标题！","","warning");
                 } else if (blogtypeid == null || blogtypeid == '') {
-                    alert("系统提示:请选择博客类型！");
+                    swal("系统提示:请选择博客类型！","","warning");
                 } else if (content == null || content == '') {
-                    alert("系统提示:请编辑博客内容！");
+                    swal("系统提示:请编辑博客内容！","","warning");
                 } else
                 {
                 	var settings = {
@@ -93,7 +93,8 @@ function writeAjax(){
         // dataType:"json",
        	 success: function (res) {
               console.log(res);
-              swal({text:'发布成功！请返回文章管理查看！',timer:3000});
+              swal('发布成功！三秒后跳到文章管理','','success');
+              setTimeout("location.href='articleManager.html'",4000);
               console.log("write success");
              
                  },
