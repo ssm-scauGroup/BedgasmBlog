@@ -8,8 +8,9 @@
 	<title>我的粉丝</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
-	<link rel="stylesheet" type="text/css" href="css/persomhome.css">
+	<link rel="stylesheet" type="text/css" href="css/personhome.css">
 	<link rel="stylesheet" type="text/css" href="css/houtaiReset.css">
+		<script src="js/sweetalert2.all.min.js"></script>
 
 	<script src="js/jquery.min.js"></script>
 
@@ -30,7 +31,7 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">	
-						<li><a id="navlogo" href="signin.html"></a></li>
+						<li><a id="navlogo" href="index.html"></a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -43,26 +44,39 @@
 
 				<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
 					<!-- <p><a href="personHome.html">个人中心</p> -->
-							<p><a href="personHome.html">我的首页</a></p>	
-						<p><a href="userpanel.html">管理站点</a></p>	
+							<p>
+				<a onclick="gohome()">我的首页</a>
+			</p>
+			<p>
+				<a onclick="gomanager()">管理站点</a>
+			</p>
 						<p><a href="#">帮助</a></p>	
-						<p><a href="index.html">退出登录</a></p>
+						<p><a onclick="pHlogout()">退出登录</a></p>
 					</div>			
 				</nav>
 		</header>
 			<div class="row">
 
-				<aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
+				 <aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
 					<ul class="nav nav-sidebar">
-						<li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
+						<a href="javascript:void(0)" onclick="gohome()"  style="padding:0px;"><li class="myhead" style="cursor: pointer;" id="headimage"></li>
 					</ul>
 					<ul class="nav nav-sidebar">
 						<li><a href="userpanel.html"><span class="  glyphicon glyphicon-dashboard">&nbsp</span>仪表盘</a></li>
 					</ul>
 					<ul class="nav nav-sidebar">
-						<li><a href="articleManager.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>文章</a></li>
+							
+						<li><a class="dropdown-toggle" id="otherMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-pushpin  ">&nbsp</span>文章</a>
+							<ul class="dropdown-menu" aria-labelledby="otherMenu1">
+									<li id="articlemanger"><a href="articleManager.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>文章管理</a></li>								
+									<li id="myarticle"><a href="myArticle.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>我的文章</a></li>
+									 <li id="writearticle"><a href="write-article2.html"><span class="glyphicon glyphicon-edit">&nbsp</span>写文章</a></li>
+							</ul>
+						</li>
+						
+						
 						<li><a href="media.html"><span class="glyphicon glyphicon-picture">&nbsp</span>媒体</a></li>
-						<li><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
+						<li id="categoryside" style="display: none"><a href="category.html"><span class="glyphicon glyphicon-th-large ">&nbsp</span>栏目</a></li>
 						<li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li>
 						<!-- <li><a href="#">栏目</a></li> -->
 					</ul>
@@ -75,7 +89,7 @@
 						</li>
 						<!-- <li><a href="#"><span class="glyphicon glyphicon-comment">&nbsp</span>评论</a></li> -->
 						<!-- <li><a href="#">栏目</a></li> -->
-						<li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
+						<li id="moreside" style="display: none"><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon  glyphicon-tags  ">&nbsp</span>其它</a>
 							<ul class="dropdown-menu" aria-labelledby="otherMenu">
 								<li><a href="friendlink.html"><span class="glyphicon glyphicon-star">&nbsp</span>友情链接</a></li>
 							</ul>
@@ -84,8 +98,8 @@
 					<ul class="nav nav-sidebar">
 						<li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog">&nbsp</span>设置</a>
 							<ul class="dropdown-menu" aria-labelledby="userMenu">
-								<li><a href="personInfo.html"><span class="glyphicon glyphicon-user">&nbsp</span>个人资料</a></li>
-								<li><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>安全设置</a></li>
+								<li><a href="personInfo.html"><span class="glyphicon glyphicon-user">&nbsp</span>修改资料</a></li>
+								<li id="safeside" style="display: none"><a href="manage-user.html"><span class="glyphicon glyphicon-cog">&nbsp</span>用户管理</a></li>
 							</ul>  
 						</li>
 
@@ -94,17 +108,11 @@
 				   
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
 
-					<div class="container wrap2">
 
-						<form action="/Article/checkAll" method="post" class="mainForm">
+						<form class="mainForm" style="margin-bottom: 140px;">
 							
-						      <h1 class="page-header">我的粉丝<span class="badge">7</span></h1>
-						<!--      <div id="search">
-					            <form action="#" onSubmit="return false;" method="get">
-					                <input type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'" value="Search.." name="q">
-					                <input type="submit" value="">
-					            </form>
-			       			 </div> -->
+						      <h1 class="page-header">我的粉丝</h1>
+					
 						      <div class="table-responsive">
 							      <table class="table table-striped table-hover">
 							      		<thead>
@@ -113,52 +121,17 @@
 							      				<th><span class="glyphicon glyphicon-link"></span> <span class="visible-lg">URL</span></th>
 							      			</tr>
 							      		</thead>
-							      		<tbody>
-							      			<tr>
+							      		<tbody id="myfanlist">
+							      			<!-- <tr>
 							      				<td class="article-title">ronething</td>
 							      				<td><a href="#">https://www.baidu.com</a></td>
 							      			</tr>
-							      			<tr>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
-							      			<tr>							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
-							      			<tr>
-							      				<td class="article-title">ronething</td>
-							      				<td><a href="">https://www.baidu.com</a></td>
-							      			</tr>
+							      			 -->
 							      		</tbody>
 							      	</table>
 		      					</div>
-		      					<footer class="message_footer">
-							          <nav>
-							            <ul class="pagination pagenav">
-							              <li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-							              <li class="active"><a href="#">1</a></li>
-							              <li><a href="#">2</a></li>
-							              <li><a href="#">3</a></li>
-							              <li><a href="#">4</a></li>
-							              <li><a href="#">5</a></li>
-							              <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
-							            </ul>
-							          </nav>
-							        </footer>
+		      					
 		 				 </form>
-					</div>
 					
 						<div class="footer-bottom">
 							<h5>感谢使用Bedgasm Blog</h5>
@@ -175,5 +148,6 @@
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/admin-scripts.js"></script> 
 <script type="text/javascript" src="js/prompt.js"></script>
+<script type="text/javascript" src="js/myfans.js"></script>
 </body>
 </html>

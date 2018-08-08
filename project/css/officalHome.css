@@ -27,8 +27,12 @@
 	bottom: 30px;
 	text-align: center;
 	padding-top:20px;
-	background-color: grey;
-	opacity: 0.5;
+	background-color: #aaa;
+	opacity: 0.8;
 	overflow:hidden;
-
+	font-size: 20px;
+	color: #222;
+	font-weight: bold;
+	cursor: default;
+	user-select: none;
 }

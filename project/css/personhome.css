@@ -70,17 +70,22 @@
     .basicinfo .headimage{
         width: 100px;
         height: 100px;
-        background: url("../images/touxiang.jpg") no-repeat;
+        /*background: url("../images/touxiang.jpg") no-repeat;*/
         background-position: center center;
         background-size: 100%;
         float: left;
         margin: 20px;
     } 
+    .headmessg{
+        display: block;
+        position: relative;
+    }
     .star{
         /*border: none;*/
-        position: relative;
-        top:-82px;
-        left: 200px;
+        position: absolute;
+        top:16px;
+        right: -100px;
+       /* left: 200px;*/
         width: 100px;
         margin-left: 6px;
         font-family: "Microsoft Yahei",Georgia,Serif;
@@ -118,7 +123,7 @@
     .basicinfo .headimage{
         width: 50px;
         height: 50px;
-        background: url("../images/touxiang.jpg") no-repeat;
+        /*background: url("../images/touxiang.jpg") no-repeat;*/
         background-position: center center;
         background-size: 100%;
         border-radius: 50%;
@@ -176,4 +181,26 @@
     background-position: center center;
     background-size: 100%;
     padding: 0;
+}
+body{
+    min-height: 100%;
+}
+#maodian{
+    /*min-height: 100%;*/
+     margin-bottom: 140px;
+}
+.row{
+    min-height: 100%;
+}
+#articleDiv{
+    min-height: 500px;
+}
+#prompt-box p>a{
+    cursor: pointer;
+}
+/*#account{
+ color: #E0E53C;
+}*/
+#accountname{
+    color: #E0E29F;
 }
