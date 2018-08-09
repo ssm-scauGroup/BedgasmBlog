@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.dao.MediaDao">
+
+    <resultMap type="Media" id="MediaResult">
+        <id property="id" column="id"/>
+        <result property="imagepath" column="imagepath"/>
+        <result property="userid" column="userid"/>
+        <result property="releaseDate" column="releaseDate"/>
+    </resultMap>
+    
+    <insert id="addMedia" parameterType="Media">
+ 		insert into t_media (imagepath,userid,releaseDate) VALUES (#{imagepath},#{userid},now())
+    </insert>
+    
+    <delete id="deleteMedia" parameterType="java.lang.Integer">
+    	delete from t_media where id=#{id}
+    </delete>
+    
+    <select id="findById" resultMap="MediaResult">
+    	SELECT * from t_media where id=#{id}
+    </select>
+    
+    <update id="updateMedia" parameterType="Media">
+        update t_media
+        <set>
+            <if test="imagepath!=null and imagepath!=''">
+                imagepath=#{imagepath},
+            </if>
+            <if test="userid!=null">
+                userid=#{userid},
+            </if>
+            <if test="releaseDate!=null and releaseDate!=''">
+            	releaseDate=#{releaseDate},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="listByUserId" parameterType="java.lang.Integer" resultMap="MediaResult">
+    	select * from t_media where userid=#{userid} ORDER BY releaseDate DESC
+    </select>
+    
+    <select id="getTotalByUserId" resultType="java.lang.Long">
+    	select count(id) from t_media where userid=#{userid}
+    </select>
+    
+</mapper> 

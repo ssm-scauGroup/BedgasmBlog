@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+		<meta name="author" content="">
+	<title>BEDGASM BLOG</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="css/jquery.bxslider.css" rel="stylesheet">
+	<link href="css/homeReset.css" type="text/css" rel="stylesheet">
+	<link href="css/officalHome.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/search.css">
+	<script src="js/jquery.min.js"></script>
+
+</head>
+<body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="index.html">Home</a></li>
+						<li><a href="aboutme.html" onclick="">About Me</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li> <a class="btn big-login" data-toggle="modal" href="javascript:openLoginModal();">登录</a></li>
+						<li><a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">注册</a></li>
+						
+					</ul>
+
+				</div>
+				<!--/.nav-collapse -->
+ 			
+
+			
+		</nav>
+
+		<div class="modal fade login" id="loginModal">
+		      <div class="modal-dialog login animated">
+    		      <div class="modal-content">
+    		         <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Login with</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                             <div class="content">
+
+                                <div class="error"></div>
+                                <div class="form loginBox">
+                                    <form method="post" action="/login" accept-charset="UTF-8">
+	                                    <input id="nameoremail" class="form-control" type="text" placeholder="用户名或邮箱" name="nameoremail">
+	                                     <span class="error error5"></span>
+	                                    <input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
+	                                     <span class="error error6"></span>
+	                                    <input id="loginBtn" class="btn btn-default btn-login" type="submit" value="登 录" >
+                                    </form>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="box">
+                            <div class="content registerBox" style="display:none;">
+                             <div class="form">
+                                <form method="post" html="{:multipart=>true}" data-remote="true" 
+                                	action="/register" accept-charset="UTF-8">
+	                                <input id="username" class="form-control" type="text" 
+	                                placeholder="用户名(4-16位)" name="username">
+	                                <span class="error error1"></span>
+
+	                                <input id="email" class="form-control" type="text" 
+	                                placeholder="邮箱" name="email">
+	                                 <span class="error error2"></span>
+
+	                                <input id="pwd" class="form-control" type="password" 
+	                                placeholder="密码(8-30位)" name="pwd">
+	                                 <span class="error error3"></span>
+
+	                                <input id="password_confirmation" class="form-control" 
+	                                type="password" placeholder="确认密码" name="password_confirmation">
+	                                 <span class="error error4"></span>
+
+	                                <input class="btn btn-default btn-register" type="submit" 
+	                                value="注 册" name="commit">
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="forgot login-footer">
+                            <span>还没账号？
+                                 <a href="javascript: showRegisterForm();">去注册</a>
+                            </span>
+                        </div>
+                        <div class="forgot register-footer" style="display:none">
+                             <span>已有账号?</span>
+                             <a href="javascript: showLoginForm();">去登录</a>
+                        </div>
+                    </div>        
+    		      </div>
+		      </div>
+		  </div>
+
+		<div class="container" id="searchcontainer">
+			<div class="row">
+				<div class="col-md-8">
+					<article class="blog-post">
+						<!-- <div class="blog-post-image">
+							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
+						</div> -->
+						<div class="blog-post-body">
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
+							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
+							<div class="read-more"><a href="#">Continue Reading</a></div>
+						</div>
+					</article>
+
+					<article class="blog-post">
+						<!-- <div class="blog-post-image">
+							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
+						</div> -->
+						<div class="blog-post-body">
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
+							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
+							<div class="read-more"><a href="#">Continue Reading</a></div>
+						</div>
+					</article>
+
+					<article class="blog-post">
+						<!-- <div class="blog-post-image">
+							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
+						</div> -->
+						<div class="blog-post-body">
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
+							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
+							<div class="read-more"><a href="#">Continue Reading</a></div>
+						</div>
+					</article>
+
+					<article class="blog-post">
+						<!-- <div class="blog-post-image">
+							<a href="post.html"><img src="images/750x500-1.jpg" alt=""></a>
+						</div> -->
+						<div class="blog-post-body">
+							<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+							<div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="article.html#comment">343</a></span></div>
+							<p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
+							<div class="read-more"><a href="#">Continue Reading</a></div>
+						</div>
+					</article>
+
+
+					<div class="pageDivide">
+						<ul id="page" class="pagination pagination-lg becenter">
+							<li><a href="#">&laquo;</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul><br>
+					</div>
+
+			</div>
+
+
+
+				<div class="col-md-3 col-md-offset-1 sidebar-gutter" id="article-sidebar">
+					<aside>
+						 <div class="sidebar-widget">
+							<section id="search"><!-- Search form -->
+					            <form action="#" onSubmit="return false;" method="get">
+					                <input type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'" value="Search.." name="q">
+					                <input type="submit" value="">
+					            </form>
+			       			 </section>
+					  	</div>
+
+						<div class="sidebar-widget">
+						<h3 class="sidebar-title">推荐热文</h3>
+						<div class="widget-container">
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+						</div>
+					   </div>
+
+					   <div class="sidebar-widget">
+						<h3 class="sidebar-title">最新文章</h3>
+						<div class="widget-container">
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">Vintage-Inspired Finds for Your Home</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+							<article class="widget-post">
+								<div class="post-body">
+									<h2><a href="article.html">The State of the Word 2014</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="article.html#comment"><i class="fa fa-comment-o"></i> 23</a></span>
+									</div>
+								</div>
+							</article>
+						</div>
+					   </div>
+					   <div class="sidebar-widget">
+						<h3 class="sidebar-title">类别栏目</h3>
+						<div class="widget-container">
+							<ul class="cate">
+								<li><a href="#">Fashion</a></li>
+								<li><a href="#">Art</a></li>
+								<li><a href="#">Design</a></li>
+								<li><a href="#">Featured</a></li>
+								<li><a href="#">Graphics</a></li>
+								<li><a href="#">Peoples</a></li>
+								<li><a href="#">Uncategorized</a></li>
+							</ul>
+						</div>
+					</div>
+
+					</aside>
+
+				</div>
+
+			</div>
+		</div>
+		
+		<footer class="footer"> 
+
+			<div class="footer-bottom">
+				<h5>感谢使用Bedgasm Blog</h5>
+				<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
+				
+			</div>
+
+		</footer>
+
+
+		<button class="back-to-top" id="backtopbtn">
+			<p class="backtop">回到顶部</p>
+			<span class="glyphicon glyphicon-plane"></span>
+		</button>
+
+
+
+		
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.bxslider.js"></script>
+		<script src="js/mooz.scripts.min.js"></script>
+		<script src="js/nav.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/common.js"></script
+</body>
+</html>

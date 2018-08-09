@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CardDao">     
+  <resultMap id="aCardinfoMap" type="com.model.Cardinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="post" jdbcType="VARCHAR" property="post" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, telephone, email, company, post, address, logo, userName
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="Integer" resultMap="aCardinfoMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cardinfo
+    where id = #{id}
+  </select>
+  
+  <select id="selectAll"  parameterType="String" resultMap="aCardinfoMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cardinfo 
+     where userName = #{userName}
+  </select>
+  
+  <select id="selectAllByPage"  parameterType="map" resultMap="aCardinfoMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cardinfo 
+     where userName = #{userName} 
+     order by id
+     limit #{startIndex}, #{perPageSize}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="Integer">
+    delete from cardinfo
+    where id = #{id}
+  </delete>
+  
+  <insert id="insert" parameterType="com.model.Cardinfo">
+    insert into cardinfo (id, name, telephone, 
+      email, company, post, 
+      address, logo, userName
+      )
+    values (#{id}, #{name}, #{telephone}, 
+      #{email}, #{company}, #{post}, 
+      #{address}, #{logo}, #{username}
+      )
+  </insert>
+    
+  <insert id="insertSelective" parameterType="com.model.Cardinfo">
+    insert into cardinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="telephone != null">
+        #{telephone},
+      </if>
+      <if test="email != null">
+        #{email},
+      </if>
+      <if test="company != null">
+        #{company},
+      </if>
+      <if test="post != null">
+        #{post},
+      </if>
+      <if test="address != null">
+        #{address},
+      </if>
+      <if test="logo != null">
+        #{logo},
+      </if>
+      <if test="username != null">
+        #{username},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Cardinfo">
+    update cardinfo
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone},
+      </if>
+      <if test="email != null">
+        email = #{email},
+      </if>
+      <if test="company != null">
+        company = #{company},
+      </if>
+      <if test="post != null">
+        post = #{post},
+      </if>
+      <if test="address != null">
+        address = #{address},
+      </if>
+      <if test="logo != null">
+        logo = #{logo},
+      </if>
+      <if test="username != null">
+        userName = #{username},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.model.Cardinfo">
+    update cardinfo
+    set name = #{name},
+      telephone = #{telephone},
+      email = #{email},
+      company = #{company},
+      post = #{post},
+      address = #{address},
+      logo = #{logo},
+      userName = #{username}
+    where id = #{id}
+  </update>
+  
+</mapper>

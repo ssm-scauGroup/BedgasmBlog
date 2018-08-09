@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.dao.ArticleDao">
+
+    <resultMap type="Article" id="ArticleResult">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="releaseDate" column="releaseDate"/>
+        <result property="clickCount" column="clickCount"/>
+        <result property="replyCount" column="replyCount"/>
+        <result property="content" column="content" />
+        <result property="mdcontent" column="mdcontent" />
+        <result property="tags" column="tags"/>
+        <result property="blogtypeid" column="blogtypeid"/>
+        <result property="author" column="author"/>
+        <association property="user" column="author" select="blog.dao.UserDao.findNormalUser"></association>
+    </resultMap>
+
+
+    <select id="listArticle" parameterType="Map" resultMap="ArticleResult">
+        SELECT id,title,summary,releaseDate,clickCount,replyCount,tags,blogtypeid,author FROM t_article
+        <where>
+            <if test="title!=null and title!=''">
+                and title like "%"#{title}"%"
+            </if>
+            <if test="blogtypeid!=null">
+                and blogtypeid=#{blogtypeid}
+            </if>
+            <if test="tags!=null and tags!=''">
+            	and tags like "%"#{tags}"%"
+            </if>
+            <if test="author!=null">
+            	and author=#{author}
+            </if>
+        </where>
+        ORDER BY releaseDate DESC
+        <if test="start!=null and end!=null">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+  	
+    <select id="listByPage"  resultMap="ArticleResult">
+        SELECT * FROM t_article ORDER BY releaseDate DESC
+        <if test="start!=null and end!=null">
+            limit #{start},#{end}
+        </if>
+    </select>
+    
+    <select id="getTotal" parameterType="Map" resultType="Long">
+        SELECT COUNT(*) FROM t_article
+        <where>
+            <if test="title!=null and title!=''">
+                and title like "%"#{title}"%"
+            </if>
+            <if test="blogtypeid!=null">
+                and blogtypeid=#{blogtypeid}
+            </if>
+            <if test="author!=null">
+            	and author=#{author}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addArticle" parameterType="Article">
+        insert into t_article 
+        (title,summary,releaseDate,clickCount,replyCount,content,mdcontent,tags,blogtypeid,author)
+         VALUES (#{title},#{summary},now(),0,0,#{content},#{mdcontent},#{tags},#{blogtypeid},#{author})
+    </insert>
+
+    <update id="updateArticle" parameterType="Article">
+        update t_article
+        <set>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="summary!=null and summary!=''">
+                summary=#{summary},
+            </if>
+            <if test="releaseDate!=null and releaseDate!=''">
+            	releaseDate=#{releaseDate},
+            </if>
+            <if test="clickCount!=null">
+                clickCount=#{clickCount},
+            </if>
+            <if test="replyCount!=null">
+                replyCount=#{replyCount},
+            </if>
+            <if test="content!=null and content!=''">
+                content=#{content},
+            </if>
+            <if test="mdcontent!=null and mdcontent!=''">
+                mdcontent=#{mdcontent},
+            </if>
+            <if test="tags!=null and tags!=''">
+                tags=#{tags},
+            </if>
+            <if test="blogtypeid!=null">
+                blogtypeid=#{blogtypeid},
+            </if>
+            <if test="author!=null">
+                author=#{author},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteArticle" parameterType="java.lang.Integer">
+        DELETE FROM t_article
+        where id=#{id}
+    </delete>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="ArticleResult">
+        SELECT * from t_article where id=#{id}
+    </select>
+    
+    <select id="listByAuthor" resultMap="ArticleResult">
+    	SELECT id,title,summary,releaseDate,clickCount,replyCount,tags,blogtypeid,author from t_article where author=#{author} ORDER BY releaseDate DESC
+    </select>
+    
+    <select id="listByClickCount" parameterType="Map" resultMap="ArticleResult">
+        SELECT id,title,summary,releaseDate,clickCount,replyCount,tags,blogtypeid,author FROM t_article ORDER BY clickcount DESC
+        <if test="rows!=null">
+            limit #{rows}
+        </if>
+    </select>
+    
+</mapper> 
