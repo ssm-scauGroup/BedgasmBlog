@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserDao">
+  <resultMap id="aUserMap" type="com.model.Usertable">
+    <id column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>  
+  <sql id="Base_Column_List">
+    userName, password
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="String" resultMap="aUserMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{username}
+  </select>
+  
+  <select id="selectByUser" parameterType="com.model.Usertable" resultMap="aUserMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usertable
+    where userName = #{username} and password = #{password}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="String">
+    delete from usertable
+    where userName = #{username}
+  </delete>
+  
+  <insert id="insert" parameterType="com.model.Usertable">
+    insert into usertable (userName, password)
+    values (#{username}, #{password})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.model.Usertable">
+    insert into usertable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username},
+      </if>
+      <if test="password != null">
+        #{password},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Usertable">
+    update usertable
+    <set>
+      <if test="password != null">
+        password = #{password},
+      </if>
+    </set>
+    where userName = #{username}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.model.Usertable">
+    update usertable
+    set password = #{password}
+    where userName = #{username}
+  </update>
+</mapper>

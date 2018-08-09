@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>BEDGASM BLOG</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="css/jquery.bxslider.css" rel="stylesheet">
+	<link href="css/homeReset.css" type="text/css" rel="stylesheet">
+	<link href="css/officalHome.css" type="text/css" rel="stylesheet">
+　	<link rel="shortcut icon" href="images/icon2.png">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/personhome.css">
+	<script src="js/jquery.min.js"></script>
+		<script src="js/sweetalert2.all.min.js"></script>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			 aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="index.html">Home</a>
+				</li>
+				<li>
+					<a href="aboutme.html" onclick="">About Me</a>
+				</li>
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a id="login-button" class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal()">登录</a>
+				</li>
+				<li>
+					<a id="signin-button" class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">注册</a>
+				</li>
+				<li id="account" style="display: none;">
+					<a id="accountname" onmouseover="showPromptBox()" onmouseout="closePromptBox()"></a>
+				</li>
+			</ul>
+
+		</div>
+		<!--/.nav-collapse -->
+		<div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+			<!-- <p><a href="personHome.html">个人中心</p> -->
+			<p>
+				<a onclick="gohome()">我的首页</a>
+			</p>
+			<p>
+				<a onclick="gomanager()">管理站点</a>
+			</p>
+			
+			<p>
+				<a onclick="logout()">退出登录</a>
+			</p>
+		</div>
+
+
+	</nav>
+
+	<div class="modal fade login " id="loginModal">
+		<div class="modal-dialog login animated">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Login with</h4>
+				</div>
+				<div class="modal-body">
+					<div class="box">
+						<div class="content">
+
+							<div class="error"></div>
+							<div class="form loginBox">
+								<form method="post" accept-charset="UTF-8">
+									<input id="nameoremail" class="form-control" type="text" placeholder="用户名/邮箱" name="nameoremail">
+									<span class="error error5"></span>
+									<input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
+									<span class="error error6"></span>
+									<div style="margin-top: -18px;">
+										<input id="validatecode" name="validatecode" class="form-control" type="text" placeholder="请输入右侧验证码" style="display: inline-block;width:50%;"><img id="validatecodeimg" style="display: inline-block;width:50%;" src="http://www.bedgasmblog.cn/user/validatecode" onclick="refreshvalidatecode()"/>
+										<span class="error error7"></span>
+									</div>
+									<input id="loginBtn" class="btn btn-default btn-login" type="button" value="登 录" onclick="loginAjax()">
+									<span class="error" id="loginfail"></span>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="box">
+						<div class="content registerBox" style="display:none;">
+							<div class="form">
+								<form method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8">
+									<input id="username" class="form-control form-control1 " type="text" placeholder="用户名(4-16位)" name="username">
+									<span class="error error1 singin-error"></span>
+
+									<input id="email" class="form-control form-control1" type="text" placeholder="邮箱" name="email">
+									<span class="error error2 singin-error"></span>
+
+									<input id="pwd" class="form-control form-control1" type="password" placeholder="密码(8-30位)" name="pwd">
+									<span class="error error3 singin-error"></span>
+
+									<input id="password_confirmation" class="form-control form-control1" type="password" placeholder="确认密码" name="password_confirmation">
+									<span class="error error4 singin-error"></span>
+
+									<input id="register-button" class="btn btn-default btn-register" type="button" value="注 册" name="commit" onclick="register()">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="forgot login-footer">
+						<span>还没账号?
+							<a href="javascript: showRegisterForm();">去注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</span>
+						<span>
+							<a href="forgetpassword.html">(忘记密码?)</a>
+						</span>
+					</div>
+					<div class="forgot register-footer" style="display:none">
+						<span>已有账号?</span>
+						<a href="javascript: showLoginForm();">去登录</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="wrap-col" id="wrap-col">
+		<div class="logo">
+			<a href="index.html">
+				<img class="becenter" src="images/bigLogo.png" />
+			</a>
+		</div>
+		<h4 class="tagline becenter">记录过去，憧憬未来 &nbsp; 向下扎根，向上生长</h4>
+		<!-- <h4 class="right-tag becenter">向下扎根，向上生长</h4> -->
+	</div>
+
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
+		</ol>
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner">
+
+			<div class="item active">
+				<a href="./article.html?id=94"><img src="images/1.jpg" alt="First slide" style="width: 100%;height: 100%;"></a>
+				<div class="carousel-caption">英国旅游 地地道道的英伦味</div>
+			</div>
+			<div class="item">
+				<a href="./article.html?id=104"><img src="images/2.jpg" alt="Second slide" style="width: 100%;height: 100%;"></a>
+				<div class="carousel-caption">北英格兰时光之旅 遇见最迷人的英伦范儿</div>
+			</div>
+			<div class="item">
+				<a href="./article.html?id=93"><img src="images/3.jpg" alt="Third slide" style="width: 100%;height: 100%;"></a>
+				<div class="carousel-caption">好用的 Chrome 扩展，我们又为你找到了这 10 款</div>
+			</div>
+			<div class="item">
+				<a href="./article.html?id=103"><img src="images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;"></a>
+				<div class="carousel-caption">没想到柏林十大必去的景 竟是一场时尚歌舞秀</div>
+			</div>
+			<div class="item">
+				<a href="./article.html?id=102"><img src="images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;"></a>
+				<div class="carousel-caption">旅行灵感开始的地方</div>
+			</div>
+		</div>
+		<!-- 轮播（Carousel）导航 -->
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+
+	<div class="container" id="maodian">
+		<div class="row" >
+			<!-- <div id="maodian"></div> -->
+			<div class="col-md-7" >
+
+				<div id="articleDiv">
+					
+
+				</div>
+				
+				<div class="js-load-more" onclick="loadmoreAjax()">加载更多</div>
+
+			
+			</div>
+
+
+
+			<div class="col-md-4 col-md-offset-1 sidebar-gutter">
+				<aside>
+					<div class="sidebar-widget">
+						<section id="search">
+							<!-- Search form -->
+							<form action="#" onSubmit="return false;" method="get">
+								<input id="searchkey" type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'"
+								 value="Search.." name="q">
+								<input type="button" value="" onclick="searchClickAjax()">
+							</form>
+						</section>
+					</div>
+					<!-- 热文 -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">推荐热文</h3>
+						<div class="widget-container" id="hotarticle">
+							<!-- <article class="widget-post">
+								<div class="post-body">
+									<h2>
+										<a href="article.html">The State of the Word 2014</a>
+									</h2>
+									<div class="post-meta">
+										<span>
+											<i class="fa fa-clock-o"></i> 2. august 2015</span>
+										<span>
+											<a href="article.html#comment><i class=" fa fa-comment-o "></i> 23</a></span>
+									</div>
+								</div>
+							</article> -->
+							
+						</div>
+					</div>
+					<!-- 类别 -->
+					<div class="sidebar-widget ">
+						<h3 class="sidebar-title ">类别栏目</h3>
+						<div class="widget-container " >
+							<ul class="cate" id="categorylist">
+							<!-- 	<li><a href="# ">Fashion</a></li>
+								<li><a href="# ">Art</a></li>
+								<li><a href="# ">Design</a></li>
+								<li><a href="# ">Featured</a></li>
+								<li><a href="# ">Graphics</a></li>
+								<li><a href="# ">Peoples</a></li>
+								<li><a href="# ">Uncategorized</a></li> -->
+							</ul>
+						</div>
+					
+					</div>
+					<!-- 友情链接 -->
+					<div class="sidebar-widget ">
+						<h3 class="sidebar-title ">友情链接</h3>
+						<div class="widget-container " >
+							<ul class="cate" id="linklist">
+<!-- 								<li><a href="# ">Fashion</a></li>
+ -->								
+							</ul>
+						</div>
+					</div>
+					
+					</aside>
+
+				</div>
+
+			</div>
+		</div>
+		
+		<footer class="footer "> 
+
+			<div class="footer-bottom ">
+				<h5>感谢使用Bedgasm Blog</h5>
+				<i class="fa fa-copyright "></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
+				
+			</div>
+
+		</footer>
+
+
+		<button class="back-to-top " id="backtopbtn">
+			<p class="backtop ">回到顶部</p>
+			<span class="glyphicon glyphicon-plane "></span>
+		</button>
+
+
+
+		
+		<script src="js/bootstrap.min.js "></script>
+		<script src="js/jquery.bxslider.js "></script>
+		<script src="js/mooz.scripts.min.js "></script>
+			<script src="js/nav.js "></script>
+		<script type="text/javascript" src="js/login.js "></script>
+		<!-- <script type="text/javascript " src="js/common.js "></script> -->
+		<script type="text/javascript" src="js/prompt.js "></script>
+		<script type="text/javascript" src="js/article.js"></script>
+</body>
+</html>

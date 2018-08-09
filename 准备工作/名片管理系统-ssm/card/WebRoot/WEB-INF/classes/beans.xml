@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jdbc 
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">                 
+    <!-- 附加props配置文件 -->
+	<context:property-placeholder location="/WEB-INF/classes/jdbc.properties" />
+    <!-- scan the package and the sub package -->
+    <context:component-scan base-package="com.controller"/> 
+    <context:component-scan base-package="com.service"/> 
+    <context:component-scan base-package="com.dao"/>
+    <mvc:annotation-driven />
+    <!-- 静态资源需要单独处理，不需要dispatcher servlet -->  
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources> 
+    <mvc:resources location="/images/" mapping="/images/**"></mvc:resources> 
+    <!-- 查看名片图片时，logos文件夹不需要dispatcher servlet --> 
+    <mvc:resources location="/logos/" mapping="/logos/**"></mvc:resources>
+    <!-- 配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+    <!--创建jdbc数据源 -->  
+     <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<!-- 读取classpath:db.properties属性文件 -->
+	</bean>
+	<!-- 添加事务支持 -->
+	<bean id="txManager"   
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
+        <property name="dataSource" ref="dataSource" />   
+    </bean> 
+    <!-- 创建SqlSessionFactory，同时指定数据源，与MyBatis整合 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <property name="configLocation" value="/WEB-INF/classes/mybatis/mybatis.xml"/>
+    </bean>  
+<!--使用Spring自动扫描MyBatis的接口并装配
+        （Spring会将指定包中的所有被@Mapper注解标注的接口自动装配为MyBatis的映射接口）  --> 
+     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+     	<!-- mybatis-spring组件的扫描器 -->
+     	<property name="basePackage" value="com.dao"/>
+     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+     </bean>
+	<!-- 注册事务注解处理器， 
+定义好配置文件后只需要在我们的类上加上注解@Transactional,就可以指定这个类需要受Spring的事务管理 
+默认Spring为每个方法开启一个事务 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	<!-- 托管MyExceptionHandler -->
+	<bean class="com.exception.MyExceptionHandler"/>
+	<!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  
+        p:defaultEncoding="UTF-8"  
+        p:maxUploadSize="5400000"  
+        p:uploadTempDir="fileUpload/temp" 
+     > 
+    </bean> 
+</beans>

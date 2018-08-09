@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.dao.LinkDao">
+
+    <resultMap type="Link" id="LinkResult">
+        <id property="id" column="id"/>
+        <result property="linkname" column="linkname"/>
+        <result property="linkurl" column="linkurl"/>
+    </resultMap>
+    
+    <insert id="addLink" parameterType="Link">
+        insert into t_link (linkname,linkurl) VALUES (#{linkname},#{linkurl})
+    </insert>
+    
+    <delete id="deleteLink" parameterType="java.lang.Integer">
+        DELETE FROM t_link
+        where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="java.lang.Integer" resultMap="LinkResult">
+        SELECT * from t_link where id=#{id}
+    </select>
+    
+    <update id="updateLink" parameterType="Link">
+        update t_link
+        <set>
+            <if test="linkname!=null and linkname!=''">
+                linkname=#{linkname},
+            </if>
+            <if test="linkurl!=null and linkurl!=''">
+                linkurl=#{linkurl},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="listLink" resultMap="LinkResult">
+        SELECT * FROM t_link
+    </select>
+    
+    <select id="getTotal" resultType="java.lang.Long">
+		SELECT count(id) from t_link
+	</select>
+    
+</mapper> 

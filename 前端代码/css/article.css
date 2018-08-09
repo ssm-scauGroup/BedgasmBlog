@@ -1,0 +1,115 @@
+#articlecontainer{
+	margin-top: 50px;
+}
+
+#article-sidebar{
+	margin-top: 20px;
+}
+
+.comment-title{
+	padding-bottom: 5px; 
+	border-bottom:2px grey solid;
+	font-family: "楷体";
+	font-weight: 800;
+}
+
+.comment-list-box{
+	margin-top: 20px;
+	border-bottom:1px dashed;
+	border-color: #CECECE;
+}
+
+.comment-list-box .comment-content{
+	float: left;
+	width: 75%;
+    margin: 10px;
+}
+
+.comment-list-box h2{
+	padding: 10px;
+	font-size: 20px;
+	font-family: "Microsoft Yahei",Georgia,Serif;
+}
+
+.comment-list-box p{
+	padding-left: 10px;
+	font-size: 15px;
+	font-family: "Microsoft Yahei",Georgia,Serif;
+}
+
+.comment-headimage{
+		width: 50px;
+        height: 50px;
+        /*background: url("../images/touxiang.jpg") no-repeat;*/
+        background-position: center center;
+        background-size: 100%;
+        float: left;
+        margin: 20px;
+}
+
+
+.domycomment{
+	margin-top: 20px;
+}
+
+.comment-area h3{
+	padding-bottom: 20px;
+	font-family: "Microsoft Yahei",Georgia,Serif;
+}
+
+.comment-area{
+	float: left;
+	width: 75%;
+    margin: 10px;
+}
+
+.mycomment{
+	font-size: 15px;
+	font-family: "Microsoft Yahei",Georgia,Serif;
+    resize:none;
+    border:1px solid;
+    border-color: #CECECE;
+    width: 100%;
+    height: 150px;
+    overflow: auto;
+    outline: none;
+    display: block;
+    line-height: inherit;
+    background-color: #f9f9f9;
+}
+
+.btn-comment{
+	margin: 20px 0px;
+	padding: 0.3em 2.6em;
+
+	font-size:1.2em;
+	font-family: "Microsoft Yahei",Georgia,Serif;
+	display: inline-block;
+	float: right;
+	color: #FFF;
+	font-weight: 400;
+	background-color: #898989;
+	outline:none;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+
+.btn-comment:hover{
+	background: #d4a258;
+}
+
+.commentpageDivide{
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+.comment-content span{
+	   font-weight: 400;
+    font-size: 11px;
+    color: #B1B1B1;
+    font-family: "Lora";
+    font-style: italic;
+}

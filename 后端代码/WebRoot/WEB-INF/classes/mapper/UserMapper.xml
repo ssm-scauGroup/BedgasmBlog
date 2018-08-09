@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog.dao.UserDao">
+
+    <resultMap type="User" id="UserResult">
+        <id property="id" column="id"/>
+        <result property="username" column="user_login"/>
+        <result property="password" column="user_pass"/>
+        <result property="nickname" column="user_nickname"/>
+        <result property="email" column="email"/>
+        <result property="signature" column="signature"/>
+        <result property="profile" column="user_profile"/>
+        <result property="role" column="role"/>
+    </resultMap>
+    
+    <insert id="addUser" parameterType="User">
+        insert into t_user (user_login,user_pass,user_nickname,email,signature,user_profile,role) VALUES (#{username},#{password},#{nickname},#{email},#{signature},#{profile},#{role})
+    </insert>
+    
+    <delete id="deleteUser">
+        DELETE FROM t_user where id=#{id}
+    </delete>
+    
+    <update id="updateUser" parameterType="User">
+       	update t_user
+        <set>
+            <if test="username!=null and username!=''">
+                user_login=#{username},
+            </if>
+            <if test="password!=null and password!=''">
+                user_pass=#{password},
+            </if>
+            <if test="nickname!=null and nickname!=''">
+            	user_nickname=#{nickname},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="signature!=null and signature!=''">
+                signature=#{signature},
+            </if>
+            <if test="profile!=null and profile!=''">
+                user_profile=#{profile},
+            </if>
+            <if test="role!=null">
+                role=#{role},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="findById" resultMap="UserResult">
+    	SELECT * from t_user where id=#{id}
+    </select>
+    
+    <select id="findSimpleUser" resultMap="UserResult">
+    	SELECT id,user_nickname,signature,user_profile,email from t_user where id=#{id}
+    </select>
+    
+   <select id="findNormalUser" resultMap="UserResult">
+    	SELECT id,user_nickname,signature,email from t_user where id=#{id}
+    </select>
+    
+    <select id="listUser" parameterType="Map" resultMap="UserResult">
+        SELECT * FROM t_user
+        <where>
+        	<if test="email!=null and email!=''">
+        		and email=#{email}
+        	</if>
+        	<if test="username!=null and username!=''">
+        		and user_login like "%"#{username}"%"
+        	</if>
+        </where>
+    </select>
+    
+    <select id="fingByUserLogin" resultMap="UserResult">
+    	SELECT * FROM t_user WHERE user_login=#{username}
+    </select>
+    
+    <select id="findByUserEmail" resultMap="UserResult">
+    	SELECT * FROM t_user WHERE email=#{email}
+    </select>
+    
+</mapper> 
