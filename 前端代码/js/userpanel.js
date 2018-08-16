@@ -34,14 +34,14 @@ function loadcommentCount() {
 
 function loadclickCount() {
 	var settings = {
-		url: "http://www.bedgasmblog.cn/article/clickcount",
+		url: "http://www.bedgasmblog.cn/article/getClickCount",
 		crossDomain: "true",
 		xhrFields: {
 			withCredentials: "true"
 		},
 		type: "POST",
 		data: {
-			'userid': sessionStorage.id
+			'id': sessionStorage.id
 		},
 		dataType: "json",
 		success: function(res) {
