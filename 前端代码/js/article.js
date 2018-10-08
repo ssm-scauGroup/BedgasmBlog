@@ -1,6 +1,6 @@
-window.onload = function() {
+window.onload = function () {
 	var more = $('.fa-comment-o');
-	more.click(function() {
+	more.click(function () {
 		$('html,body').animate({
 			scrollTop: ($('.comment-title').offset().top) - 50
 		}, 800);
@@ -36,7 +36,7 @@ function backtotop() {
 	// console.log(clientHeight)
 
 	//滚动条滚动时触发
-	window.onscroll = function() {
+	window.onscroll = function () {
 		//显示回到顶部按钮
 		var osTop = document.documentElement.scrollTop || document.body.scrollTop;
 		if (osTop >= clientHeight) {
@@ -53,9 +53,9 @@ function backtotop() {
 
 	};
 
-	btn.onclick = function() {
+	btn.onclick = function () {
 		//设置定时器
-		timer = setInterval(function() {
+		timer = setInterval(function () {
 			//获取滚动条距离顶部高度
 			var osTop = document.documentElement.scrollTop || document.body.scrollTop;
 			// console.log('osTop ' + osTop);
@@ -79,33 +79,38 @@ function getHomeAjax() {
 
 	var settings = {
 		url: "http://www.bedgasmblog.cn/article/list",
-		  crossDomain:"true",
-		xhrFields:{
-			withCredentials:"true"
+		crossDomain: "true",
+		xhrFields: {
+			withCredentials: "true"
 		},
 		type: "POST",
 		data: {
 			'page': "1",
 			'rows': "4"
-		}, 
+		},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var articleDiv = document.getElementById("articleDiv");
 			var detail = "";
-			var title, summary, url, releaseDate, nickname, commentCount,authorUrl;
+			var title, summary, url, releaseDate, nickname,clickCount, commentCount, authorUrl;
 			for (var key in res['posts']) {
 				title = res['posts'][key]['title'];
 				summary = res['posts'][key]['summary'];
 				url = "./article.html?id=" + res['posts'][key]['id'];
-				authorUrl="./personHome.html?id=" + res['posts'][key]['author'];
+				authorUrl = "./personHome.html?id=" + res['posts'][key]['author'];
 				releaseDate = res['posts'][key]['releaseDate'];
+				clickCount = res['posts'][key]['clickCount'];
 				commentCount = res['posts'][key]['replyCount'];
-				nickname=res['posts'][key]['user']['nickname'];
+				nickname = res['posts'][key]['user']['nickname'];
 				detail +=
 					`<article class="blog-post">
 						<div class="blog-post-body">
 							<h2><a href="${url}">${title}</a></h2>
-							<div class="post-meta"><span>by <a href="${authorUrl}">${nickname}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i>${commentCount}</span></div>
+							<div class="post-meta"><span>by <a href="${authorUrl}">${nickname}</a></span>
+							/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+							/<span><i class="fa fa-comment-o"></i>${commentCount}</span>
+							/<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+							</div>
 							<p>${summary}</p>
 							<div class="read-more"><a href="${url}">Continue Reading</a></div>
 						</div>
@@ -115,62 +120,67 @@ function getHomeAjax() {
 			console.log("HOME success");
 		},
 
-		error: function(res) {
+		error: function (res) {
 			console.log("error");
 		}
 	};
 	$.ajax(settings);
 }
 
-function searchClickAjax(){
-	var searchkey=$("#searchkey").val();
+function searchClickAjax() {
+	var searchkey = $("#searchkey").val();
 	$(".js-load-more").hide();
 	console.log(searchkey);
-	
-		var settings = {
+
+	var settings = {
 		url: "http://www.bedgasmblog.cn/article/search",
-		  crossDomain:"true",
-		xhrFields:{
-			withCredentials:"true"
+		crossDomain: "true",
+		xhrFields: {
+			withCredentials: "true"
 		},
 		type: "POST",
 		data: {
 			'keyword': searchkey
-		}, 
+		},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var articleDiv = document.getElementById("articleDiv");
 			var detail = "";
-			var title, summary, url, releaseDate, username, replyCount,authorUrl;
+			var title, summary, url, releaseDate, username, replyCount,clickCount, authorUrl;
 			for (var key in res['articles']) {
 				title = res['articles'][key]['title'];
 				summary = res['articles'][key]['summary'];
 				url = "./article.html?id=" + res['articles'][key]['id'];
-				authorUrl="./personHome.html?id=" + res['articles'][key]['author'];
+				authorUrl = "./personHome.html?id=" + res['articles'][key]['author'];
 				releaseDate = res['articles'][key]['releaseDate'];
+				clickCount = res['articles'][key]['clickCount'];
 				replyCount = res['articles'][key]['replyCount'];
 				username = res['articles'][key]['user']['nickname'];
 				detail +=
 					`<article class="blog-post">
 						<div class="blog-post-body">
 							<h2><a href="${url}">${title}</a></h2>
-							<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i> <a href="#">${replyCount}</a></span></div>
+							<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>
+							/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+							/<span><i class="fa fa-comment-o"></i> <a href="#">${replyCount}</a></span>
+							/<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+							</div>
 							<p>${summary}</p>
 							<div class="read-more"><a href="${url}">Continue Reading</a></div>
 						</div>
 					</article>`;
 			}
 			console.log(res);
-		
+
 			articleDiv.innerHTML = detail;
 			console.log("SEARCH success");
-			if(res.total==0){
+			if (res.total == 0) {
 				$(".js-load-more").hide();
 				articleDiv.innerHTML = "抱歉，搜索不到您要的内容";
 			}
 		},
 
-		error: function(res) {
+		error: function (res) {
 			console.log("error");
 		}
 	};
@@ -179,41 +189,47 @@ function searchClickAjax(){
 }
 
 
-var page=2;
+var page = 2;
 
 function loadmoreAjax() {
 
 
 	var settings = {
 		url: "http://www.bedgasmblog.cn/article/list",
-		  crossDomain:"true",
-		xhrFields:{
-			withCredentials:"true"
+		crossDomain: "true",
+		xhrFields: {
+			withCredentials: "true"
 		},
 		type: "POST",
-		aysnc:false,
+		aysnc: false,
 		data: {
 			'page': page,
 			'rows': '4'
-		}, 
+		},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var articleDiv = document.getElementById("articleDiv");
 			var detail = "";
-			var title, summary, url, releaseDate, nickname, commentCount,authorUrl;
+			var title, summary, url, releaseDate,clickCount, nickname, commentCount, authorUrl;
 			for (var key in res['posts']) {
 				title = res['posts'][key]['title'];
 				summary = res['posts'][key]['summary'];
 				url = "./article.html?id=" + res['posts'][key]['id'];
-				authorUrl="./personHome.html?id=" + res['posts'][key]['author'];
+				authorUrl = "./personHome.html?id=" + res['posts'][key]['author'];
 				releaseDate = res['posts'][key]['releaseDate'];
+				clickCount = res['posts'][key]['clickCount'];
 				commentCount = res['posts'][key]['replyCount'];
-				nickname=res['posts'][key]['user']['nickname'];
+				nickname = res['posts'][key]['user']['nickname'];
 				detail +=
 					`<article class="blog-post">
 						<div class="blog-post-body">
 							<h2><a href="${url}">${title}</a></h2>
-							<div class="post-meta"><span>by <a href="${authorUrl}">${nickname}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i>${commentCount}</span></div>
+							<div class="post-meta"><span>by <a href="${authorUrl}">${nickname}</a></span>
+							/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+							/<span><i class="fa fa-comment-o"></i>${commentCount}</span>
+							/<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+							</div>
+							
 							<p>${summary}</p>
 							<div class="read-more"><a href="${url}">Continue Reading</a></div>
 						</div>
@@ -221,17 +237,16 @@ function loadmoreAjax() {
 			}
 			articleDiv.innerHTML += detail;
 			console.log("success");
-			page=page+1;
+			page = page + 1;
 			console.log(page);
-			if(res['total']<4)
-			{
+			if (res['total'] < 4) {
 				$(".js-load-more").hide();
 			}
 
 
 		},
 
-		error: function(res) {
+		error: function (res) {
 			console.log("error");
 		}
 	};
@@ -239,31 +254,31 @@ function loadmoreAjax() {
 
 }
 
-function loadCateAjax(){
+function loadCateAjax() {
 	// console.log(searchkey	
-		var settings = {
+	var settings = {
 		url: "http://www.bedgasmblog.cn/category/search",
-		  crossDomain:"true",
-		xhrFields:{
-			withCredentials:"true"
+		crossDomain: "true",
+		xhrFields: {
+			withCredentials: "true"
 		},
 		type: "POST",
 		data: {
-	
-		}, 
+
+		},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var categorylist = document.getElementById("categorylist");
 			var detail = "";
 			var url;
 			var typename;
 			for (var key in res['categories']) {
 				typename = res['categories'][key]['typename'];
-				url =res['categories'][key]['id'];
+				url = res['categories'][key]['id'];
 				detail +=
 					`<li><a onclick="getCateArticle(${url})" href="index.html#maodian" >${typename}</a></li>`
 			}
-		
+
 			categorylist.innerHTML = detail;
 			console.log("success");
 			// if(res.total==0){
@@ -272,7 +287,7 @@ function loadCateAjax(){
 			// }
 		},
 
-		error: function(res) {
+		error: function (res) {
 			console.log("error");
 		}
 	};
@@ -289,33 +304,38 @@ function getCateArticle(typeid) {
 		console.log(typeid);
 		var html = $.ajax({
 			async: true,
-			  crossDomain:"true",
-		xhrFields:{
-			withCredentials:"true"
-		},
+			crossDomain: "true",
+			xhrFields: {
+				withCredentials: "true"
+			},
 			url: "http://www.bedgasmblog.cn/article/category",
 			type: "post",
 			data: {
 				'id': typeid
 			},
 			dataType: "json",
-			success: function(res) {
+			success: function (res) {
 				var articleDiv = document.getElementById("articleDiv");
 				var detail = "";
-				var title, summary, url, releaseDate, username, replyCount,authorUrl;
+				var title, summary, url, releaseDate,clickCount, username, replyCount, authorUrl;
 				for (var key in res['articles']) {
 					title = res['articles'][key]['title'];
 					summary = res['articles'][key]['summary'];
 					url = "./article.html?id=" + res['articles'][key]['id'];
-					authorUrl="./personHome.html?id=" + res['articles'][key]['author'];
-					username=res['articles'][key]['user']['nickname'];
+					authorUrl = "./personHome.html?id=" + res['articles'][key]['author'];
+					username = res['articles'][key]['user']['nickname'];
 					releaseDate = res['articles'][key]['releaseDate'];
+					clickCount = res['articles'][key]['clickCount'];
 					replyCount = res['articles'][key]['replyCount'];
 					detail +=
 						`<article class="blog-post">
 								<div class="blog-post-body">
 									<h2><a href="${url}">${title}</a></h2>
-									<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i> <a href="#">${replyCount}</a></span></div>
+									<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>
+									/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+									/<span><i class="fa fa-comment-o"></i> <a href="#">${replyCount}</a></span>
+									/<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+									</div>
 									<p>${summary}</p>
 									<div class="read-more"><a href="${url}">Continue Reading</a></div>
 								</div>
@@ -328,7 +348,7 @@ function getCateArticle(typeid) {
 					articleDiv.innerHTML = "抱歉，该类别还没有文章！";
 				}
 			},
-			error: function(res) {
+			error: function (res) {
 				console.log("error");
 			}
 		})
@@ -358,24 +378,29 @@ function getCateArticle1() {
 				'id': detailId
 			},
 			dataType: "json",
-			success: function(res) {
+			success: function (res) {
 				console.log("id:" + detailId);
 				var articleDiv = document.getElementById("articleDiv");
 				var detail = "";
-				var title, summary, url, releaseDate, username, commentCount, authorUrl;
+				var title, summary, url, releaseDate, username, commentCount,clickCount, authorUrl;
 				for (var key in res['articles']) {
 					title = res['articles'][key]['title'];
 					summary = res['articles'][key]['summary'];
 					url = "./article.html?id=" + res['articles'][key]['id'];
 					authorUrl = "./personHome.html?id=" + res['articles'][key]['author'];
 					releaseDate = res['articles'][key]['releaseDate'];
+					clickCount = res['articles'][key]['clickCount'];
 					commentCount = res['articles'][key]['replyCount'];
 					username = res['articles'][key]['user']['nickname'];
 					detail +=
 						`<article class="blog-post">
 								<div class="blog-post-body">
 									<h2><a href="${url}">${title}</a></h2>
-									<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i> ${commentCount}</span></div>
+									<div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>
+									/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+									/<span><i class="fa fa-comment-o"></i> ${commentCount}</span>
+									/<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+									</div>
 									<p>${summary}</p>
 									<div class="read-more"><a href="${url}">继续阅读</a></div>
 								</div>
@@ -385,7 +410,7 @@ function getCateArticle1() {
 				articleDiv.innerHTML += detail;
 				console.log("success");
 			},
-			error: function(res) {
+			error: function (res) {
 				console.log("error");
 			}
 		})
@@ -406,15 +431,17 @@ function loadHotAjax() {
 			'rows': 5
 		},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var hotarticle = document.getElementById("hotarticle");
 			var detail = "";
 			var url;
 			var replyCount;
+			var clickCount;
 			var title;
 			var releaseDate;
 			for (var key in res['posts']) {
 				releaseDate = res['posts'][key]['releaseDate'];
+				clickCount = res['posts'][key]['clickCount'];
 				replyCount = res['posts'][key]['replyCount'];
 				title = res['posts'][key]['title'];
 				url = "./article.html?id=" + res['posts'][key]['id'];
@@ -429,6 +456,8 @@ function loadHotAjax() {
 											<i class="fa fa-clock-o"></i> ${releaseDate}</span>
 										<span>
 											<i class=" fa fa-comment-o "></i> ${replyCount}</span>
+										<span>
+											<i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
 									</div>
 								</div>
 							</article>`;
@@ -442,7 +471,7 @@ function loadHotAjax() {
 			// }
 		},
 
-		error: function(res) {
+		error: function (res) {
 			console.log("error");
 		}
 	};
@@ -459,7 +488,7 @@ function loadlinkAjax() {
 		type: "POST",
 		data: {},
 		dataType: "json",
-		success: function(res) {
+		success: function (res) {
 			var detail = "";
 			var url, linkname;
 			var linkDiv = document.getElementById("linklist");
@@ -471,7 +500,7 @@ function loadlinkAjax() {
 			linkDiv.innerHTML += detail;
 			console.log("linklist success");
 		},
-		error: function(res) {
+		error: function (res) {
 			console.log("link error");
 		}
 	};

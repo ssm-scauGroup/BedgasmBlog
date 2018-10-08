@@ -2,6 +2,7 @@ window.onload = function() {
 	loadarticleCount();
 	loadosMsg();
 	loadcommentCount();
+	loadclickCount()
 	loadstarCount();
 };
 
@@ -31,6 +32,31 @@ function loadcommentCount() {
 	$.ajax(settings);
 }
 
+function loadclickCount() {
+	var settings = {
+		url: "http://www.bedgasmblog.cn/article/getClickCount",
+		crossDomain: "true",
+		xhrFields: {
+			withCredentials: "true"
+		},
+		type: "POST",
+		data: {
+			'id': sessionStorage.id
+		},
+		dataType: "json",
+		success: function(res) {
+			if (res.success == true) {
+				$('#clickcount').text(res.total);
+				console.log(res.total);
+			}
+		},
+
+		error: function(res) {
+			console.log("error");
+		}
+	};
+	$.ajax(settings);
+}
 function loadarticleCount() {
 	var settings = {
 		url: "http://www.bedgasmblog.cn/article/author",

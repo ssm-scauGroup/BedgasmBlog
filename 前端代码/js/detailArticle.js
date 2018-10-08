@@ -75,18 +75,22 @@ function loadDetailAjax() {
                 var mainArticle = document.getElementById("mainArticle");
                 var detail = "";
                 var url = "";
-                var title, username, releaseDate, replyCount, content, authorUrl;
+                var title, username, releaseDate,clickCount, replyCount, content, authorUrl;
                 title = res['post']['title'];
                 username = res['post']['user']['nickname'];
                 releaseDate = res['post']['releaseDate'];
                 authorUrl = "./personHome.html?id=" + res['post']['author'];
+                clickCount = res['post']['clickCount'];
                 replyCount = res['post']['replyCount'];
                 content = res['post']['content'];
                 detail +=
                     `<article class="blog-post">    
                         <div class="blog-post-body">
                             <h2>${title}</h2>
-                            <div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span<i class="fa fa-comment-o"></i>${replyCount}</span>
+                            <div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>
+                            /<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+                            /<span><i class="fa fa-comment-o"></i>${replyCount}</span>
+                            /<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
                             </div>
                             <div style="text-align: left" class="wenzhang">${content}</div>
                         </div>
@@ -123,20 +127,24 @@ function searchClickAjax() {
         success: function(res) {
             var articleDiv = document.getElementById("articleDiv");
             var detail = "";
-            var title, summary, url, releaseDate, username, replyCount,authorUrl;
+            var title, summary, url, releaseDate, username, replyCount,clickCount,authorUrl;
             for (var key in res['articles']) {
                 title = res['articles'][key]['title'];
                 summary = res['articles'][key]['summary'];
                 url = "./article.html?id=" + res['articles'][key]['id'];
                 authorUrl="./personHome.html?id=" + res['articles'][key]['author'];
-
                 releaseDate = res['articles'][key]['releaseDate'];
+                clickCount = res['articles'][key]['clickCount'];
                 replyCount = res['articles'][key]['replyCount'];
                 detail +=
                     `<article class="blog-post">
                         <div class="blog-post-body">
                             <h2><a href="${url}">${title}</a></h2>
-                            <div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>/<span><i class="fa fa-clock-o"></i>${releaseDate}</span>/<span><i class="fa fa-comment-o"></i>${replyCount}</span></div>
+                            <div class="post-meta"><span>by <a href="${authorUrl}">${username}</a></span>
+                            /<span><i class="fa fa-clock-o"></i>${releaseDate}</span>
+                            /<span><i class="fa fa-comment-o"></i>${replyCount}</span>
+                            /<span><i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
+                            </div>
                             <p>${summary}</p>
                             <div class="read-more"><a href="${url}">Continue Reading</a></div>
                         </div>
@@ -241,10 +249,12 @@ function loadHotAjax(){
             var detail = "";
             var url;
             var replyCount;
+            var clickCount;
             var title;
             var releaseDate;
             for (var key in res['posts']) {
                 releaseDate = res['posts'][key]['releaseDate'];
+                clickCount = res['posts'][key]['clickCount'];
                 replyCount = res['posts'][key]['replyCount'];
                 title = res['posts'][key]['title'];
                 url = "./article.html?id=" + res['posts'][key]['id'];
@@ -259,6 +269,8 @@ function loadHotAjax(){
                                             <i class="fa fa-clock-o"></i> ${releaseDate}</span>
                                         <span>
                                             <i class=" fa fa-comment-o "></i> ${replyCount}</span>
+                                        <span>
+                                            <i class="glyphicon glyphicon-hand-up"></i>${clickCount}</span>
                                     </div>
                                 </div>
                             </article>`;

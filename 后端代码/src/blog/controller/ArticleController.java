@@ -563,5 +563,28 @@ public class ArticleController {
 		return jsonObject.toString();
 
 	}
+	/**
+	 * 获得用户文章总的点击量
+	 * @param authorid
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getClickCount", produces = "application/json;charset=UTF-8")
+	public String getClickCount(@RequestParam("id") String id,HttpSession session) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("author", id);
 
+		List<Article> articles = articleService.listByAuthor(Integer.parseInt(id));
+		Integer total = 0;
+		for (Article article : articles) {
+			total+=article.getClickCount();
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("success", true);
+		jsonObject.put("total", total);
+
+		return jsonObject.toString();
+	}
 }
