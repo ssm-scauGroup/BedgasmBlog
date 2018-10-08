@@ -6,7 +6,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/ssm-scauGroup/BedgasmBlog.svg?style=flat-square)](https://github.com/ssm-scauGroup/BedgasmBlog/network)
 [![GitHub stars](https://img.shields.io/github/stars/ssm-scauGroup/BedgasmBlog.svg?style=flat-square)](https://github.com/ssm-scauGroup/BedgasmBlog/stargazers)
 
-[演示网址](http://bedgasmblog.cn) 
+~~[演示网址](http://bedgasmblog.cn)~~  别说了 没钱了。服务器停了。
 
 ## 系统设计
 
